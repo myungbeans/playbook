@@ -4,7 +4,7 @@ export function updateGridSettings(settings) {
     return {
         type: UPDATE_GRID_SETTINGS,
         payload: {
-            gridSettings: {...settings}
+            gridSettings: settings
         }
     }
 }

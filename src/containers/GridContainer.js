@@ -1,41 +1,32 @@
 import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField'
+// import Grid from '@material-ui/core/Grid';
 import GridLine from '../components/GridLine'
 
 import { connect } from 'react-redux'
 import { updateGridSettings } from '../actions/settings-actions'
 import { bindActionCreators } from 'redux'
 
+
 class GridContainer extends Component {
-    onUpdateGridSettings = (event) => {
+    onGridSettingsSubmit = (event) => {
         event.preventDefault()
-        console.log(event)
-        const height = 100
-        const weight = 100
-        const increment = 100
-        this.props.onUpdateGridSettings({ height, weight, increment })
+        const interval = event.target.value
+        this.props.updateGridSettings({ interval })
     }
 
     axisIncrements = (dimension) => {
+        // for (let i=0, i < this.axisIncrements, i += this.axisIncrements)
         return dimension/this.state.increment
     }
 
-    // for (let i=0, i < this.axisIncrements, i += this.axisIncrements)
-
     render() {
         // const horizontal = 
-        console.log(this.state)
-        console.log(this.props)
+        console.log("STATE",this.state)
+        console.log("PROPS", this.props)
         return (
-            <div className="ad-Container-svg" data-reactid=".0.0.0">
-                <form onSubmit={this.onUpdateGridSettings}>
-                    <TextField name="height" id="height" label="Height" value={this.props.height} />
-                    <TextField name="width" id="width" label="Width" value={this.props.width} />
-                    <button type="submit">Submit</button>
-                </form>
-
-
-                <svg className="ad-SVG" width="800" height="600" data-reactid=".0.0.0.0">
+            <div className="" data-reactid=".0.0.0">
+                <svg className="ad-SVG" width="100vh" height="70vh" data-reactid=".0.0.0.0">
                     <g className="ad-Grid" data-reactid=".0.0.0.0.0">
                         <line x1="50" y1="0" x2="50" y2="600" data-reactid=".0.0.0.0.0.0"></line>
                         <line x1="100" y1="0" x2="100" y2="600" data-reactid=".0.0.0.0.0.1"></line>
@@ -66,6 +57,7 @@ class GridContainer extends Component {
                         <line x1="0" y1="550" x2="800" y2="550" data-reactid=".0.0.0.0.0.p"></line>
                     </g>
                 </svg>
+                <TextField onChange={this.onGridSettingsSubmit} name="interval" id="interval" label="Graph Interval" value={this.props.interval} />
             </div>
         )
     }
@@ -77,7 +69,7 @@ const mapStateToProps = state => {
 
 const mapActionsToProps = (dispatch) => {
     return bindActionCreators({
-        onUpdateGridSettings: updateGridSettings
+        updateGridSettings
     }, dispatch)
 }
   

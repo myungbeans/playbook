@@ -16,14 +16,15 @@ const masterReducer = combineReducers({
     other: otherReducer
 })
 
+const defaultState = {
+    settings: {
+        interval: 25, 
+    }
+}
+
 const store = createStore(
     masterReducer,
-    { settings: {
-        height: 800,
-        width: 1280,
-        increment: 25, 
-        }
-    },
+    { ...defaultState },
     window.devToolsExtension && window.devToolsExtension()
 );
 
