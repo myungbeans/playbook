@@ -10,26 +10,20 @@ import { updateGridSettings } from '../actions/settings-actions'
 import { bindActionCreators } from 'redux'
 
 class CustomMenuContainer extends Component {
-    // localState = {
-    //     error: false,
-    //     label: "Graph Interval"
-    // }
+    increaseGridIncrement = () => {
+        this.props.updateGridSettings({ interval: this.props.settings.interval + 5 })
+    }
 
-    onGridSettingsChange = (event) => {
-        this.setState({errorText: '', label: "Graph Interval"})
-        console.log(event.target)
-        const interval = event.target.value
-        this.props.updateGridSettings({ interval })
+    decreaseGridIncrement = () => {
+        this.props.settings.interval <= 0 || this.props.updateGridSettings({ interval: this.props.settings.interval - 5})
     }
 
     render() {
-        console.log(this.props)
         return (
             <div>
-                {/* <TextField onChange={this.onGridSettingsChange} name="interval" id="interval" label={this.localState.label} error={this.localState.error} value={this.props.interval} /> */}
-                <IconButton color="default"><ExpandLess/></IconButton>
-                {this.props.settings.interval}
-                <IconButton color="default"><ExpandMore/></IconButton>
+                <IconButton onClick={this.decreaseGridIncrement} color="default"><ExpandMore/></IconButton>
+                Grid Increment: {this.props.settings.interval}
+                <IconButton onClick={this.increaseGridIncrement} color="default"><ExpandLess/></IconButton>
             </div>
         )
     }
