@@ -8,16 +8,21 @@ import { bindActionCreators } from 'redux'
 
 class GridContainer extends Component {
 
-    axisIncrements = (dimension) => {
-        // for (let i=0, i < this.axisIncrements, i += this.axisIncrements)
-        return dimension/this.state.increment
+    componentDidMount() {
+        const height = document.getElementById("GridContainer").clientHeight
+        const width = document.getElementById("GridContainer").clientWidth
+        console.log("HEIGHT", height)
+        console.log("HEIGHT", width)
     }
 
     render() {
+        console.log("GRID CONTAINER", this.props)
+        
         return (
-            <div className="" data-reactid=".0.0.0">
+            <div id="GridContainer" data-reactid=".0.0.0">
                 <svg className="ad-SVG" width="100vh" height="70vh" data-reactid=".0.0.0.0">
                     <g className="ad-Grid" data-reactid=".0.0.0.0.0">
+                        {/* VERTICAL LINES */}
                         <line x1="50" y1="0" x2="50" y2="600" data-reactid=".0.0.0.0.0.0"></line>
                         <line x1="100" y1="0" x2="100" y2="600" data-reactid=".0.0.0.0.0.1"></line>
                         <line x1="150" y1="0" x2="150" y2="600" data-reactid=".0.0.0.0.0.2"></line>
@@ -47,9 +52,6 @@ class GridContainer extends Component {
                         <line x1="0" y1="550" x2="800" y2="550" data-reactid=".0.0.0.0.0.p"></line>
                     </g>
                 </svg>
-
-                
-
             </div>
         )
     }

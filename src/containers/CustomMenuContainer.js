@@ -1,24 +1,25 @@
 import React, { Component } from 'react';
-// import TextField from '@material-ui/core/TextField'
-import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import ExpandLess from '@material-ui/icons/ExpandLess'
 import ExpandMore from '@material-ui/icons/ExpandMore'
 
 import { connect } from 'react-redux'
 import { updateGridSettings } from '../actions/settings-actions'
+import { increaseGridIncrement } from '../actions/settings-actions'
+import { decreaseGridIncrement } from '../actions/settings-actions'
 import { bindActionCreators } from 'redux'
 
 class CustomMenuContainer extends Component {
     increaseGridIncrement = () => {
-        this.props.updateGridSettings({ interval: this.props.settings.interval + 5 })
+        this.props.increaseGridIncrement(this.props.settings.interval + 5)
     }
 
     decreaseGridIncrement = () => {
-        this.props.settings.interval <= 0 || this.props.updateGridSettings({ interval: this.props.settings.interval - 5})
+        this.props.settings.interval <= 0 || this.props.decreaseGridIncrement(this.props.settings.interval - 5 )
     }
 
     render() {
+        console.log("MENU PROPS", this.props)
         return (
             <div>
                 <IconButton onClick={this.decreaseGridIncrement} color="default"><ExpandMore/></IconButton>
@@ -35,7 +36,7 @@ const mapStateToProps = state => {
 
 const mapActionsToProps = (dispatch) => {
     return bindActionCreators({
-        updateGridSettings
+        updateGridSettings, increaseGridIncrement, decreaseGridIncrement
     }, dispatch)
 }
   
