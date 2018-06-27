@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import TextField from '@material-ui/core/TextField'
-// import Grid from '@material-ui/core/Grid';
 import GridLine from '../components/GridLine'
 
 import { connect } from 'react-redux'
@@ -9,11 +7,6 @@ import { bindActionCreators } from 'redux'
 
 
 class GridContainer extends Component {
-    onGridSettingsSubmit = (event) => {
-        event.preventDefault()
-        const interval = event.target.value
-        this.props.updateGridSettings({ interval })
-    }
 
     axisIncrements = (dimension) => {
         // for (let i=0, i < this.axisIncrements, i += this.axisIncrements)
@@ -21,9 +14,6 @@ class GridContainer extends Component {
     }
 
     render() {
-        // const horizontal = 
-        console.log("STATE",this.state)
-        console.log("PROPS", this.props)
         return (
             <div className="" data-reactid=".0.0.0">
                 <svg className="ad-SVG" width="100vh" height="70vh" data-reactid=".0.0.0.0">
@@ -57,7 +47,9 @@ class GridContainer extends Component {
                         <line x1="0" y1="550" x2="800" y2="550" data-reactid=".0.0.0.0.0.p"></line>
                     </g>
                 </svg>
-                <TextField onChange={this.onGridSettingsSubmit} name="interval" id="interval" label="Graph Interval" value={this.props.interval} />
+
+                
+
             </div>
         )
     }

@@ -5,6 +5,7 @@ import '../stylesheets/Grid.css';
 
 import AppBar from '../components/AppBar'
 import GridContainer from './GridContainer'
+import CustomMenuContainer from './CustomMenuContainer';
 
 class App extends Component {
   render() {
@@ -12,6 +13,7 @@ class App extends Component {
       <div className="App">
         <AppBar/>
         <GridContainer/>
+        <CustomMenuContainer/>
       </div>
     );
   }
