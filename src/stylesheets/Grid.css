@@ -1,0 +1,13 @@
+.ad-SVG {
+    display: block;
+    background: #fff;
+    border-radius: 4px;
+}
+    .ad-Grid {
+        fill: none;
+        stroke: #eee;
+        stroke-width: 2px;
+    }
+    .ad-Grid.is-hidden {
+        opacity: 0;
+    }
