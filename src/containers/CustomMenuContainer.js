@@ -4,7 +4,7 @@ import ExpandLess from '@material-ui/icons/ExpandLess'
 import ExpandMore from '@material-ui/icons/ExpandMore'
 
 import { connect } from 'react-redux'
-import { updateGridSettings } from '../actions/settings-actions'
+import { updateGridDimensions } from '../actions/settings-actions'
 import { increaseGridIncrement } from '../actions/settings-actions'
 import { decreaseGridIncrement } from '../actions/settings-actions'
 import { bindActionCreators } from 'redux'
@@ -23,7 +23,7 @@ class CustomMenuContainer extends Component {
         return (
             <div>
                 <IconButton onClick={this.decreaseGridIncrement} color="default"><ExpandMore/></IconButton>
-                Grid Increment: {this.props.settings.interval}
+                Grid Interval: {this.props.settings.interval}
                 <IconButton onClick={this.increaseGridIncrement} color="default"><ExpandLess/></IconButton>
             </div>
         )
@@ -36,7 +36,7 @@ const mapStateToProps = state => {
 
 const mapActionsToProps = (dispatch) => {
     return bindActionCreators({
-        updateGridSettings, increaseGridIncrement, decreaseGridIncrement
+        updateGridDimensions, increaseGridIncrement, decreaseGridIncrement
     }, dispatch)
 }
   

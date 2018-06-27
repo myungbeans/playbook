@@ -7,7 +7,7 @@
     .ad-Grid {
         fill: none;
         stroke: #eee;
-        stroke-width: 2px;
+        stroke-width: 3px;
     }
     .ad-Grid.is-hidden {
         opacity: 0;

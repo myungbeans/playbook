@@ -1,12 +1,13 @@
-export const UPDATE_GRID_SETTINGS = 'settings: updateGridSettings'
+export const UPDATE_GRID_DIMENSIONS = 'settings: updateGridDimensions'
 export const INCREASE_GRID_INCREMENT = 'settings: increaseGridIncrement'
 export const DECREASE_GRID_INCREMENT = 'settings: decreaseGridIncrement'
 
-export function updateGridSettings(settings) {
+export function updateGridDimensions(dimensions) {
     return {
-        type: UPDATE_GRID_SETTINGS,
+        type: UPDATE_GRID_DIMENSIONS,
         payload: {
-            gridSettings: settings
+            height: dimensions.height,
+            width: dimensions.width
         }
     }
 }

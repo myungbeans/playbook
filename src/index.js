@@ -19,8 +19,8 @@ const masterReducer = combineReducers({
 const defaultState = {
     settings: {
         interval: 25,
-        height: 1326,
-        width: 417,
+        height: 417,
+        width: 1326,
     }
 }
 

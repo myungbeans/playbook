@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-import GridLine from '../components/GridLine'
+import UUID from "uuid"
+import { GridLine } from '../components/GridLine'
+
 
 import { connect } from 'react-redux'
-import { updateGridSettings } from '../actions/settings-actions'
-import { bindActionCreators } from 'redux'
+import { updateGridDimensions } from '../actions/settings-actions'
+import { bindActionCreators } from 'redux' 
+import settingsReducer from '../reducers/SettingsReducer';
 
 
 class GridContainer extends Component {
@@ -11,45 +14,28 @@ class GridContainer extends Component {
     componentDidMount() {
         const height = document.getElementById("GridContainer").clientHeight
         const width = document.getElementById("GridContainer").clientWidth
+
+        this.props.updateGridDimensions( { height, width} )
         console.log("HEIGHT", height)
-        console.log("HEIGHT", width)
+        console.log("WIDTH", width)
     }
 
     render() {
         console.log("GRID CONTAINER", this.props)
-        
+        const verticalLines = []
+        const horizontalLines = []
+        for (let i =0; i < this.props.settings.width; i = i+this.props.settings.interval){
+            verticalLines.push(<GridLine key={UUID()} x1={i} x2={i} y1={0} y2={this.props.settings.height}/>)
+        }
+        for (let i =0; i < this.props.settings.height; i = i+this.props.settings.interval){
+            horizontalLines.push(<GridLine key={UUID()} x1={0} x2={this.props.settings.width} y1={i} y2={i}/>)
+        }
         return (
             <div id="GridContainer" data-reactid=".0.0.0">
                 <svg className="ad-SVG" width="100vh" height="70vh" data-reactid=".0.0.0.0">
                     <g className="ad-Grid" data-reactid=".0.0.0.0.0">
-                        {/* VERTICAL LINES */}
-                        <line x1="50" y1="0" x2="50" y2="600" data-reactid=".0.0.0.0.0.0"></line>
-                        <line x1="100" y1="0" x2="100" y2="600" data-reactid=".0.0.0.0.0.1"></line>
-                        <line x1="150" y1="0" x2="150" y2="600" data-reactid=".0.0.0.0.0.2"></line>
-                        <line x1="200" y1="0" x2="200" y2="600" data-reactid=".0.0.0.0.0.3"></line>
-                        <line x1="250" y1="0" x2="250" y2="600" data-reactid=".0.0.0.0.0.4"></line>
-                        <line x1="300" y1="0" x2="300" y2="600" data-reactid=".0.0.0.0.0.5"></line>
-                        <line x1="350" y1="0" x2="350" y2="600" data-reactid=".0.0.0.0.0.6"></line>
-                        <line x1="400" y1="0" x2="400" y2="600" data-reactid=".0.0.0.0.0.7"></line>
-                        <line x1="450" y1="0" x2="450" y2="600" data-reactid=".0.0.0.0.0.8"></line>
-                        <line x1="500" y1="0" x2="500" y2="600" data-reactid=".0.0.0.0.0.9"></line>
-                        <line x1="550" y1="0" x2="550" y2="600" data-reactid=".0.0.0.0.0.a"></line>
-                        <line x1="600" y1="0" x2="600" y2="600" data-reactid=".0.0.0.0.0.b"></line>
-                        <line x1="650" y1="0" x2="650" y2="600" data-reactid=".0.0.0.0.0.c"></line>
-                        <line x1="700" y1="0" x2="700" y2="600" data-reactid=".0.0.0.0.0.d"></line>
-                        <line x1="750" y1="0" x2="750" y2="600" data-reactid=".0.0.0.0.0.e"></line>
-                        {/* HORIZONTAL LINES */}
-                        <line x1="0" y1="50" x2="800" y2="50" data-reactid=".0.0.0.0.0.f"></line>
-                        <line x1="0" y1="100" x2="800" y2="100" data-reactid=".0.0.0.0.0.g"></line>
-                        <line x1="0" y1="150" x2="800" y2="150" data-reactid=".0.0.0.0.0.h"></line>
-                        <line x1="0" y1="200" x2="800" y2="200" data-reactid=".0.0.0.0.0.i"></line>
-                        <line x1="0" y1="250" x2="800" y2="250" data-reactid=".0.0.0.0.0.j"></line>
-                        <line x1="0" y1="300" x2="800" y2="300" data-reactid=".0.0.0.0.0.k"></line>
-                        <line x1="0" y1="350" x2="800" y2="350" data-reactid=".0.0.0.0.0.l"></line>
-                        <line x1="0" y1="400" x2="800" y2="400" data-reactid=".0.0.0.0.0.m"></line>
-                        <line x1="0" y1="450" x2="800" y2="450" data-reactid=".0.0.0.0.0.n"></line>
-                        <line x1="0" y1="500" x2="800" y2="500" data-reactid=".0.0.0.0.0.o"></line>
-                        <line x1="0" y1="550" x2="800" y2="550" data-reactid=".0.0.0.0.0.p"></line>
+                        {verticalLines}
+                        {horizontalLines}
                     </g>
                 </svg>
             </div>
@@ -63,7 +49,7 @@ const mapStateToProps = state => {
 
 const mapActionsToProps = (dispatch) => {
     return bindActionCreators({
-        updateGridSettings
+        updateGridDimensions
     }, dispatch)
 }
   
