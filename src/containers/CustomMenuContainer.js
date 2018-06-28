@@ -21,7 +21,7 @@ class CustomMenuContainer extends Component {
     render() {
         console.log("MENU PROPS", this.props)
         return (
-            <div>
+            <div id="Customization-Menu-Container">
                 <IconButton onClick={this.decreaseGridIncrement} color="default"><ExpandMore/></IconButton>
                 Grid Interval: {this.props.settings.interval}
                 <IconButton onClick={this.increaseGridIncrement} color="default"><ExpandLess/></IconButton>

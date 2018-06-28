@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import UUID from "uuid"
 import { GridLine } from '../components/GridLine'
-
+import { Route } from 'react-router-dom'
 
 import { connect } from 'react-redux'
 import { updateGridDimensions } from '../actions/settings-actions'
@@ -12,8 +12,8 @@ import settingsReducer from '../reducers/SettingsReducer';
 class GridContainer extends Component {
 
     componentDidMount() {
-        const height = document.getElementById("GridContainer").clientHeight
-        const width = document.getElementById("GridContainer").clientWidth
+        const height = document.getElementById("Grid-Container").clientHeight
+        const width = document.getElementById("Grid-Container").clientWidth
 
         this.props.updateGridDimensions( { height, width} )
         console.log("HEIGHT", height)
@@ -31,7 +31,7 @@ class GridContainer extends Component {
             horizontalLines.push(<GridLine key={UUID()} x1={0} x2={this.props.settings.width} y1={i} y2={i}/>)
         }
         return (
-            <div id="GridContainer" data-reactid=".0.0.0">
+            <div id="Grid-Container" data-reactid=".0.0.0">
                 <svg className="ad-SVG" width="100vh" height="70vh" data-reactid=".0.0.0.0">
                     <g className="ad-Grid" data-reactid=".0.0.0.0.0">
                         {verticalLines}
