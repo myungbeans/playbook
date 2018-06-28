@@ -9,20 +9,21 @@ import { createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
 
 import settingsReducer from './reducers/SettingsReducer'
-import otherReducer from './reducers/OtherReducer'
+import authReducer from './reducers/AuthReducer'
 
 
 const masterReducer = combineReducers({
     settings: settingsReducer,
-    other: otherReducer
+    auth: authReducer
 })
 
-const defaultState = {
+export const defaultState = {
     settings: {
         interval: 25,
         height: 417,
         width: 1326,
-    }
+    },
+    auth: ""
 }
 
 const store = createStore(

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import UUID from "uuid"
 import { GridLine } from '../components/GridLine'
-import { Route } from 'react-router-dom'
+// import { Route } from 'react-router-dom'
 
 import { connect } from 'react-redux'
 import { updateGridDimensions } from '../actions/settings-actions'
 import { bindActionCreators } from 'redux' 
-import settingsReducer from '../reducers/SettingsReducer';
+// import settingsReducer from '../reducers/SettingsReducer';
 
 
 class GridContainer extends Component {
