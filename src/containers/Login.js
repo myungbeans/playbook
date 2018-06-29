@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import TextField from '@material-ui/core/TextField'
-import Button from '@material-ui/core/Button'
+import {Paper, Typography, TextField, Button, Fade} from '@material-ui/core/';
+import '../stylesheets/index.css';
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux' 
@@ -9,10 +9,15 @@ import { routeActions } from 'react-router-redux'
 import { withRouter } from 'react-router-dom'
 
 class Login extends Component {
-
+    state = {
+        toggle: true,
+        inOut: {enter: 1000, exit:1000}
+    }
+    
     onSubmit = (event) => {
         event.preventDefault()
         event.persist()
+        this.setState({...this.state, toggle: false})
         fetch("http://localhost:3000/api/v1/sessions/", {
             method: "POST",
             headers: {
@@ -24,20 +29,39 @@ class Login extends Component {
         .then(json => {
             localStorage.setItem('token', json.token);
             localStorage.setItem('id', json.id);
-            this.props.history.push('/home')
+            setTimeout(()=> this.props.history.push('/home'), 2000)
         })
     }
 
     render() {
         return (
-            <form onSubmit={this.onSubmit}>
-                <TextField id={"username-input"} error={false} required name={"username"} label={"username"}/>
-                <TextField id={"password-input"} error={false} required name={"password"} label={"password"} type={"password"}/>
-                <Button type="submit" value="Login" variant={"text"}>Login</Button>
-            </form>
+            <div className='outer-div'>
+                <Fade in={this.state.toggle} timeout={this.state.inOut} >
+                <Paper className='Input-Paper'elevation={1}>
+                    <form onSubmit={this.onSubmit}>
+                        <TextField required error={false} id="username-input" label="username" name="username" margin="normal"/><br />
+                        <TextField required error={false} id="password-input" label="password" name="password" margin="normal" type="password"/><br />
+                        <br />
+                        <Button type="submit" variant='contained' color='primary'> Log in </Button>
+                    </form>
+                    <br />
+                    <a onClick={this.handleClick}><Typography variant="caption">Don't Have an Account? Create one here</Typography></a>
+                </Paper>
+                </Fade>
+            </div>
         )
     }
 }
+
+
+//             <form onSubmit={this.onSubmit}>
+//                 <TextField id={"username-input"} error={false} required name={"username"} label={"username"}/>
+//                 <TextField id={"password-input"} error={false} required name={"password"} label={"password"} type={"password"}/>
+//                 <Button type="submit" value="Login" variant={"text"}>Login</Button>
+//             </form>
+//         )
+//     }
+// }
 
 const mapStateToProps = state => {
     return state

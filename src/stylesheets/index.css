@@ -13,7 +13,7 @@ body {
 .outer-div {
   position: relative;
   top: 40%;
-  transform: perspective(1px) translateY(-50%);
+  transform: perspective(1px) translateY(80%);
 }
 
 .Main-Paper {
