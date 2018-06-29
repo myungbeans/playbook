@@ -1,12 +1,19 @@
 import React, { Component } from 'react'
-import TextField from '@material-ui/core/TextField'
-import Button from '@material-ui/core/Button'
+import {Paper, Typography, TextField, Button, Fade} from '@material-ui/core/';
+import '../stylesheets/index.css';
 
-import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux' 
+import { connect } from 'react-redux'
+import { routeActions } from 'react-router-redux'
+import { withRouter } from 'react-router-dom'
+
 import { createUser } from '../actions/auth-actions'
 
 class NewUser extends Component {
+    state = {
+        toggle: true,
+        inOut: {enter: 2000, exit:1000}
+    }
 
     onSubmit = (event) => {
         event.preventDefault()
@@ -20,19 +27,36 @@ class NewUser extends Component {
         })
         .then(res => res.json())
         .then(data => {
-            localStorage.setItem('token', data.token)
-            localStorage.setItem('id', data.id)
+            //TODO: Check for error messages on the response
+            //TODO: fadeout effect
+            // localStorage.setItem('token', data.token)
+            // localStorage.setItem('id', data.id)
+            this.props.history.push('/login')
         })
     }
 
+    redirectToLogin = () => {
+        this.props.history.push('/login')
+    }
+
     render() {
+        console.log(this.props)
         return (
-            <form onSubmit={this.onSubmit}>
-                <TextField id={"username-input"} error={false} required name={"username"} label={"username"}/>
-                <TextField id={"email"} error={false} required name={"email"} label={"email"}/>
-                <TextField id={"password-input"} error={false} required name={"password"} label={"password"} type={"password"}/>
-                <Button type="submit" value="Login" variant={"text"}>Create User</Button>
-            </form>
+            <div className='outer-div-create-user'>
+                <Fade in={this.state.toggle} timeout={this.state.inOut} >
+                <Paper className='Input-Paper'elevation={1}>
+                    <form onSubmit={this.onSubmit}>
+                        <TextField required error={false} id="username-input" label="username" name="username" margin="normal"/><br />
+                        <TextField required error={false} id="email-input" label="email" name="email" margin="normal"/><br />
+                        <TextField required error={false} id="password-input" label="password" name="password" margin="normal" type="password"/><br />
+                        <br />
+                        <Button type="submit" variant='contained' color='primary'> Create User </Button>
+                    </form>
+                    <br />
+                    <p onClick={this.redirectToLogin}><Typography variant="caption">Already have an Account? Click to Login</Typography></p>
+                </Paper>
+                </Fade>
+            </div>
         )
     }
 }
@@ -43,8 +67,8 @@ const mapStateToProps = state => {
 
 const mapActionsToProps = (dispatch) => {
     return bindActionCreators({
-        createUser
+        createUser, ...routeActions
     }, dispatch)
 }
   
-export default connect(mapStateToProps, mapActionsToProps)(NewUser);
+export default withRouter(connect(mapStateToProps, mapActionsToProps)(NewUser));

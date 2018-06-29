@@ -16,9 +16,10 @@ class App extends Component {
   render() {
     const routes = [
     <Route key={"main"} path="/playbook" exact render={ () => <div><GridContainer/><CustomMenuContainer/></div> }/>,
-    <Route key={"home"} exact path="/home" render={ () => <HomePage/>}/>]
-
-    const login = [<Route path="/login" exact render={ () => <Login/>}/>,<Route key={"signup"} path="/new_account" exact render={ () => <NewUser/>}/>]
+    <Route key={"home"} exact path="/home" render={ () => <HomePage/>}/>
+    ]
+    const login = [<Route key={"login"} path="/login" exact render={ () => <Login/>}/>,<Route key={"signup"} path="/new_account" exact render={ () => <NewUser/>}/>]
+    
     return (
       <div className="App">
         <AppBar props={this.props} />

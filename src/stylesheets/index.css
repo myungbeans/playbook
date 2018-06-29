@@ -16,6 +16,12 @@ body {
   transform: perspective(1px) translateY(80%);
 }
 
+.outer-div-create-user {
+  position: relative;
+  top: 40%;
+  transform: perspective(1px) translateY(62%);
+}
+
 .Main-Paper {
   text-align: center;
   margin: 0 auto;

@@ -1,10 +1,14 @@
 // import Button from '@material-ui/core/Button'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux' 
 import { routeActions } from 'react-router-redux'
 import { withRouter } from 'react-router-dom'
 
-import React, { Component } from 'react'
+import {Grid} from '@material-ui/core/';
+
+import PlayCard from '../components/PlayCard'
+import AddCard from '../components/AddCard'
 
 class HomePage extends Component {
 
@@ -23,7 +27,18 @@ class HomePage extends Component {
 
     render() {
         return (
-            <h1> HOMEPAGE </h1>
+            <Grid container alignContent="center" id="PlayCards-Container">
+                <Grid container justify="center" id="new-card-container">
+                    <AddCard/>
+                </Grid>   
+                <Grid container alignItems="center" sm justify="center" spacing={12} id="my-cards-container">
+                    {/*TODO: Map this ish*/}
+                    <PlayCard delay={500}/>
+                    <PlayCard delay={600}/>
+                    <PlayCard delay={700}/>
+                    <PlayCard delay={800}/>
+                </Grid>
+            </Grid>
         )
     }
 }

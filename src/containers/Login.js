@@ -29,8 +29,12 @@ class Login extends Component {
         .then(json => {
             localStorage.setItem('token', json.token);
             localStorage.setItem('id', json.id);
-            setTimeout(()=> this.props.history.push('/home'), 2000)
+            setTimeout(()=> this.props.history.push('/home'), 1000)
         })
+    }
+
+    redirectToSignup = () => {
+        this.props.history.push('/new_account')
     }
 
     render() {
@@ -45,7 +49,7 @@ class Login extends Component {
                         <Button type="submit" variant='contained' color='primary'> Log in </Button>
                     </form>
                     <br />
-                    <a onClick={this.handleClick}><Typography variant="caption">Don't Have an Account? Create one here</Typography></a>
+                    <p onClick={this.redirectToSignup}><Typography variant="caption">Don't Have an Account? Create one here</Typography></p>
                 </Paper>
                 </Fade>
             </div>

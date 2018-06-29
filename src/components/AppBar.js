@@ -7,6 +7,9 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 
+// import { routeActions } from 'react-router-redux'
+// import { withRouter } from 'react-router-dom'
+
 // import MenuIcon from '@material-ui/icons/Menu';
 // import { MuiThemeProvider, createMuiTheme } from '@material-ui/styles';
 
@@ -26,10 +29,16 @@ const styles = {
 
 function ButtonAppBar(props) {
   const { classes } = props;
+  let myHistory = props.props.history
+  
+  const logOutAction = () => {
+    localStorage.clear()
+    myHistory.push('/')
+  }
 
-  let logOut = <Button color="inherit" onClick={()=> localStorage.clear()}>Logout</Button>
+  let logOut = <Button color="inherit" onClick={logOutAction}>Logout</Button>
   let logIn = <Button color="inherit" onClick={()=> props.props.history.push('/login')}>Login</Button>
-  console.log("appbar props", props)
+  
   return (
     <div className={classes.root}>
       <AppBar position="static">
