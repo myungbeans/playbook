@@ -3,3 +3,21 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.Input-Paper {
+  text-align: center;
+  margin: 0 auto;
+  width: 400px;
+}
+
+.outer-div {
+  position: relative;
+  top: 40%;
+  transform: perspective(1px) translateY(-50%);
+}
+
+.Main-Paper {
+  text-align: center;
+  margin: 0 auto;
+  width: 1000px;
+}
