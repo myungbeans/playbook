@@ -10,17 +10,21 @@ import CustomMenuContainer from './CustomMenuContainer';
 import Login from '../containers/Login'
 import HomePage from './HomePage'
 import NewUser from './NewUser'
+import Public from '../components/Public'
 
 class App extends Component {
   render() {
+    const routes = [
+    <Route key={"main"} path="/playbook" exact render={ () => <div><GridContainer/><CustomMenuContainer/></div> }/>,
+    <Route key={"home"} exact path="/home" render={ () => <HomePage/>}/>]
+
+    const login = [<Route path="/login" exact render={ () => <Login/>}/>,<Route key={"signup"} path="/new_account" exact render={ () => <NewUser/>}/>]
     return (
       <div className="App">
         <AppBar props={this.props} />
         <Switch history={this.props.history}>
-          <Route path="/playbook" exact render={ () => <div><GridContainer/><CustomMenuContainer/></div> }/>
-          <Route path="/login" exact render={ () => <Login/>}/>
-          <Route path="/new_account" exact render={ () => <NewUser/>}/>
-          <Route exact path="/home" render={ () => <HomePage/>}/>
+          { localStorage.getItem("token") ? routes : login }
+          <Route key={"default"} path="/" render={() => <Public/>}/>
         </Switch>
       </div>
     );

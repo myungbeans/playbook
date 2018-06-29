@@ -5,12 +5,11 @@ import App from './containers/App';
 import registerServiceWorker from './registerServiceWorker';
 
 import { createStore, combineReducers } from 'redux'
-
 import { createBrowserHistory } from 'history'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
-
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
+
 import settingsReducer from './reducers/SettingsReducer'
 import authReducer from './reducers/AuthReducer'
 

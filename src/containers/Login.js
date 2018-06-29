@@ -53,16 +53,6 @@ class Login extends Component {
     }
 }
 
-
-//             <form onSubmit={this.onSubmit}>
-//                 <TextField id={"username-input"} error={false} required name={"username"} label={"username"}/>
-//                 <TextField id={"password-input"} error={false} required name={"password"} label={"password"} type={"password"}/>
-//                 <Button type="submit" value="Login" variant={"text"}>Login</Button>
-//             </form>
-//         )
-//     }
-// }
-
 const mapStateToProps = state => {
     return state
 }
