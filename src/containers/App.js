@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux' //needed to set up connection between store and this file
-import { Route, Switch} from 'react-router-dom'
+import { Route, Switch, withRouter } from 'react-router-dom'
 
 import '../stylesheets/Grid.css';
 
@@ -15,12 +15,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <AppBar/>
-        <Switch>
-          <Route path="/playbook" render={ () => <div><GridContainer/><CustomMenuContainer/></div> }/>
-          <Route path="/login" render={ () => <Login/>}/>
-          <Route path="/create_account" render={ () => <NewUser/>}/>
-          <Route path="/" exact render={ () => <HomePage/> }/>
+        <AppBar props={this.props} />
+        <Switch history={this.props.history}>
+          <Route path="/playbook" exact render={ () => <div><GridContainer/><CustomMenuContainer/></div> }/>
+          <Route path="/login" exact render={ () => <Login/>}/>
+          <Route path="/new_account" exact render={ () => <NewUser/>}/>
+          <Route exact path="/home" render={ () => <HomePage/>}/>
         </Switch>
       </div>
     );
@@ -33,4 +33,4 @@ const mapStateToProps = state => {
   return state 
 }
 
-export default connect(mapStateToProps)(App);
+export default withRouter(connect(mapStateToProps)(App));

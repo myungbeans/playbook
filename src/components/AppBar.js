@@ -26,6 +26,10 @@ const styles = {
 
 function ButtonAppBar(props) {
   const { classes } = props;
+
+  let logOut = <Button color="inherit" onClick={()=> localStorage.clear()}>Logout</Button>
+  let logIn = <Button color="inherit" onClick={()=> props.props.history.push('/login')}>Login</Button>
+  console.log("appbar props", props)
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -35,7 +39,7 @@ function ButtonAppBar(props) {
           <Typography variant="title" color="inherit" className={classes.flex}>
             Playbook
           </Typography>
-          <Button color="inherit">Logout</Button>
+          {localStorage.token? logOut : logIn}
         </Toolbar>
       </AppBar>
     </div>

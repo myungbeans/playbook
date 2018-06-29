@@ -3,18 +3,22 @@ import ReactDOM from 'react-dom';
 import './stylesheets/index.css';
 import App from './containers/App';
 import registerServiceWorker from './registerServiceWorker';
-import { BrowserRouter as Router } from 'react-router-dom'
 
 import { createStore, combineReducers } from 'redux'
-import { Provider } from 'react-redux'
 
+import { createBrowserHistory } from 'history'
+import { Provider } from 'react-redux'
+import { BrowserRouter as Router } from 'react-router-dom'
+
+import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 import settingsReducer from './reducers/SettingsReducer'
 import authReducer from './reducers/AuthReducer'
 
 
 const masterReducer = combineReducers({
     settings: settingsReducer,
-    auth: authReducer
+    auth: authReducer,
+    routing: routerReducer,
 })
 
 export const defaultState = {
@@ -32,9 +36,12 @@ const store = createStore(
     window.devToolsExtension && window.devToolsExtension()
 );
 
+const browserHistory = createBrowserHistory()
+const history = syncHistoryWithStore(browserHistory, store)
+
 ReactDOM.render(
     <Provider store={store}>
-        <Router>
+        <Router history={history}>
             <App />
         </Router>
     </Provider>
