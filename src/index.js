@@ -12,11 +12,13 @@ import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 
 import settingsReducer from './reducers/SettingsReducer'
 import authReducer from './reducers/AuthReducer'
+import homepageReducer from './reducers/HomePageReducer'
 
 
 const masterReducer = combineReducers({
     settings: settingsReducer,
     auth: authReducer,
+    homepage: homepageReducer,
     routing: routerReducer,
 })
 

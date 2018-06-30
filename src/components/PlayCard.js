@@ -6,7 +6,6 @@ import '../stylesheets/Playcard.css'
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux' 
-import { loginUser } from '../actions/auth-actions'
 import { routeActions } from 'react-router-redux'
 import { withRouter } from 'react-router-dom'
 
@@ -15,7 +14,7 @@ class PlayCard extends Component {
         return (
             <div>
                 <Zoom in style={{transitionDelay: this.props.delay}}>
-                    <Grid item>
+                    <Grid sm item>
                         <Card className="card">
                             <CardMedia className="media" image="/static/images/cards/contemplative-reptile.jpg" title="Contemplative Reptile" />
                             <CardContent>
@@ -45,7 +44,7 @@ const mapStateToProps = state => {
 
 const mapActionsToProps = (dispatch) => {
     return bindActionCreators({
-        loginUser, ...routeActions
+        ...routeActions
     }, dispatch)
 }
 

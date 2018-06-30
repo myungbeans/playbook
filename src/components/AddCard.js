@@ -6,7 +6,6 @@ import '../stylesheets/Playcard.css'
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux' 
-import { loginUser } from '../actions/auth-actions'
 import { routeActions } from 'react-router-redux'
 import { withRouter } from 'react-router-dom'
 
@@ -42,7 +41,7 @@ const mapStateToProps = state => {
 
 const mapActionsToProps = (dispatch) => {
     return bindActionCreators({
-        loginUser, ...routeActions
+        ...routeActions
     }, dispatch)
 }
 

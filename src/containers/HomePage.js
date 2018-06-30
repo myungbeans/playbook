@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux' 
 import { routeActions } from 'react-router-redux'
 import { withRouter } from 'react-router-dom'
+import { setPlays } from '../actions/homepage-actions'
 
 import {Grid} from '@material-ui/core/';
 
@@ -12,7 +13,7 @@ import AddCard from '../components/AddCard'
 
 class HomePage extends Component {
 
-    getPlays = () => {
+    getPlay = () => {
         fetch(`http:localhost:3000/users/${localStorage.getItem("id")}plays/`, {
             headers: {
                 "Content-Type": "application/json",
@@ -22,8 +23,22 @@ class HomePage extends Component {
         .then(res => res.json())
         .then(data => {
             //action to set the plays to store
+            
         })
     }
+
+    // componentDidMount(){
+    //     fetch(`http:localhost:3000/users/${localStorage.getItem("id")}/plays/`, {
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //             "Authorization": localStorage.getItem("token")
+    //         }
+    //     })
+    //     .then(res => res.json())
+    //     .then(data => {
+    //         console.log("Data", data)//action to set the plays to store
+    //     })
+    // }
 
     render() {
         return (
@@ -31,7 +46,7 @@ class HomePage extends Component {
                 <Grid container justify="center" id="new-card-container">
                     <AddCard/>
                 </Grid>   
-                <Grid container alignItems="center" sm justify="center" spacing={12} id="my-cards-container">
+                <Grid container alignItems="center" justify="center" spacing={8} id="my-cards-container">
                     {/*TODO: Map this ish*/}
                     <PlayCard delay={500}/>
                     <PlayCard delay={600}/>
@@ -49,7 +64,7 @@ const mapStateToProps = state => {
 
 const mapActionsToProps = (dispatch) => {
     return bindActionCreators({
-        ...routeActions
+        ...routeActions, setPlays
     }, dispatch)
 }
 

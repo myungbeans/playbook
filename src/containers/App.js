@@ -5,17 +5,16 @@ import { Route, Switch, withRouter } from 'react-router-dom'
 import '../stylesheets/Grid.css';
 
 import AppBar from '../components/AppBar'
-import GridContainer from './GridContainer'
-import CustomMenuContainer from './CustomMenuContainer';
 import Login from '../containers/Login'
-import HomePage from './HomePage'
+import HomePage from './Homepage'
 import NewUser from './NewUser'
 import Public from '../components/Public'
+import Playbook from './Playbook'
 
 class App extends Component {
   render() {
     const routes = [
-    <Route key={"main"} path="/playbook" exact render={ () => <div><GridContainer/><CustomMenuContainer/></div> }/>,
+    <Route key={"main"} path="/playbook" exact render={ () => <Playbook/> }/>,
     <Route key={"home"} exact path="/home" render={ () => <HomePage/>}/>
     ]
     const login = [<Route key={"login"} path="/login" exact render={ () => <Login/>}/>,<Route key={"signup"} path="/new_account" exact render={ () => <NewUser/>}/>]
