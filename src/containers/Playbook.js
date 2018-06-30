@@ -12,7 +12,7 @@ class Playbook extends Component {
         return (
             <div id="playbook-page-container">
                 <GridContainer/>
-                {/*TODO: make this into a container and download speedidal <PlaybookMenu/>*/}
+                <PlaybookMenu/>
                 <CustomMenuContainer/>
             </div>
         )

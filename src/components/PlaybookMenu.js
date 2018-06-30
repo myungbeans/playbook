@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-// import SpeedDial from '@material-ui/lab/SpeedDial';
-// import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon';
-// import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
+
+import { SpeedDial, SpeedDialAction, SpeedDialIcon} from '@material-ui/lab'
 import ContentCopyIcon from '@material-ui/icons/ContentCopy';
 import SaveIcon from '@material-ui/icons/Save';
 import PrintIcon from '@material-ui/icons/Print';
@@ -31,7 +30,7 @@ const actions = [
   { icon: <DeleteIcon />, name: 'Delete' },
 ];
 
-class OpenIconSpeedDial extends React.Component {
+class PlaybookMenu extends Component {
   state = {
     open: false,
     hidden: false,
@@ -71,7 +70,7 @@ class OpenIconSpeedDial extends React.Component {
     return (
       <div className={classes.root}>
         <Button onClick={this.handleVisibility}>Toggle Speed Dial</Button>
-        {/* <SpeedDial
+        <SpeedDial
           ariaLabel="SpeedDial openIcon example"
           className={classes.speedDial}
           hidden={hidden}
@@ -92,14 +91,14 @@ class OpenIconSpeedDial extends React.Component {
               onClick={this.handleClick}
             />
           ))}
-        </SpeedDial> */}
+        </SpeedDial>}
       </div>
     );
   }
 }
 
-OpenIconSpeedDial.propTypes = {
+PlaybookMenu.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(OpenIconSpeedDial);
+export default withStyles(styles)(PlaybookMenu);
