@@ -11,6 +11,11 @@ import { withRouter } from 'react-router-dom'
 import { selectPlay } from '../actions/homepage-actions'
 
 class PlayCard extends Component {
+    handleClick = () => {
+        this.props.selectPlay(this.props.play_id)
+        this.props.history.push('/playbook')
+    }
+
     render() {
         console.log("PlayCard Props",this.props)
         return (
@@ -25,7 +30,7 @@ class PlayCard extends Component {
                                 </Typography>
                             </CardContent>
                             <CardActions>
-                                <Button size="small" color="primary" onClick={()=> this.props.selectPlay(this.props.play_id)}>
+                                <Button size="small" color="primary" onClick={this.handleClick}>
                                     Play
                                 </Button>
                                 <Button size="small" color="primary">
