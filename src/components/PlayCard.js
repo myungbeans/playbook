@@ -11,6 +11,7 @@ import { withRouter } from 'react-router-dom'
 
 class PlayCard extends Component {
     render() {
+        console.log(this.props)
         return (
             <div>
                 <Zoom in style={{transitionDelay: this.props.delay}}>
@@ -19,7 +20,7 @@ class PlayCard extends Component {
                             <CardMedia className="media" image="/static/images/cards/contemplative-reptile.jpg" title="Contemplative Reptile" />
                             <CardContent>
                                 <Typography gutterBottom variant="headline" component="h2">
-                                    Play Name
+                                    {this.props.title}
                                 </Typography>
                             </CardContent>
                             <CardActions>
@@ -39,7 +40,7 @@ class PlayCard extends Component {
 }
 
 const mapStateToProps = state => {
-    return state
+    return state.homepage
 }
 
 const mapActionsToProps = (dispatch) => {

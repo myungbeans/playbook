@@ -14,19 +14,6 @@ import AddCard from '../components/AddCard'
 class HomePage extends Component {
 
     getPlay = () => {
-        fetch(`http:localhost:3000/users/${localStorage.getItem("id")}plays/`, {
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": localStorage.getItem("token")
-            }
-        })
-        .then(res => res.json())
-        .then(data => {
-            this.props.setPlays([...data])
-        })
-    }
-
-    componentDidMount(){
         fetch(`http://localhost:3000/api/v1/users/${localStorage.getItem("id")}/plays/`, {
             headers: {
                 "Content-Type": "application/json",
@@ -39,18 +26,25 @@ class HomePage extends Component {
         })
     }
 
+    componentDidMount(){
+        this.getPlay()
+    }
+
     render() {
+        let delay = 200
+        const myPlays = this.props.homepage.myPlays.map(play => {
+            // console.log("looped play", play)
+            delay = delay+100
+            return <PlayCard delay={delay} title={play.title}/>
+        })
+        
         return (
             <Grid container alignContent="center" id="PlayCards-Container">
                 <Grid container justify="center" id="new-card-container">
-                    <AddCard/>
+                    <AddCard delay={100}/>
                 </Grid>   
                 <Grid container alignItems="center" justify="center" spacing={8} id="my-cards-container">
-                    {/*TODO: Map this ish*/}
-                    <PlayCard delay={500}/>
-                    <PlayCard delay={600}/>
-                    <PlayCard delay={700}/>
-                    <PlayCard delay={800}/>
+                    {myPlays}
                 </Grid>
             </Grid>
         )

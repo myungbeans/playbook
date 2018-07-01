@@ -36,7 +36,7 @@ class AddCard extends Component {
 }
 
 const mapStateToProps = state => {
-    return state
+    return state.homepage
 }
 
 const mapActionsToProps = (dispatch) => {
