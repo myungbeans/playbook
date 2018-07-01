@@ -8,10 +8,11 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux' 
 import { routeActions } from 'react-router-redux'
 import { withRouter } from 'react-router-dom'
+import { selectPlay } from '../actions/homepage-actions'
 
 class PlayCard extends Component {
     render() {
-        console.log(this.props)
+        console.log("PlayCard Props",this.props)
         return (
             <div>
                 <Zoom in style={{transitionDelay: this.props.delay}}>
@@ -24,7 +25,7 @@ class PlayCard extends Component {
                                 </Typography>
                             </CardContent>
                             <CardActions>
-                                <Button size="small" color="primary">
+                                <Button size="small" color="primary" onClick={()=> this.props.selectPlay(this.props.play_id)}>
                                     Play
                                 </Button>
                                 <Button size="small" color="primary">
@@ -45,7 +46,7 @@ const mapStateToProps = state => {
 
 const mapActionsToProps = (dispatch) => {
     return bindActionCreators({
-        ...routeActions
+        ...routeActions, selectPlay
     }, dispatch)
 }
 

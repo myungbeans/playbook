@@ -27,6 +27,7 @@ export const defaultState = {
     },
     homepage: {
         myPlays:[],
+        selectedPlay: "",
     }
 }
 

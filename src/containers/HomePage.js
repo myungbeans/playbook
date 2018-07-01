@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux' 
 import { routeActions } from 'react-router-redux'
 import { withRouter } from 'react-router-dom'
-import { setPlays } from '../actions/homepage-actions'
+import { getPlays } from '../actions/homepage-actions'
 
 import {Grid} from '@material-ui/core/';
 
@@ -13,7 +13,7 @@ import AddCard from '../components/AddCard'
 
 class HomePage extends Component {
 
-    getPlay = () => {
+    fetchPlay = () => {
         fetch(`http://localhost:3000/api/v1/users/${localStorage.getItem("id")}/plays/`, {
             headers: {
                 "Content-Type": "application/json",
@@ -22,20 +22,19 @@ class HomePage extends Component {
         })
         .then(res => res.json())
         .then(data => {
-            this.props.setPlays(data)
+            this.props.getPlays(data)
         })
     }
 
     componentDidMount(){
-        this.getPlay()
+        this.fetchPlay()
     }
 
     render() {
         let delay = 200
-        const myPlays = this.props.homepage.myPlays.map(play => {
-            // console.log("looped play", play)
+        const myPlays = this.props.myPlays.map(play => {
             delay = delay+100
-            return <PlayCard delay={delay} title={play.title}/>
+            return <PlayCard delay={delay} title={play.title} play_id={play.id}/>
         })
         
         return (
@@ -52,12 +51,12 @@ class HomePage extends Component {
 }
 
 const mapStateToProps = state => {
-    return state
+    return state.homepage
 }
 
 const mapActionsToProps = (dispatch) => {
     return bindActionCreators({
-        ...routeActions, setPlays
+        ...routeActions, getPlays,
     }, dispatch)
 }
 
