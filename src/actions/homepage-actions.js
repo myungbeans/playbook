@@ -4,7 +4,7 @@ export function setPlays(userPlays){
     return {
         type: SET_MY_PLAYS,
         payload: {
-            plays: [...userPlays]
+            myPlays: [...userPlays]
         }
     }
 }

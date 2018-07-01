@@ -22,23 +22,22 @@ class HomePage extends Component {
         })
         .then(res => res.json())
         .then(data => {
-            //action to set the plays to store
-            
+            this.props.setPlays([...data])
         })
     }
 
-    // componentDidMount(){
-    //     fetch(`http:localhost:3000/users/${localStorage.getItem("id")}/plays/`, {
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //             "Authorization": localStorage.getItem("token")
-    //         }
-    //     })
-    //     .then(res => res.json())
-    //     .then(data => {
-    //         console.log("Data", data)//action to set the plays to store
-    //     })
-    // }
+    componentDidMount(){
+        fetch(`http://localhost:3000/api/v1/users/${localStorage.getItem("id")}/plays/`, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": localStorage.getItem("token")
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            this.props.setPlays(data)
+        })
+    }
 
     render() {
         return (

@@ -11,13 +11,10 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 
 import settingsReducer from './reducers/SettingsReducer'
-import authReducer from './reducers/AuthReducer'
 import homepageReducer from './reducers/HomePageReducer'
-
 
 const masterReducer = combineReducers({
     settings: settingsReducer,
-    auth: authReducer,
     homepage: homepageReducer,
     routing: routerReducer,
 })
@@ -28,7 +25,9 @@ export const defaultState = {
         height: 417,
         width: 1326,
     },
-    auth: ""
+    homepage: {
+        myPlays:[],
+    }
 }
 
 const store = createStore(

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
 
 import { SpeedDial, SpeedDialAction, SpeedDialIcon} from '@material-ui/lab'
 import ContentCopyIcon from '@material-ui/icons/ContentCopy';
@@ -13,7 +12,7 @@ import EditIcon from '@material-ui/icons/ModeEdit';
 
 const styles = theme => ({
   root: {
-    height: 380,
+    height: 0,
   },
   speedDial: {
     position: 'absolute',
@@ -69,7 +68,6 @@ class PlaybookMenu extends Component {
 
     return (
       <div className={classes.root}>
-        <Button onClick={this.handleVisibility}>Toggle Speed Dial</Button>
         <SpeedDial
           ariaLabel="SpeedDial openIcon example"
           className={classes.speedDial}
@@ -91,7 +89,7 @@ class PlaybookMenu extends Component {
               onClick={this.handleClick}
             />
           ))}
-        </SpeedDial>}
+        </SpeedDial>
       </div>
     );
   }

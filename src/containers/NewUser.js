@@ -7,8 +7,6 @@ import { connect } from 'react-redux'
 import { routeActions } from 'react-router-redux'
 import { withRouter } from 'react-router-dom'
 
-import { createUser } from '../actions/auth-actions'
-
 class NewUser extends Component {
     state = {
         toggle: true,
@@ -67,7 +65,7 @@ const mapStateToProps = state => {
 
 const mapActionsToProps = (dispatch) => {
     return bindActionCreators({
-        createUser, ...routeActions
+        ...routeActions
     }, dispatch)
 }
   
