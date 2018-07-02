@@ -7,7 +7,7 @@ import { GridLine } from '../components/GridLine'
 import { updateGridDimensions } from '../actions/settings-actions'
 
 //DnD functionality
-
+import { DropTarget } from 'react-dnd'
 
 //SVG Assets
 import Png from '../components/pngComponent'
@@ -43,11 +43,15 @@ class GridContainer extends Component {
         const players = []
         let coord = {x: 50, y:100}
         for (let i =0; i < this.props.players.length; i = i+1){
-            players.push(<Png key={UUID()} imgSrc={emptyCircle} dimension={this.props.settings.interval}/>)
+            players.push(<Png draggable={"true"} key={UUID()} imgSrc={emptyCircle} dimension={this.props.settings.interval}/>)
             // players.push(<EmptyCircle key={UUID()} x={coord.x} y={coord.y}/>)
             coord = {x: coord.x+50, y: coord.y+25}
         }
         return players
+    }
+
+    allowDrop = (e) => {
+        e.preventDefault()
     }
 
     render() {
@@ -75,8 +79,17 @@ const mapActionsToProps = (dispatch) => {
         updateGridDimensions
     }, dispatch)
 }
+
+//Params for DropTarget
+const type = "player"
+
+function collect(connect, monitor){
+    return {
+        connectDropTarget: connect.dropTarget()
+    }
+}
   
-export default connect(mapStateToProps, mapActionsToProps)(GridContainer);
+export default DropTarget(type, {}, collect)(connect(mapStateToProps, mapActionsToProps)(GridContainer));
 
 //positiveNumber(n) {
 //         n = parseInt(n)
