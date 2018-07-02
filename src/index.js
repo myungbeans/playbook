@@ -12,10 +12,12 @@ import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 
 import settingsReducer from './reducers/SettingsReducer'
 import homepageReducer from './reducers/HomePageReducer'
+import playbookMenuReducer from './reducers/PlaybookMenuReducer'
 
 const masterReducer = combineReducers({
     settings: settingsReducer,
     homepage: homepageReducer,
+    players: playbookMenuReducer,
     routing: routerReducer,
 })
 
@@ -28,7 +30,8 @@ export const defaultState = {
     homepage: {
         myPlays:[],
         selectedPlay: "",
-    }
+    },
+    players: [],
 }
 
 const store = createStore(

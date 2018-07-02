@@ -12,7 +12,8 @@ import { selectPlay } from '../actions/homepage-actions'
 
 class PlayCard extends Component {
     handleClick = () => {
-        this.props.selectPlay(this.props.play_id)
+        this.props.selectPlay(this.props.play_id) //TODO: REFACTOR --> play_id stored in localstorage. Maybe implement a check system to check localStorage vs storre
+        localStorage.setItem("selectedPlay", this.props.play_id)
         this.props.history.push('/playbook')
     }
 

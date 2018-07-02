@@ -4,7 +4,7 @@ import { DECREASE_GRID_INCREMENT } from '../actions/settings-actions'
 import { defaultState } from '../index'
 
 export default function settingsReducer(state={...defaultState}, { type, payload }) {
-    switch (type){
+    switch(type){
         case UPDATE_GRID_DIMENSIONS:
             return {...state,
             ...state.settings,

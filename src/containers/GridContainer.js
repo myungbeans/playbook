@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
-import UUID from "uuid"
-import { GridLine } from '../components/GridLine'
-
-import { connect } from 'react-redux'
-import { updateGridDimensions } from '../actions/settings-actions'
 import { bindActionCreators } from 'redux' 
+import { connect } from 'react-redux'
+import UUID from "uuid"
+
+import { GridLine } from '../components/GridLine'
+import { updateGridDimensions } from '../actions/settings-actions'
+
+//SVG Assets
+import { unselected } from '../components/Unselected'
 
 class GridContainer extends Component {
 
@@ -13,12 +16,9 @@ class GridContainer extends Component {
         const width = document.getElementById("Grid-Container").clientWidth
 
         this.props.updateGridDimensions( { height, width} )
-        console.log("HEIGHT", height)
-        console.log("WIDTH", width)
     }
 
     render() {
-        console.log("GRID CONTAINER", this.props)
         const verticalLines = []
         const horizontalLines = []
         for (let i =0; i < this.props.settings.width; i = i+this.props.settings.interval){

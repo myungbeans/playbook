@@ -1,8 +1,15 @@
+//React Dependencies
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux' 
+import { connect } from 'react-redux'
+import { routeActions } from 'react-router-redux'
+import { withRouter } from 'react-router-dom'
+import { addPlayer } from '../actions/playbookMenu-actions'
+
+//SpeedDial Dependencies
+import { SpeedDial, SpeedDialAction, SpeedDialIcon} from '@material-ui/lab'
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-
-import { SpeedDial, SpeedDialAction, SpeedDialIcon} from '@material-ui/lab'
 import ContentCopyIcon from '@material-ui/icons/ContentCopy';
 import SaveIcon from '@material-ui/icons/Save';
 import PrintIcon from '@material-ui/icons/Print';
@@ -35,6 +42,20 @@ class PlaybookMenu extends Component {
     hidden: false,
   };
 
+  postToPlayers = () => {
+    fetch("http://localhost:3000/api/v1/players/", {
+      method: "POST",
+      headers: {
+        "Content-Type" : "application/json"
+      },
+      body: JSON.stringify({ play_id: localStorage.getItem("selectedPlay"), name: "P1"})
+    })
+    .then(res => res.json())
+    .then(json => {
+      console.log(json)
+    })
+  }
+
   handleVisibility = () => {
     this.setState(state => ({
       open: false,
@@ -46,6 +67,8 @@ class PlaybookMenu extends Component {
     this.setState(state => ({
       open: !state.open,
     }));
+    console.log("Clicked on add")
+    this.postToPlayers()
   };
 
   handleOpen = () => {
@@ -99,4 +122,14 @@ PlaybookMenu.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(PlaybookMenu);
+const mapStateToProps = state => {
+  return state.homepage
+}
+
+const mapActionsToProps = (dispatch) => {
+  return bindActionCreators({
+      ...routeActions, addPlayer
+  }, dispatch)
+}
+
+export default withRouter(connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(PlaybookMenu)));
