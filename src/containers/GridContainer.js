@@ -7,7 +7,7 @@ import { GridLine } from '../components/GridLine'
 import { updateGridDimensions } from '../actions/settings-actions'
 
 //SVG Assets
-import { unselected } from '../components/Unselected'
+import { Unselected } from '../components/Unselected'
 
 class GridContainer extends Component {
 
@@ -21,18 +21,29 @@ class GridContainer extends Component {
     render() {
         const verticalLines = []
         const horizontalLines = []
-        for (let i =0; i < this.props.settings.width; i = i+this.props.settings.interval){
+        const players = []
+        let coord = {x: 50, y:100}
+        
+        for (let i = 0; i < this.props.settings.width; i = i+this.props.settings.interval){
             verticalLines.push(<GridLine key={UUID()} x1={i} x2={i} y1={0} y2={this.props.settings.height}/>)
         }
-        for (let i =0; i < this.props.settings.height; i = i+this.props.settings.interval){
+        for (let i = 0; i < this.props.settings.height; i = i+this.props.settings.interval){
             horizontalLines.push(<GridLine key={UUID()} x1={0} x2={this.props.settings.width} y1={i} y2={i}/>)
         }
+        for (let i =0; i < this.props.players.length; i = i+1){
+            players.push(<Unselected key={UUID()} x={coord.x} y={coord.y}/>)
+            coord = {x: coord.x+50, y: coord.y+25}
+        }
+
+        console.log(this.props)
         return (
             <div id="Grid-Container" data-reactid=".0.0.0">
                 <svg className="ad-SVG" width="100vh" height="70vh" data-reactid=".0.0.0.0">
                     <g className="ad-Grid" data-reactid=".0.0.0.0.0">
                         {verticalLines}
                         {horizontalLines}
+                        {players}
+                        {/*TODO: see if PNGs are better for resizing according to grid preferences */}
                     </g>
                 </svg>
             </div>

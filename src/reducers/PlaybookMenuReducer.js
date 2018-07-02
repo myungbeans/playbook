@@ -4,7 +4,7 @@ import { defaultState } from '../index'
 export default function playbookMenuReducer(state={...defaultState}, { type, payload }) {
     switch(type){
         case ADD_PLAYER:
-            return {...state, players: [...state.players, payload]}
+            return state.length > 0 ? [...state, {...payload}] : [{...payload}]
         default:
             return state
     }

@@ -40,6 +40,7 @@ class PlaybookMenu extends Component {
   state = {
     open: false,
     hidden: false,
+    playerCounter: 0,
   };
 
   postToPlayers = () => {
@@ -48,11 +49,12 @@ class PlaybookMenu extends Component {
       headers: {
         "Content-Type" : "application/json"
       },
-      body: JSON.stringify({ play_id: localStorage.getItem("selectedPlay"), name: "P1"})
+      body: JSON.stringify({ play_id: localStorage.getItem("selectedPlay"), name: `P${this.state.playerCounter}`})
     })
     .then(res => res.json())
     .then(json => {
-      console.log(json)
+      this.setState({ playerCounter: json.id + 1 })
+      this.props.addPlayer({...json})
     })
   }
 
@@ -67,7 +69,6 @@ class PlaybookMenu extends Component {
     this.setState(state => ({
       open: !state.open,
     }));
-    console.log("Clicked on add")
     this.postToPlayers()
   };
 
