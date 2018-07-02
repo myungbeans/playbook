@@ -6,8 +6,13 @@ import UUID from "uuid"
 import { GridLine } from '../components/GridLine'
 import { updateGridDimensions } from '../actions/settings-actions'
 
+//DnD functionality
+
+
 //SVG Assets
-import { Unselected } from '../components/Unselected'
+import Png from '../components/pngComponent'
+// import { EmptyCircle } from '../components/EmptyCircle'
+import emptyCircle from '../assets/PlayerTokens/emptyCircle.png'
 
 class GridContainer extends Component {
 
@@ -18,31 +23,41 @@ class GridContainer extends Component {
         this.props.updateGridDimensions( { height, width} )
     }
 
-    render() {
+    setVertical = () => {
         const verticalLines = []
-        const horizontalLines = []
-        const players = []
-        let coord = {x: 50, y:100}
-        
         for (let i = 0; i < this.props.settings.width; i = i+this.props.settings.interval){
             verticalLines.push(<GridLine key={UUID()} x1={i} x2={i} y1={0} y2={this.props.settings.height}/>)
         }
+        return verticalLines
+    }
+
+    setHorizontal = () => {
+        const horizontalLines = []
         for (let i = 0; i < this.props.settings.height; i = i+this.props.settings.interval){
             horizontalLines.push(<GridLine key={UUID()} x1={0} x2={this.props.settings.width} y1={i} y2={i}/>)
         }
+        return horizontalLines
+    }
+
+    setPlayers = () => {
+        const players = []
+        let coord = {x: 50, y:100}
         for (let i =0; i < this.props.players.length; i = i+1){
-            players.push(<Unselected key={UUID()} x={coord.x} y={coord.y}/>)
+            players.push(<Png key={UUID()} imgSrc={emptyCircle} dimension={this.props.settings.interval}/>)
+            // players.push(<EmptyCircle key={UUID()} x={coord.x} y={coord.y}/>)
             coord = {x: coord.x+50, y: coord.y+25}
         }
+        return players
+    }
 
-        console.log(this.props)
+    render() {
         return (
-            <div id="Grid-Container" data-reactid=".0.0.0">
+            <div id="Grid-Container" data-reactid=".0.0.0" onDragOver={this.allowDrop}>
+                {this.setPlayers()}
                 <svg className="ad-SVG" width="100vh" height="70vh" data-reactid=".0.0.0.0">
                     <g className="ad-Grid" data-reactid=".0.0.0.0.0">
-                        {verticalLines}
-                        {horizontalLines}
-                        {players}
+                        {this.setVertical()}
+                        {this.setHorizontal()}
                         {/*TODO: see if PNGs are better for resizing according to grid preferences */}
                     </g>
                 </svg>
