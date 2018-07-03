@@ -4,8 +4,8 @@ import { withRouter } from 'react-router-dom'
 // import { bindActionCreators } from 'redux' 
 
 //DnD functionality
-import HTML5Backend from 'react-dnd-html5-backend'
-import { DragDropContext } from 'react-dnd'
+// import HTML5Backend from 'react-dnd-html5-backend'
+// import { DragDropContext } from 'react-dnd'
 
 import PlaybookMenu from '../components/PlaybookMenu'
 import GridContainer from './GridContainer'
@@ -28,4 +28,6 @@ const mapStateToProps = state => {
     return state
 }
   
-export default DragDropContext(HTML5Backend)(withRouter(connect(mapStateToProps)(Playbook)));
+export default withRouter(connect(mapStateToProps)(Playbook))
+
+// export default DragDropContext(HTML5Backend)(withRouter(connect(mapStateToProps)(Playbook)));
