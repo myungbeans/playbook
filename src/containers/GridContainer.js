@@ -37,19 +37,9 @@ class GridContainer extends Component {
     }
 
     setPlayers = () => {
-        // let coord = {x: 50, y:100}
-        // coord = {x: coord.x+50, y: coord.y+25}
         return this.props.players.map(player=>{
-            return <Png key={UUID()} id={player.id} draggable={"true"} dimension={this.props.settings.interval} x={player.x} y={player.y}/>
+            return <Png key={UUID()} player_id={player.id} draggable={"true"} dimension={this.props.settings.interval} x={player.x} y={player.y}/>
         })
-        
-
-        // for (let i =0; i < this.props.players.length; i = i+1){
-        //     players.push(<Png draggable={"true"} key={UUID()} imgSrc={emptyCircle} dimension={this.props.settings.interval}/>)
-        //     // players.push(<EmptyCircle key={UUID()} x={coord.x} y={coord.y}/>)
-            
-        // }
-        // return players
     }
 
     allowDrop = (e) => {

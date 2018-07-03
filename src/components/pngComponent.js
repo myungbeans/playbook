@@ -35,39 +35,29 @@ class Png extends Component {
     handleDrag = (e,ui) => {
         e.preventDefault()
         e.stopPropagation()
-        // const { x, y } = this.state.deltaPosition;
-        // this.setState({
-        //     deltaPosition: {
-        //         x: x+ui.deltaX,
-        //         y: y+ui.deltaY,
-        //     }
-        // })
     }
-
-    // controlledDrag = (e, position) => {
-    //     e.preventDefault()
-    //     e.stopPropagation()
-        
-    // }
 
     controlledStop = (e, position) => {
         const {x, y} = position;
         this.setState({controlledPosition: {x, y}})
+
+        //TODO: consider making coords based on % of screen so as to maintain ratio when zooming
+
         this.onStop()
+        this.persistCoords()
     }
 
-    //POST the new coordinates
-    // fetch(http:`//localhost:3000/api/v1/players/${this.props.id}`, {
-        //     method: "POST",
-        //     headers: {
-        //         "Content-Type" : "application/json"
-        //     },
-        //     body: JSON.stringify({ x:625, y:370 })
-        // })
-        // .then(res => res.json())
-        // .then(json => {
-        // this.props.addPlayer({...json})
-        // })
+    persistCoords = () => {
+        console.log(this.state.controlledPosition)
+        const {x, y} = this.state.controlledPosition
+        fetch(`http://localhost:3000/api/v1/players/${this.props.player_id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type" : "application/json"
+            },
+            body: JSON.stringify({ x:x, y:y })
+        })
+    }
 
     clickedPlayer = () => {
         console.log("Clicked")
@@ -79,8 +69,6 @@ class Png extends Component {
         const dragHandlers = {onStart: this.onStart, onStop: this.onStop}
         const {controlledPosition} = this.state;
         //TODO: bounds need to account for window resizing after the initial grid has been renderd. Might be fixed once the grid size becomes responsive to window size
-
-        console.log("POSITION", this.state)
         return (
             <Draggable {...dragHandlers} onStop={this.controlledStop} position={controlledPosition} bounds={{left: 0, top: 0, right:this.props.width, bottom: this.props.height - 17}} >
                 <img src={emptyCircle} style={this.style} alt="Player Token"/>
