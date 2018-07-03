@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-// import { bindActionCreators } from 'redux' 
-
+import { bindActionCreators } from 'redux' 
+import { setPlayers } from '../actions/playbookMenu-actions'
 //DnD functionality
 // import HTML5Backend from 'react-dnd-html5-backend'
 // import { DragDropContext } from 'react-dnd'
@@ -12,6 +12,19 @@ import GridContainer from './GridContainer'
 import CustomMenuContainer from './CustomMenuContainer';
 
 class Playbook extends Component {
+    componentDidMount(){
+        fetch(`http://localhost:3000/api/v1/plays/${localStorage.getItem("selectedPlay")}/players`, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": localStorage.getItem("token")
+            }
+        })
+        .then(res => res.json())
+        .then(data => {console.log(data)
+            this.props.setPlayers(data)})
+    }
+    
+    
     render() {
         return (
             <div id="playbook-page-container">
@@ -27,7 +40,13 @@ class Playbook extends Component {
 const mapStateToProps = state => {
     return state
 }
+
+const mapActionsToProps = (dispatch) => {
+    return bindActionCreators({
+        setPlayers
+    }, dispatch)
+}
   
-export default withRouter(connect(mapStateToProps)(Playbook))
+export default withRouter(connect(mapStateToProps, mapActionsToProps)(Playbook))
 
 // export default DragDropContext(HTML5Backend)(withRouter(connect(mapStateToProps)(Playbook)));
