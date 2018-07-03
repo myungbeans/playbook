@@ -27,12 +27,6 @@ export const defaultState = {
         height: 417,
         width: 1326,
         selectedPlayer: "",
-        position: {
-            x1: 50,
-            y1: 50,
-            x2: 50,
-            y2: 50,
-        }
     },
     homepage: {
         myPlays:[],
