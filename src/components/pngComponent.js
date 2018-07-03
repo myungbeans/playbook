@@ -14,7 +14,7 @@ class Png extends Component {
         activeDrags: 0,
         deltaPosition: {
             x: 150, y: 150
-        }
+        },
     }
     
     style ={
@@ -33,10 +33,14 @@ class Png extends Component {
     }
 
     handleDrag = (e,ui) => {
+        e.preventDefault()
+        e.stopPropagation()
         const { x, y } = this.state.deltaPosition;
+        console.log("ui", ui)
+        
         this.setState({
             deltaPosition: {
-                x: x + ui.deltaX,
+                x: x+ui.deltaX,
                 y: y+ui.deltaY,
             }
         })
@@ -50,9 +54,10 @@ class Png extends Component {
 
     render(){
         const dragHandlers = {onStart: this.onStart, onStop: this.onStop}
+        const {deltaPosition} = this.state;
         return (
-            <Draggable bounds={{left: 0, top: 65, right:this.props.width, bottom: this.props.height}} >
-                <img onDrag={this.handleDrag} {...dragHandlers} src={this.state.clicked ? selectedCircle : emptyCircle} style={this.style} alt="Player Token"/> 
+            <Draggable {...dragHandlers} {...this.handleDrag} bounds={{left: 0, top: 65, right:this.props.width, bottom: this.props.height}} >
+                <img src={emptyCircle} style={this.style} alt="Player Token"/> 
             </Draggable>
         )
     }
