@@ -18,7 +18,6 @@ class PlayCard extends Component {
     }
 
     render() {
-        console.log("PlayCard Props",this.props)
         return (
             <div>
                 <Zoom in style={{transitionDelay: this.props.delay}}>

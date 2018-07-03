@@ -20,8 +20,7 @@ class Playbook extends Component {
             }
         })
         .then(res => res.json())
-        .then(data => {console.log(data)
-            this.props.setPlayers(data)})
+        .then(data => {this.props.setPlayers(data)})
     }
     
     

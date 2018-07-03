@@ -40,7 +40,7 @@ class GridContainer extends Component {
         // let coord = {x: 50, y:100}
         // coord = {x: coord.x+50, y: coord.y+25}
         return this.props.players.map(player=>{
-            return <Png key={UUID()} id={player.id} draggable={"true"} dimension={this.props.settings.interval}/>
+            return <Png key={UUID()} id={player.id} draggable={"true"} dimension={this.props.settings.interval} x={player.x} y={player.y}/>
         })
         
 

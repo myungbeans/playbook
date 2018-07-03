@@ -34,7 +34,7 @@ class HomePage extends Component {
         let delay = 200
         const myPlays = this.props.myPlays.map(play => {
             delay = delay+100
-            return <PlayCard delay={delay} title={play.title} play_id={play.id}/>
+            return <PlayCard key={play.title} delay={delay} title={play.title} play_id={play.id}/>
         })
         
         return (

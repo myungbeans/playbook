@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux' 
 import { connect } from 'react-redux'
 import { selectPlayer } from '../actions/settings-actions'
-// import { DragSource } from 'react-dnd'
 import Draggable from 'react-draggable'
 
 import emptyCircle from '../assets/PlayerTokens/emptyCircle.png'
@@ -12,8 +11,8 @@ class Png extends Component {
     state = {
         clicked: false,
         activeDrags: 0,
-        deltaPosition: {
-            x: 150, y: 150
+        controlledPosition: {
+            x: this.props.x, y: this.props.y
         },
     }
     
@@ -24,7 +23,8 @@ class Png extends Component {
         position: "absolute",
     }
 
-    onStart = () => {
+    onStart = (e) => {
+        e.preventDefault()
         this.setState({activeDrags: this.state.activeDrags + 1})
     }
 
@@ -35,16 +35,39 @@ class Png extends Component {
     handleDrag = (e,ui) => {
         e.preventDefault()
         e.stopPropagation()
-        const { x, y } = this.state.deltaPosition;
-        console.log("ui", ui)
-        
-        this.setState({
-            deltaPosition: {
-                x: x+ui.deltaX,
-                y: y+ui.deltaY,
-            }
-        })
+        // const { x, y } = this.state.deltaPosition;
+        // this.setState({
+        //     deltaPosition: {
+        //         x: x+ui.deltaX,
+        //         y: y+ui.deltaY,
+        //     }
+        // })
     }
+
+    // controlledDrag = (e, position) => {
+    //     e.preventDefault()
+    //     e.stopPropagation()
+        
+    // }
+
+    controlledStop = (e, position) => {
+        const {x, y} = position;
+        this.setState({controlledPosition: {x, y}})
+        this.onStop()
+    }
+
+    //POST the new coordinates
+    // fetch(http:`//localhost:3000/api/v1/players/${this.props.id}`, {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type" : "application/json"
+        //     },
+        //     body: JSON.stringify({ x:625, y:370 })
+        // })
+        // .then(res => res.json())
+        // .then(json => {
+        // this.props.addPlayer({...json})
+        // })
 
     clickedPlayer = () => {
         console.log("Clicked")
@@ -54,41 +77,17 @@ class Png extends Component {
 
     render(){
         const dragHandlers = {onStart: this.onStart, onStop: this.onStop}
-        const {deltaPosition} = this.state;
+        const {controlledPosition} = this.state;
+        //TODO: bounds need to account for window resizing after the initial grid has been renderd. Might be fixed once the grid size becomes responsive to window size
+
+        console.log("POSITION", this.state)
         return (
-            <Draggable {...dragHandlers} {...this.handleDrag} bounds={{left: 0, top: 65, right:this.props.width, bottom: this.props.height}} >
-                <img src={emptyCircle} style={this.style} alt="Player Token"/> 
+            <Draggable {...dragHandlers} onStop={this.controlledStop} position={controlledPosition} bounds={{left: 0, top: 0, right:this.props.width, bottom: this.props.height - 17}} >
+                <img src={emptyCircle} style={this.style} alt="Player Token"/>
             </Draggable>
         )
     }
 }
-
-//Params for DragSource
-// const type = "player"
-
-// const itemSource = {
-//     canDrag(props){
-//         return "Yes"
-//         // return props.isReady
-//     },
-//     beginDrag(props){
-//         console.log("dragStart")
-//         //describes current item being dragged
-//     },
-//     endDrag(props){
-//         return "bye"
-//         //call a fx or anything after successful drop
-//         //otherwise use DropTarget
-//     }
-// }
-
-// function collect(connect, monitor){
-//     return {
-//         connectDragSource: connect.dragSource(),
-//         isDragging: monitor.isDragging(),
-//     }
-//     //returns ab object of props to be injected into component. DnD event handles and current dragging state passed to component
-// }
 
 //Params for Redux
 const mapStateToProps = state => {
@@ -101,6 +100,4 @@ const mapActionsToProps = (dispatch) => {
     }, dispatch)
 }
 
-
 export default connect(mapStateToProps, mapActionsToProps)(Png)
-// export default DragSource(type, itemSource, collect)(connect(mapStateToProps, mapActionsToProps)(Png))

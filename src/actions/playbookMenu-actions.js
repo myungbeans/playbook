@@ -11,6 +11,6 @@ export function addPlayer(data){
 export function setPlayers(data){
     return {
         type: SET_PLAYERS,
-        payload: data
+        payload: [...data]
     }
 }

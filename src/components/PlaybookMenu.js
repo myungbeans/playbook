@@ -40,7 +40,6 @@ class PlaybookMenu extends Component {
   state = {
     open: false,
     hidden: false,
-    playerCounter: 0,
   };
 
   postToPlayers = () => {
@@ -49,11 +48,10 @@ class PlaybookMenu extends Component {
       headers: {
         "Content-Type" : "application/json"
       },
-      body: JSON.stringify({ play_id: localStorage.getItem("selectedPlay"), name: `P${this.state.playerCounter}`})
+      body: JSON.stringify({ play_id: localStorage.getItem("selectedPlay"), name: `P${this.props.players.length + 1}`, x:625, y:370 })
     })
     .then(res => res.json())
     .then(json => {
-      this.setState({ playerCounter: json.id + 1 })
       this.props.addPlayer({...json})
     })
   }
@@ -89,7 +87,6 @@ class PlaybookMenu extends Component {
   render() {
     const { classes } = this.props;
     const { hidden, open } = this.state;
-
     return (
       <div className={classes.root}>
         <SpeedDial
@@ -124,7 +121,7 @@ PlaybookMenu.propTypes = {
 };
 
 const mapStateToProps = state => {
-  return state.homepage
+  return state
 }
 
 const mapActionsToProps = (dispatch) => {
