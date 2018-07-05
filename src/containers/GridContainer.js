@@ -6,7 +6,7 @@ import UUID from "uuid"
 import { GridLine } from '../components/GridLine'
 import { updateGridDimensions } from '../actions/settings-actions'
 
-import Png from '../components/pngComponent'
+import StartPoint from '../components/StartPoint'
 
 //DnD functionality
 // import { DropTarget } from 'react-dnd'
@@ -38,23 +38,23 @@ class GridContainer extends Component {
 
     setPlayers = () => {
         return Object.values(this.props.players.roster).map(player => {
-            return <Png key={UUID()} player_id={player.id} name={player.name} draggable={"true"} dimension={this.props.settings.interval} x={player.x} y={player.y}/>
+            return <StartPoint key={UUID()} player_id={player.id} name={player.name} draggable={"true"} dimension={this.props.settings.interval} x={player.x} y={player.y}/>
         })
     }
 
-    allowDrop = (e) => {
+    drawRoute = (e) => {
         e.preventDefault()
+        
     }
 
     render() {
         return (
-            <div id="Grid-Container" data-reactid=".0.0.0" onDragOver={this.allowDrop}>
+            <div onContextMenu={this.drawRoute} id="Grid-Container" data-reactid=".0.0.0">
                 {this.setPlayers()}
                 <svg className="ad-SVG" width="100vh" height="70vh" data-reactid=".0.0.0.0">
                     <g className="ad-Grid" data-reactid=".0.0.0.0.0">
                         {this.setVertical()}
                         {this.setHorizontal()}
-                        {/*TODO: see if PNGs are better for resizing according to grid preferences */}
                     </g>
                 </svg>
             </div>

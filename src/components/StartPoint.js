@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { bindActionCreators } from 'redux' 
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { selectPlayer, updatePlayer } from '../actions/playbook-actions'
 import Draggable from 'react-draggable'
@@ -7,13 +7,17 @@ import Draggable from 'react-draggable'
 import emptyCircle from '../assets/PlayerTokens/emptyCircle.png'
 import selectedCircle from '../assets/PlayerTokens/selectedCircle.png'
 
-class Png extends Component {
-    state = {
-        disabled: true,
-        activeDrags: 0,
-        controlledPosition: {
-            x: this.props.x, y: this.props.y
-        },
+class StartPoint extends Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            disabled: true,
+            activeDrags: 0,
+            controlledPosition: {
+                x: this.props.x, y: this.props.y
+            },
+        }
     }
     
     style ={
@@ -93,4 +97,4 @@ const mapActionsToProps = (dispatch) => {
     }, dispatch)
 }
 
-export default connect(mapStateToProps, mapActionsToProps)(Png)
+export default connect(mapStateToProps, mapActionsToProps)(StartPoint)

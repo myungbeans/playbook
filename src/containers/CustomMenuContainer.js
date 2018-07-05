@@ -24,6 +24,9 @@ class CustomMenuContainer extends Component {
                 <IconButton onClick={this.decreaseGridIncrement} color="default"><ExpandMore/></IconButton>
                 Grid Interval: {this.props.settings.interval}
                 <IconButton onClick={this.increaseGridIncrement} color="default"><ExpandLess/></IconButton>
+                <br/>
+                <br/>
+                <p>Player: {this.props.players.selectedPlayer}</p>
             </div>
         )
     }
