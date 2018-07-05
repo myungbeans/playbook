@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux' 
 import { connect } from 'react-redux'
-import { selectPlayer } from '../actions/playbook-actions'
+import { selectPlayer, updatePlayer } from '../actions/playbook-actions'
 import Draggable from 'react-draggable'
 
 import emptyCircle from '../assets/PlayerTokens/emptyCircle.png'
@@ -25,8 +25,8 @@ class Png extends Component {
 
     onStart = (e) => {
         e.preventDefault()
-        
         this.setState({activeDrags: this.state.activeDrags + 1})
+        // this.props.selectPlayer(this.props.player_id)
     }
 
     onStop = () => {
@@ -41,16 +41,12 @@ class Png extends Component {
     controlledStop = (e, position) => {
         const {x, y} = position;
         this.setState({controlledPosition: {x, y}})
-
         //TODO: consider making coords based on % of screen so as to maintain ratio when zooming
-
+        this.persistCoords({x, y})
         this.onStop()
-        this.persistCoords()
     }
 
-    persistCoords = () => {
-        console.log(this.state.controlledPosition)
-        const {x, y} = this.state.controlledPosition
+    persistCoords = ({x, y}) => {
         fetch(`http://localhost:3000/api/v1/players/${this.props.player_id}`, {
             method: "PATCH",
             headers: {
@@ -58,6 +54,7 @@ class Png extends Component {
             },
             body: JSON.stringify({ x:x, y:y })
         })
+        .then(() => this.props.updatePlayer({id: this.props.player_id,x,y}))
     }
 
     clickedPlayer = () => {
@@ -85,7 +82,7 @@ const mapStateToProps = state => {
 
 const mapActionsToProps = (dispatch) => {
     return bindActionCreators({
-        selectPlayer
+        selectPlayer, updatePlayer
     }, dispatch)
 }
 

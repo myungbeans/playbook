@@ -4,13 +4,13 @@ import { defaultState } from '../index'
 export default function playbookReducer(state={...defaultState}, { type, payload }) {    
     switch(type){
         case ADD_PLAYER:
-            return state.concat({...payload})
+            return {...state, roster: {...state.roster, ...payload}}
         case SET_PLAYERS:
             return {...state, ...state.players, roster: {...payload}}
         case SELECT_PLAYER:
-            return state.concat({...payload})
+            return {...state, selectedPlayer: payload}
         case UPDATE_PLAYER:
-            return [...payload]
+            return {...state, roster: {...state.roster, [payload.id]: {...state.roster[payload.id], x: payload.x, y:payload.y}}}
         default:
             return state
     }

@@ -48,7 +48,7 @@ class PlaybookMenu extends Component {
   };
 
   defaultNamer = () => {
-    return this.props.players.last ? this.props.players.last.id + 1 : 1
+    return Object.keys(this.props.players.roster) ? Object.keys(this.props.players.roster).last + 1 : 1
   }
 
   postToPlayers = () => {
@@ -61,7 +61,9 @@ class PlaybookMenu extends Component {
     })
     .then(res => res.json())
     .then(json => {
-      this.props.addPlayer({...json})
+      let newPlayer = {}
+      newPlayer[json.id] = json
+      this.props.addPlayer(newPlayer)
     })
   }
 

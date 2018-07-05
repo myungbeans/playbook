@@ -25,8 +25,9 @@ export function selectPlayer(data){
 }
 
 export function updatePlayer(data){
+    // debugger
     return {
         type: UPDATE_PLAYER,
-        payload: [...data]
+        payload: data
     }
 }
