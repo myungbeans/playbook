@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux' 
 import { connect } from 'react-redux'
-import { selectPlayer } from '../actions/settings-actions'
+import { selectPlayer } from '../actions/playbook-actions'
 import Draggable from 'react-draggable'
 
 import emptyCircle from '../assets/PlayerTokens/emptyCircle.png'
@@ -25,6 +25,7 @@ class Png extends Component {
 
     onStart = (e) => {
         e.preventDefault()
+        
         this.setState({activeDrags: this.state.activeDrags + 1})
     }
 

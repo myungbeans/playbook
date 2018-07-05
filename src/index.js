@@ -12,12 +12,12 @@ import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 
 import settingsReducer from './reducers/SettingsReducer'
 import homepageReducer from './reducers/HomePageReducer'
-import playbookMenuReducer from './reducers/PlaybookMenuReducer'
+import playbookReducer from './reducers/PlaybookReducer'
 
 const masterReducer = combineReducers({
     settings: settingsReducer,
     homepage: homepageReducer,
-    players: playbookMenuReducer,
+    players: playbookReducer,
     routing: routerReducer,
 })
 

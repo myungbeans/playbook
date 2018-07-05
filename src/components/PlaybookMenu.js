@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { routeActions } from 'react-router-redux'
 import { withRouter } from 'react-router-dom'
-import { addPlayer } from '../actions/playbookMenu-actions'
+import { addPlayer } from '../actions/playbook-actions'
 
 //SpeedDial Dependencies
 import { SpeedDial, SpeedDialAction, SpeedDialIcon} from '@material-ui/lab'

@@ -1,7 +1,7 @@
-import { ADD_PLAYER, SET_PLAYERS, SELECT_PLAYER, UPDATE_PLAYER } from '../actions/playbookMenu-actions'
+import { ADD_PLAYER, SET_PLAYERS, SELECT_PLAYER, UPDATE_PLAYER } from '../actions/playbook-actions'
 import { defaultState } from '../index'
 
-export default function playbookMenuReducer(state={...defaultState}, { type, payload }) {    
+export default function playbookReducer(state={...defaultState}, { type, payload }) {    
     switch(type){
         case ADD_PLAYER:
             return state.concat({...payload})
