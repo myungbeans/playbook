@@ -29,7 +29,7 @@ export const defaultState = {
     },
     homepage: {
         myPlays:[],
-        selectedPlay: "",
+        selectedPlay: parseInt(localStorage.getItem("selectedPlay"), 8) || "",
     },
     players: {
         roster: {},

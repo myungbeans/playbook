@@ -14,7 +14,6 @@ import CustomMenuContainer from './CustomMenuContainer';
 class Playbook extends Component {
     componentDidMount(){
         this.fetchPlayers()
-        this.fetchMoves()
     }
     
     fetchPlayers = () => {
@@ -32,21 +31,21 @@ class Playbook extends Component {
         })
     }
 
-    fetchMoves = (player_id) => {
-        fetch(`http://localhost:3000/api/v1/players/${player_id}/moves`, {
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": localStorage.getItem("token")
-            }
-        })
-        .then(res => res.json())
-        .then(data => {
-            console.log("fetched moves", data)
-            // let roster = {}
-            // data.forEach(player => roster[player.id] = player)
-            // this.props.setPlayers(roster)
-        })
-    }
+    // fetchMoves = (player_id) => {
+    //     fetch(`http://localhost:3000/api/v1/players/${player_id}/moves`, {
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //             "Authorization": localStorage.getItem("token")
+    //         }
+    //     })
+    //     .then(res => res.json())
+    //     .then(data => {
+    //         console.log("fetched moves", data)
+    //         // let roster = {}
+    //         // data.forEach(player => roster[player.id] = player)
+    //         // this.props.setPlayers(roster)
+    //     })
+    // }
     
     render() {
         return (

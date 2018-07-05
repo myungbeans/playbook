@@ -7,6 +7,7 @@ import { GridLine } from '../components/GridLine'
 import { updateGridDimensions } from '../actions/settings-actions'
 
 import StartPoint from '../components/StartPoint'
+import EndPoint from '../components/EndPoint'
 
 //DnD functionality
 // import { DropTarget } from 'react-dnd'
@@ -42,6 +43,15 @@ class GridContainer extends Component {
         })
     }
 
+    setEndPoints = () => {
+        //TODO: find a way to shorthand the props of EndPoint
+        return Object.values(this.props.players.roster).map(player => { 
+            let lastMove = [...(player.moves)].slice(-1)[0]
+            console.log('last move', lastMove)
+            return <EndPoint key={UUID()} draggable={"true"} dimension={this.props.settings.interval} moveSettings={lastMove} />
+        })
+    }
+
     drawRoute = (e) => {
         e.preventDefault()
         
@@ -51,6 +61,7 @@ class GridContainer extends Component {
         return (
             <div onContextMenu={this.drawRoute} id="Grid-Container" data-reactid=".0.0.0">
                 {this.setPlayers()}
+                {this.setEndPoints()}
                 <svg className="ad-SVG" width="100vh" height="70vh" data-reactid=".0.0.0.0">
                     <g className="ad-Grid" data-reactid=".0.0.0.0.0">
                         {this.setVertical()}
