@@ -23,6 +23,14 @@ class Png extends Component {
         position: "absolute",
     }
 
+    verifySelectedPlayer = () => {
+        return this.props.players.selectedPlayer === this.props.player_id
+    }
+
+    imgSrc = () => {
+        return this.verifySelectedPlayer() ? selectedCircle : emptyCircle
+    }
+
     onStart = (e) => {
         e.preventDefault()
         this.setState({activeDrags: this.state.activeDrags + 1})
@@ -48,7 +56,7 @@ class Png extends Component {
     selectPlayer = (e) => {
         e.preventDefault()
         e.stopPropagation()
-        this.props.players.selectedPlayer === this.props.player_id ? null : this.props.selectPlayer(this.props.player_id)
+        return this.verifySelectedPlayer() ? null : this.props.selectPlayer(this.props.player_id)
     }
 
     persistCoords = ({x, y}) => {
@@ -63,13 +71,12 @@ class Png extends Component {
     }
 
     render(){
-        const dragHandlers = {onStart: this.onStart, onStop: this.onStop}
         const {controlledPosition} = this.state;
 
         //TODO: bounds need to account for window resizing after the initial grid has been renderd. Might be fixed once the grid size becomes responsive to window size
         return (
             <Draggable onStart={this.onStart} onStop={this.controlledStop} position={controlledPosition} bounds={{left: 0, top: 0, right:this.props.width, bottom: this.props.height - 17}} >
-                <img onMouseEnter={this.selectPlayer} src={emptyCircle} style={this.style} alt="Player Token"/>
+                <img onMouseEnter={this.selectPlayer} src={this.imgSrc()} style={this.style} alt="Player Token"/>
             </Draggable>
         )
     }

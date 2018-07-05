@@ -1,4 +1,4 @@
-import { UPDATE_GRID_DIMENSIONS, INCREASE_GRID_INCREMENT, DECREASE_GRID_INCREMENT, SELECT_PLAYER } from '../actions/settings-actions'
+import { UPDATE_GRID_DIMENSIONS, INCREASE_GRID_INCREMENT, DECREASE_GRID_INCREMENT } from '../actions/settings-actions'
 import { defaultState } from '../index'
 
 export default function settingsReducer(state={...defaultState}, { type, payload }) {

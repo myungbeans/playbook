@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { routeActions } from 'react-router-redux'
 import { withRouter } from 'react-router-dom'
-import { addPlayer } from '../actions/playbook-actions'
+import { addPlayer, selectPlayer } from '../actions/playbook-actions'
 
 //SpeedDial Dependencies
 import { SpeedDial, SpeedDialAction, SpeedDialIcon} from '@material-ui/lab'
@@ -64,6 +64,7 @@ class PlaybookMenu extends Component {
       let newPlayer = {}
       newPlayer[json.id] = json
       this.props.addPlayer(newPlayer)
+      this.props.selectPlayer(json.id)
     })
   }
 
@@ -137,7 +138,7 @@ const mapStateToProps = state => {
 
 const mapActionsToProps = (dispatch) => {
   return bindActionCreators({
-      ...routeActions, addPlayer
+      ...routeActions, addPlayer, selectPlayer
   }, dispatch)
 }
 
