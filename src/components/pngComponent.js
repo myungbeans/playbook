@@ -9,7 +9,7 @@ import selectedCircle from '../assets/PlayerTokens/selectedCircle.png'
 
 class Png extends Component {
     state = {
-        clicked: false,
+        disabled: true,
         activeDrags: 0,
         controlledPosition: {
             x: this.props.x, y: this.props.y
@@ -26,7 +26,6 @@ class Png extends Component {
     onStart = (e) => {
         e.preventDefault()
         this.setState({activeDrags: this.state.activeDrags + 1})
-        // this.props.selectPlayer(this.props.player_id)
     }
 
     onStop = () => {
@@ -46,6 +45,12 @@ class Png extends Component {
         this.onStop()
     }
 
+    selectPlayer = (e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        this.props.players.selectedPlayer === this.props.player_id ? null : this.props.selectPlayer(this.props.player_id)
+    }
+
     persistCoords = ({x, y}) => {
         fetch(`http://localhost:3000/api/v1/players/${this.props.player_id}`, {
             method: "PATCH",
@@ -57,19 +62,14 @@ class Png extends Component {
         .then(() => this.props.updatePlayer({id: this.props.player_id,x,y}))
     }
 
-    clickedPlayer = () => {
-        console.log("Clicked")
-        // this.setState({ clicked: true})
-        this.props.selectPlayer(this.props.id)
-    }
-
     render(){
         const dragHandlers = {onStart: this.onStart, onStop: this.onStop}
         const {controlledPosition} = this.state;
+
         //TODO: bounds need to account for window resizing after the initial grid has been renderd. Might be fixed once the grid size becomes responsive to window size
         return (
-            <Draggable {...dragHandlers} onStop={this.controlledStop} position={controlledPosition} bounds={{left: 0, top: 0, right:this.props.width, bottom: this.props.height - 17}} >
-                <img src={emptyCircle} style={this.style} alt="Player Token"/>
+            <Draggable onStart={this.onStart} onStop={this.controlledStop} position={controlledPosition} bounds={{left: 0, top: 0, right:this.props.width, bottom: this.props.height - 17}} >
+                <img onMouseEnter={this.selectPlayer} src={emptyCircle} style={this.style} alt="Player Token"/>
             </Draggable>
         )
     }

@@ -20,7 +20,7 @@ export function setPlayers(data){
 export function selectPlayer(data){
     return {
         type: SELECT_PLAYER,
-        payload: {...data}
+        payload: data
     }
 }
 
