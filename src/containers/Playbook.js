@@ -20,7 +20,11 @@ class Playbook extends Component {
             }
         })
         .then(res => res.json())
-        .then(data => {this.props.setPlayers(data)})
+        .then(data => {
+            let roster = {}
+            data.forEach(player => roster[player.id] = player)
+            this.props.setPlayers(roster)
+        })
     }
     
     

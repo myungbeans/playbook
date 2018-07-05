@@ -12,13 +12,11 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
 //Custom Icons
-import { PlusIcon, StraightRouteIcon, SharpRouteIcon } from '../assets/menuIcons/Icons'
+import { StraightRouteIcon, SharpRouteIcon, SquiggleRoute, GroupIcon } from '../assets/menuIcons/Icons'
 
 //Default Icons
 import ContentCopyIcon from '@material-ui/icons/ContentCopy';
 import SaveIcon from '@material-ui/icons/Save';
-import PrintIcon from '@material-ui/icons/Print';
-import ShareIcon from '@material-ui/icons/Share';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 const styles = theme => ({
@@ -33,11 +31,12 @@ const styles = theme => ({
 });
 
 const actions = [
-  { icon: <StraightRouteIcon/>, name: 'StraightPath' },
-  { icon: <SharpRouteIcon/>, name: 'StraightPath' },
+  { icon: <StraightRouteIcon/>, name: 'Straight Route' },
+  { icon: <SharpRouteIcon/>, name: 'Sharp Route' },
+  { icon: <SquiggleRoute/>, name: 'Round Route' },
+  { icon: <GroupIcon />, name: 'Group' },
   { icon: <ContentCopyIcon />, name: 'Copy' },
   { icon: <SaveIcon />, name: 'Save' },
-  // { icon: <PrintIcon />, name: 'Print' },
   // { icon: <ShareIcon />, name: 'Share' },
   { icon: <DeleteIcon />, name: 'Delete' },
 ];

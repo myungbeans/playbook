@@ -79,7 +79,7 @@ class Png extends Component {
 
 //Params for Redux
 const mapStateToProps = state => {
-    return state.settings
+    return state
 }
 
 const mapActionsToProps = (dispatch) => {

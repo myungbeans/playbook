@@ -26,13 +26,15 @@ export const defaultState = {
         interval: 25,
         height: 417,
         width: 1326,
-        selectedPlayer: "",
     },
     homepage: {
         myPlays:[],
         selectedPlay: "",
     },
-    players: [],
+    players: {
+        roster: {},
+        selectedPlayer: ""
+    },
 }
 
 const store = createStore(

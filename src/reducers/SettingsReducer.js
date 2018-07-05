@@ -15,11 +15,12 @@ export default function settingsReducer(state={...defaultState}, { type, payload
             return {...state,
                 ...state.settings,
                 interval: payload};
-        case SELECT_PLAYER:
-            return {...state,
-                ...state.settings,
-                selectedPlayer: payload};
         default:
             return state
     }
 }
+
+// case SELECT_PLAYER:
+//             return {...state,
+//                 ...state.settings,
+//                 selectedPlayer: payload};

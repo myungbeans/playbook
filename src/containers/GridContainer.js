@@ -37,7 +37,7 @@ class GridContainer extends Component {
     }
 
     setPlayers = () => {
-        return this.props.players.map(player=>{
+        return Object.values(this.props.players.roster).map(player => {
             return <Png key={UUID()} player_id={player.id} name={player.name} draggable={"true"} dimension={this.props.settings.interval} x={player.x} y={player.y}/>
         })
     }
@@ -71,16 +71,6 @@ const mapActionsToProps = (dispatch) => {
         updateGridDimensions
     }, dispatch)
 }
-
-//Params for DropTarget
-// const type = "player"
-
-// function collect(connect, monitor){
-//     return {
-//         connectDropTarget: connect.dropTarget()
-//     }
-// } 
-// export default DropTarget(type, {}, collect)(connect(mapStateToProps, mapActionsToProps)(GridContainer));
 
 export default connect(mapStateToProps, mapActionsToProps)(GridContainer)
 
