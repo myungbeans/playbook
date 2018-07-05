@@ -44,11 +44,12 @@ class GridContainer extends Component {
     }
 
     setEndPoints = () => {
-        //TODO: find a way to shorthand the props of EndPoint
+        //TODO: Rendering only LAST move of each player upon load.
         return Object.values(this.props.players.roster).map(player => { 
-            let lastMove = [...(player.moves)].slice(-1)[0]
-            console.log('last move', lastMove)
-            return <EndPoint key={UUID()} draggable={"true"} dimension={this.props.settings.interval} moveSettings={lastMove} />
+            if (player.moves[0]) {
+                let lastMove = [...(player.moves)].slice(-1)[0]
+                return <EndPoint key={UUID()} player_id={player.id} move_id={lastMove.id} draggable={"true"} dimension={this.props.settings.interval} moveSettings={lastMove} />
+            }
         })
     }
 

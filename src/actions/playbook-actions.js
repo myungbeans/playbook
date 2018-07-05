@@ -2,6 +2,7 @@ export const ADD_PLAYER = 'playbookMenu: addPlayer'
 export const SET_PLAYERS = "playbookMenu: setPlayers"
 export const SELECT_PLAYER = 'player: selectPlayer'
 export const UPDATE_PLAYER = "player: updatePlayer"
+export const UPDATE_ENDPOINT = "endPoint: updateEndPoint"
 
 export function addPlayer(data){
     return {
@@ -28,5 +29,14 @@ export function updatePlayer(data){
     return {
         type: UPDATE_PLAYER,
         payload: data
+    }
+}
+
+export function updateEndPoint(data){
+    data.oldMoves[data.move_id - 1].endX = data.x
+    data.oldMoves[data.move_id - 1].endY = data.y
+    return {
+        type: UPDATE_ENDPOINT,
+        payload: {...data, moves: [...data.oldMoves]}
     }
 }
