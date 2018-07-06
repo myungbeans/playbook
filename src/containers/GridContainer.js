@@ -5,11 +5,10 @@ import UUID from "uuid"
 
 import { updateGridDimensions } from '../actions/settings-actions'
 
-import { GridLine } from '../components/GridLine'
+import { GridLine, PathLine } from '../components/Line'
 import StartPoint from '../components/StartPoint'
 import EndPoint from '../components/EndPoint'
 import Snap, { Paper } from 'snapsvg-cjs'
-import { PathLine } from '../components/PathLine'
 
 class GridContainer extends Component {
     componentDidMount() {
