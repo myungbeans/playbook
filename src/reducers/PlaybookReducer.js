@@ -1,4 +1,4 @@
-import { ADD_PLAYER, SET_PLAYERS, SELECT_PLAYER, UPDATE_PLAYER, UPDATE_ENDPOINT } from '../actions/playbook-actions'
+import { ADD_PLAYER, SET_PLAYERS, SELECT_PLAYER, UPDATE_PLAYER, UPDATE_ENDPOINT, UPDATE_STARTPOINT, SET_CURRENT_MOVE } from '../actions/playbook-actions'
 import { defaultState } from '../index'
 
 export default function playbookReducer(state={...defaultState}, { type, payload }) {    
@@ -13,6 +13,10 @@ export default function playbookReducer(state={...defaultState}, { type, payload
             return {...state, roster: {...state.roster, [payload.id]: {...state.roster[payload.id], x: payload.x, y:payload.y}}}
         case UPDATE_ENDPOINT:
             return {...state, roster: {...state.roster, [payload.player_id]: {...state.roster[payload.player_id], moves: [...payload.moves]}}}
+        case UPDATE_STARTPOINT:
+            return state
+        case SET_CURRENT_MOVE:
+            return {...state, moveIndex: payload}
         default:
             return state
     }

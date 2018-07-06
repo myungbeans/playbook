@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { bindActionCreators } from 'redux' 
-import { setPlayers } from '../actions/playbook-actions'
+import { setPlayers, setCurrentMove } from '../actions/playbook-actions'
 //DnD functionality
 // import HTML5Backend from 'react-dnd-html5-backend'
 // import { DragDropContext } from 'react-dnd'
@@ -29,23 +29,8 @@ class Playbook extends Component {
             data.forEach(player => roster[player.id] = player)
             this.props.setPlayers(roster)
         })
+        .then(()=> this.props.setCurrentMove(this.props.players.roster))
     }
-
-    // fetchMoves = (player_id) => {
-    //     fetch(`http://localhost:3000/api/v1/players/${player_id}/moves`, {
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //             "Authorization": localStorage.getItem("token")
-    //         }
-    //     })
-    //     .then(res => res.json())
-    //     .then(data => {
-    //         console.log("fetched moves", data)
-    //         // let roster = {}
-    //         // data.forEach(player => roster[player.id] = player)
-    //         // this.props.setPlayers(roster)
-    //     })
-    // }
     
     render() {
         return (
@@ -64,7 +49,7 @@ const mapStateToProps = state => {
 
 const mapActionsToProps = (dispatch) => {
     return bindActionCreators({
-        setPlayers
+        setPlayers, setCurrentMove
     }, dispatch)
 }
   

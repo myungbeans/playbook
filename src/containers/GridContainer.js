@@ -3,16 +3,15 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import UUID from "uuid"
 
-import { GridLine } from '../components/GridLine'
 import { updateGridDimensions } from '../actions/settings-actions'
 
+import { GridLine } from '../components/GridLine'
 import StartPoint from '../components/StartPoint'
 import EndPoint from '../components/EndPoint'
 import Snap, { Paper } from 'snapsvg-cjs'
-import { svgify } from '../components/SVG'
+import { PathLine } from '../components/PathLine'
 
 class GridContainer extends Component {
-
     componentDidMount() {
         const height = document.getElementById("Grid-Container").clientHeight
         const width = document.getElementById("Grid-Container").clientWidth
@@ -44,39 +43,49 @@ class GridContainer extends Component {
 
     setEndPoints = () => {
         //TODO: Rendering only LAST move of each player upon load.
-        return Object.values(this.props.players.roster).map(player => { 
+        let moves = {
+            endPoints: [],
+            pathLines: []
+        }
+        Object.values(this.props.players.roster).forEach(player => { 
             if (player.moves[0]) {
                 let lastMove = [...(player.moves)].slice(-1)[0]
-                let grid = Snap(this.props.settings.width, this.props.settings.height)
-                let line = grid.paper.line(lastMove.startX, lastMove.startY, lastMove.endX, lastMove.endY)
-                console.log(line)
-                svgify(line, 'move_line')
-
-                // debugger
-                return (
+                moves.endPoints.push(
                     <div key={UUID()}>
                         <EndPoint key={UUID()} player_id={player.id} move_id={lastMove.id} draggable={"true"} dimension={this.props.settings.interval} moveSettings={lastMove} />
-                        <path d="M626 325l134-53" />
                     </div>
                 )
+                moves.pathLines.push(
+                    <PathLine key={UUID()} x1={lastMove.startX} x2={lastMove.endX} y1={lastMove.startY} y2={lastMove.endY}/>
+                )
             }
+                            
+                // let grid = Snap(this.props.settings.width, this.props.settings.height)
+                // let line = grid.paper.line(lastMove.startX, lastMove.startY, lastMove.endX, lastMove.endY)
+                // console.log(line)
+                // svgify(line, 'move_line')
+                // debugger
         })
+        return moves
     }
 
+
+
     newEndPoint = (e) => {
-        e.preventDefault()
-        
+        e.preventDefault()    
     }
 
     render() {
+        let moves = this.setEndPoints()
         return (
             <div onContextMenu={this.drawRoute} id="Grid-Container" data-reactid=".0.0.0">
                 {this.setPlayers()}
-                {this.setEndPoints()}
+                {moves.endPoints}
                 <svg className="ad-SVG" width="100vh" height="70vh" data-reactid=".0.0.0.0">
                     <g className="ad-Grid" data-reactid=".0.0.0.0.0">
                         {this.setVertical()}
                         {this.setHorizontal()}
+                        {moves.pathLines}
                     </g>
                 </svg>
             </div>

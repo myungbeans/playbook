@@ -1,8 +1,10 @@
 export const ADD_PLAYER = 'playbookMenu: addPlayer'
 export const SET_PLAYERS = "playbookMenu: setPlayers"
-export const SELECT_PLAYER = 'player: selectPlayer'
-export const UPDATE_PLAYER = "player: updatePlayer"
+export const SELECT_PLAYER = 'players: selectPlayer'
+export const UPDATE_PLAYER = "players: updatePlayer"
 export const UPDATE_ENDPOINT = "endPoint: updateEndPoint"
+export const UPDATE_STARTPOINT = "startPoint: updateStartPoint"
+export const SET_CURRENT_MOVE = "players: currentMove"
 
 export function addPlayer(data){
     return {
@@ -38,5 +40,23 @@ export function updateEndPoint(data){
     return {
         type: UPDATE_ENDPOINT,
         payload: {...data, moves: [...data.oldMoves]}
+    }
+}
+
+export function updateStartPoint(data){
+    // const player = this.props.players.roster[data.player_id]
+    // const move = player.moves.select()
+    debugger
+
+    return {
+        type: UPDATE_ENDPOINT,
+        payload: {...data, moves: [...data.oldMoves]}
+    }
+}
+
+export function setCurrentMove(data){
+    return{
+        type: SET_CURRENT_MOVE,
+        payload: (data[Object.keys(data)[0]].moves.length - 1)
     }
 }

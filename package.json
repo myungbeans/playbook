@@ -9,6 +9,8 @@
     "@material-ui/lab": "^1.0.0-alpha.5",
     "@smollweide/material-ui-speed-dial": "^0.10.0",
     "@svgr/cli": "^2.0.0",
+    "@svgr/core": "^2.0.0",
+    "@svgr/webpack": "^2.0.0",
     "animejs": "^2.2.0",
     "history": "^4.7.2",
     "react": "^16.4.1",

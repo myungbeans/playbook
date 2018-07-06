@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { selectPlayer, updatePlayer } from '../actions/playbook-actions'
+import { selectPlayer, updatePlayer, updateStartPoint } from '../actions/playbook-actions'
 import Draggable from 'react-draggable'
 
 import emptyCircle from '../assets/PlayerTokens/emptyCircle.png'
@@ -72,6 +72,7 @@ class StartPoint extends Component {
             body: JSON.stringify({ x:x, y:y })
         })
         .then(() => this.props.updatePlayer({id: this.props.player_id,x,y}))
+        .then(() => this.props.updateStartPoint({id: this.props.player_id,x,y}))
     }
 
     render(){
@@ -93,7 +94,7 @@ const mapStateToProps = state => {
 
 const mapActionsToProps = (dispatch) => {
     return bindActionCreators({
-        selectPlayer, updatePlayer
+        selectPlayer, updatePlayer, updateStartPoint
     }, dispatch)
 }
 
