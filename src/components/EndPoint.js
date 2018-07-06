@@ -6,7 +6,7 @@ import Draggable from 'react-draggable'
 
 // import emptyCircle from '../assets/PlayerTokens/emptyCircle.png'
 // import selectedCircle from '../assets/PlayerTokens/selectedCircle.png'
-import dashCircle from '../assets/PlayerTokens/dashCircle.png'
+import dashCircle2 from '../assets/PlayerTokens/dashCircle2.png'
 
 class EndPoint extends Component {
     constructor(props) {
@@ -69,7 +69,7 @@ class EndPoint extends Component {
         //TODO: bounds need to account for window resizing after the initial grid has been renderd. Might be fixed once the grid size becomes responsive to window size
         return (
             <Draggable onStart={this.onStart} onStop={this.controlledStop} position={controlledPosition} bounds={{left: 0, top: 0, right:this.props.width, bottom: this.props.height - 17}} >
-                <img src={dashCircle} style={this.style} alt="EndPoint Token"/>
+                <img src={dashCircle2} style={this.style} alt="EndPoint Token"/>
             </Draggable>
         )
     }
