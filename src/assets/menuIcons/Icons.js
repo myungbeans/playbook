@@ -13,7 +13,7 @@ export function PlusIcon() {
 
 export function StraightRouteIcon() {
     return (
-        <svg viewBox="0 13 90 78" preserveAspectRatio width="3.5em" height="3.5em">
+        <svg viewBox="0 13 90 78" width="3.5em" height="3.5em">
             <path
             d="M45 15.1c-16.5 0-29.9 13.4-29.9 29.9S28.5 74.9 45 74.9 74.9 61.5 74.9 45 61.5 15.1 45 15.1zm0 57.8c-15.4 0-27.9-12.5-27.9-27.9S29.6 17.1 45 17.1 72.9 29.6 72.9 45 60.4 72.9 45 72.9z"
             fill="none"
@@ -25,7 +25,7 @@ export function StraightRouteIcon() {
 
 export function SharpRouteIcon() {
     return (
-        <svg viewBox="0 13 90 78" preserveAspectRatio width="3.5em" height="3.5em">
+        <svg viewBox="0 13 90 78" width="3.5em" height="3.5em">
             <path
             d="M45 15.1c-16.5 0-29.9 13.4-29.9 29.9S28.5 74.9 45 74.9 74.9 61.5 74.9 45 61.5 15.1 45 15.1zm0 57.8c-15.4 0-27.9-12.5-27.9-27.9S29.6 17.1 45 17.1 72.9 29.6 72.9 45 60.4 72.9 45 72.9z"
             fill="none"
@@ -37,7 +37,7 @@ export function SharpRouteIcon() {
 
 export function SquiggleRoute() {
     return ( 
-        <svg viewBox="0 13 90 78" preserveAspectRatio width="3.5em" height="3.5em">
+        <svg viewBox="0 13 90 78" width="3.5em" height="3.5em">
             <path
             d="M45 15.1c-16.5 0-29.9 13.4-29.9 29.9S28.5 74.9 45 74.9 74.9 61.5 74.9 45 61.5 15.1 45 15.1zm0 57.8c-15.4 0-27.9-12.5-27.9-27.9S29.6 17.1 45 17.1 72.9 29.6 72.9 45 60.4 72.9 45 72.9z"
             fill="none"

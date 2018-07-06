@@ -54,12 +54,13 @@ class EndPoint extends Component {
     }
 
     persistEndCoords = ({x, y}) => {
+        
         fetch(`http://localhost:3000/api/v1/moves/${this.props.move_id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type" : "application/json"
             },
-            body: JSON.stringify({ endX:x, endY:y })
+            body: JSON.stringify({ startX: this.props.players.roster[this.props.player_id].x, startY: this.props.players.roster[this.props.player_id].y ,endX:x, endY:y })
         })
         .then(() => this.props.updateEndPoint({moveIndex: this.props.players.moveIndex, player_id: this.props.player_id, oldMoves: [...this.props.players.roster[this.props.player_id].moves], x, y}))
     }

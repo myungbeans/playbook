@@ -53,8 +53,8 @@ class StartPoint extends Component {
         const {x, y} = position;
         this.setState({controlledPosition: {x, y}})
         //TODO: consider making coords based on % of screen so as to maintain ratio when zooming
-        this.persistCoords({x, y})
         this.onStop()
+        this.persistCoords({x, y})
     }
 
     selectPlayer = (e) => {
@@ -73,6 +73,7 @@ class StartPoint extends Component {
         })
         .then(() => this.props.updatePlayer({id: this.props.player_id,x,y}))
         .then(() => this.props.updateStartPoint({moveIndex: this.props.players.moveIndex, player_id: this.props.player_id, oldMoves: [...this.props.players.roster[this.props.player_id].moves], x, y}))
+        // .then(() => this.props.update)
     }
 
     render(){
