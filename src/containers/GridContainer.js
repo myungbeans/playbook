@@ -8,9 +8,8 @@ import { updateGridDimensions } from '../actions/settings-actions'
 
 import StartPoint from '../components/StartPoint'
 import EndPoint from '../components/EndPoint'
-
-//DnD functionality
-// import { DropTarget } from 'react-dnd'
+import Snap, { Paper } from 'snapsvg-cjs'
+import { svgify } from '../components/SVG'
 
 class GridContainer extends Component {
 
@@ -48,12 +47,23 @@ class GridContainer extends Component {
         return Object.values(this.props.players.roster).map(player => { 
             if (player.moves[0]) {
                 let lastMove = [...(player.moves)].slice(-1)[0]
-                return <EndPoint key={UUID()} player_id={player.id} move_id={lastMove.id} draggable={"true"} dimension={this.props.settings.interval} moveSettings={lastMove} />
+                let grid = Snap(this.props.settings.width, this.props.settings.height)
+                let line = grid.paper.line(lastMove.startX, lastMove.startY, lastMove.endX, lastMove.endY)
+                console.log(line)
+                svgify(line, 'move_line')
+
+                // debugger
+                return (
+                    <div key={UUID()}>
+                        <EndPoint key={UUID()} player_id={player.id} move_id={lastMove.id} draggable={"true"} dimension={this.props.settings.interval} moveSettings={lastMove} />
+                        <path d="M626 325l134-53" />
+                    </div>
+                )
             }
         })
     }
 
-    drawRoute = (e) => {
+    newEndPoint = (e) => {
         e.preventDefault()
         
     }
