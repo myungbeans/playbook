@@ -54,21 +54,26 @@ class GridContainer extends Component {
                         <EndPoint key={UUID()} player_id={player.id} move_id={move.id} draggable={"true"} dimension={this.props.settings.interval} moveSettings={move} />
                     </div>
                 )
+                this.updateCoordsIfNeeded(player, move, this.props)
                 moves.pathLines.push(
-                    <PathLine key={UUID()} x1={move.startX} x2={move.endX} y1={move.startY} y2={move.endY}/>
+                    <PathLine key={UUID()} dimension={this.props.settings.interval} x1={move.startX} x2={move.endX} y1={move.startY} y2={move.endY}/>
                 )
             }
-                            
-                // let grid = Snap(this.props.settings.width, this.props.settings.height)
-                // let line = grid.paper.line(lastMove.startX, lastMove.startY, lastMove.endX, lastMove.endY)
-                // console.log(line)
-                // svgify(line, 'move_line')
-                // debugger
         })
         return moves
     }
 
-
+    updateCoordsIfNeeded = (player, move, props) => {
+        if (player.x !== move.startX || player.y !== move.startY) {
+            fetch(`http://localhost:3000/api/v1/moves/${move.id}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type" : "application/json"
+                },
+                body: JSON.stringify({ startX: props.players.roster[player.id].x, startY: props.players.roster[player.id].y ,endX:move.endX, endY:move.endY })
+            })
+        }
+    }
 
     newEndPoint = (e) => {
         e.preventDefault()    
@@ -77,7 +82,7 @@ class GridContainer extends Component {
     render() {
         let moves = this.setEndPoints()
         return (
-            <div onContextMenu={this.drawRoute} id="Grid-Container" data-reactid=".0.0.0">
+            <div onContextMenu={this.newEndPoint} id="Grid-Container" data-reactid=".0.0.0">
                 {this.setPlayers()}
                 {moves.endPoints}
                 <svg className="ad-SVG" width="100vh" height="70vh" data-reactid=".0.0.0.0">

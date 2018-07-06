@@ -4,8 +4,6 @@ import { connect } from 'react-redux'
 import { selectPlayer, updateEndPoint } from '../actions/playbook-actions'
 import Draggable from 'react-draggable'
 
-// import emptyCircle from '../assets/PlayerTokens/emptyCircle.png'
-// import selectedCircle from '../assets/PlayerTokens/selectedCircle.png'
 import dashCircle2 from '../assets/PlayerTokens/dashCircle2.png'
 
 class EndPoint extends Component {
@@ -54,7 +52,6 @@ class EndPoint extends Component {
     }
 
     persistEndCoords = ({x, y}) => {
-        
         fetch(`http://localhost:3000/api/v1/moves/${this.props.move_id}`, {
             method: "PATCH",
             headers: {
@@ -86,6 +83,5 @@ const mapActionsToProps = (dispatch) => {
         selectPlayer, updateEndPoint
     }, dispatch)
 }
-// updateEndPoint
 
 export default connect(mapStateToProps, mapActionsToProps)(EndPoint)

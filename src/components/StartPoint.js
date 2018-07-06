@@ -73,7 +73,6 @@ class StartPoint extends Component {
         })
         .then(() => this.props.updatePlayer({id: this.props.player_id,x,y}))
         .then(() => this.props.updateStartPoint({moveIndex: this.props.players.moveIndex, player_id: this.props.player_id, oldMoves: [...this.props.players.roster[this.props.player_id].moves], x, y}))
-        // .then(() => this.props.update)
     }
 
     render(){
