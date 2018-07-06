@@ -48,15 +48,15 @@ class GridContainer extends Component {
             pathLines: []
         }
         Object.values(this.props.players.roster).forEach(player => { 
-            if (player.moves[0]) {
-                let lastMove = [...(player.moves)].slice(-1)[0]
+            if (player.moves[this.props.players.moveIndex]) {
+                let move = player.moves[this.props.players.moveIndex]
                 moves.endPoints.push(
                     <div key={UUID()}>
-                        <EndPoint key={UUID()} player_id={player.id} move_id={lastMove.id} draggable={"true"} dimension={this.props.settings.interval} moveSettings={lastMove} />
+                        <EndPoint key={UUID()} player_id={player.id} move_id={move.id} draggable={"true"} dimension={this.props.settings.interval} moveSettings={move} />
                     </div>
                 )
                 moves.pathLines.push(
-                    <PathLine key={UUID()} x1={lastMove.startX} x2={lastMove.endX} y1={lastMove.startY} y2={lastMove.endY}/>
+                    <PathLine key={UUID()} x1={move.startX} x2={move.endX} y1={move.startY} y2={move.endY}/>
                 )
             }
                             

@@ -14,7 +14,7 @@ export default function playbookReducer(state={...defaultState}, { type, payload
         case UPDATE_ENDPOINT:
             return {...state, roster: {...state.roster, [payload.player_id]: {...state.roster[payload.player_id], moves: [...payload.moves]}}}
         case UPDATE_STARTPOINT:
-            return state
+            return {...state, roster: {...state.roster, [payload.player_id]: {...state.roster[payload.player_id], moves: [...payload.moves]}}}
         case SET_CURRENT_MOVE:
             return {...state, moveIndex: payload}
         default:

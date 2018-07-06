@@ -12,7 +12,3 @@
     .ad-Grid.is-hidden {
         opacity: 0;
     }
-
-    #pathLine {
-        stroke: #000
-    }

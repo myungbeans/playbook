@@ -34,9 +34,17 @@ export function updatePlayer(data){
     }
 }
 
+
+//REPLACE AT MOVEINDEX BEFORE SENDING TO REDUCER
 export function updateEndPoint(data){
-    data.oldMoves[data.move_id - 1].endX = data.x
-    data.oldMoves[data.move_id - 1].endY = data.y
+    if (data.oldMoves[data.moveIndex]){
+        data.oldMoves[data.moveIndex].endX = data.x
+        data.oldMoves[data.moveIndex].endY = data.y
+        return {
+            type: UPDATE_ENDPOINT,
+            payload: {...data, moves: [...data.oldMoves]}
+        }
+    }
     return {
         type: UPDATE_ENDPOINT,
         payload: {...data, moves: [...data.oldMoves]}
@@ -44,10 +52,14 @@ export function updateEndPoint(data){
 }
 
 export function updateStartPoint(data){
-    // const player = this.props.players.roster[data.player_id]
-    // const move = player.moves.select()
-    debugger
-
+    if (data.oldMoves[data.moveIndex]){
+        data.oldMoves[data.moveIndex].startX = data.x
+        data.oldMoves[data.moveIndex].startY = data.y
+        return {
+            type: UPDATE_ENDPOINT,
+            payload: {...data, moves: [...data.oldMoves]}
+        }
+    }
     return {
         type: UPDATE_ENDPOINT,
         payload: {...data, moves: [...data.oldMoves]}

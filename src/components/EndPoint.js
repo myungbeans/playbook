@@ -61,7 +61,7 @@ class EndPoint extends Component {
             },
             body: JSON.stringify({ endX:x, endY:y })
         })
-        .then(() => this.props.updateEndPoint({move_id: this.props.move_id, player_id: this.props.player_id, oldMoves: [...this.props.players.roster[this.props.player_id].moves], x, y}))
+        .then(() => this.props.updateEndPoint({moveIndex: this.props.players.moveIndex, player_id: this.props.player_id, oldMoves: [...this.props.players.roster[this.props.player_id].moves], x, y}))
     }
 
     render(){
