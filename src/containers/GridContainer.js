@@ -47,7 +47,7 @@ class GridContainer extends Component {
             pathLines: []
         }
         Object.values(this.props.players.roster).forEach(player => { 
-            if (player.moves[this.props.players.moveIndex]) {
+            if (player.moves && player.moves.length - 1 === this.props.players.moveIndex) {
                 let move = player.moves[this.props.players.moveIndex]
                 moves.endPoints.push(
                     <div key={UUID()}>
@@ -76,7 +76,19 @@ class GridContainer extends Component {
     }
 
     newEndPoint = (e) => {
-        e.preventDefault()    
+        e.preventDefault()
+        let player = this.props.players.roster[this.props.players.selectedPlayer]
+        if (!player || player.moves[this.props.players.moveIndex]){
+            console.log("Already have a move or player not found")
+        } else { 
+            fetch(`http://localhost:3000/api/v1/players/${player.id}/moves/`, {
+                method: "POST",
+                headers: {
+                "Content-Type" : "application/json"
+                },
+                body: JSON.stringify({ player_id: player.id, startX: player.x, startY:player.y, endX: player.x, endY: player.y - 40, duration: 5})
+            })    
+        }
     }
 
     render() {

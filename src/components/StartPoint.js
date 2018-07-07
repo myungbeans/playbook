@@ -72,7 +72,10 @@ class StartPoint extends Component {
             body: JSON.stringify({ x:x, y:y })
         })
         .then(() => this.props.updatePlayer({id: this.props.player_id,x,y}))
-        .then(() => this.props.updateStartPoint({moveIndex: this.props.players.moveIndex, player_id: this.props.player_id, oldMoves: [...this.props.players.roster[this.props.player_id].moves], x, y}))
+        .then(() => {
+            let moves = this.props.players.roster[this.props.player_id].moves || []
+            this.props.updateStartPoint({moveIndex: this.props.players.moveIndex, player_id: this.props.player_id, oldMoves: moves, x, y})
+        })
     }
 
     render(){

@@ -34,8 +34,6 @@ export function updatePlayer(data){
     }
 }
 
-
-//REPLACE AT MOVEINDEX BEFORE SENDING TO REDUCER
 export function updateEndPoint(data){
     if (data.oldMoves[data.moveIndex]){
         data.oldMoves[data.moveIndex].endX = data.x
@@ -67,8 +65,15 @@ export function updateStartPoint(data){
 }
 
 export function setCurrentMove(data){
-    return{
-        type: SET_CURRENT_MOVE,
-        payload: (data[Object.keys(data)[0]].moves.length - 1)
+    if (data[Object.keys(data)[0]] && data[Object.keys(data)[0]].moves){
+        return {
+            type: SET_CURRENT_MOVE,
+            payload: (data[Object.keys(data)[0]].moves.length - 1)
+        }
+    } else {
+        return {
+            type: SET_CURRENT_MOVE,
+            payload: 0
+        }
     }
 }

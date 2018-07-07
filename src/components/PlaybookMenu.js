@@ -37,7 +37,6 @@ const actions = [
   { icon: <GroupIcon />, name: 'Group' },
   { icon: <ContentCopyIcon />, name: 'Copy' },
   { icon: <SaveIcon />, name: 'Save' },
-  // { icon: <ShareIcon />, name: 'Share' },
   { icon: <DeleteIcon />, name: 'Delete' },
 ];
 

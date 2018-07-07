@@ -3,9 +3,6 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { bindActionCreators } from 'redux' 
 import { setPlayers, setCurrentMove } from '../actions/playbook-actions'
-//DnD functionality
-// import HTML5Backend from 'react-dnd-html5-backend'
-// import { DragDropContext } from 'react-dnd'
 
 import PlaybookMenu from '../components/PlaybookMenu'
 import GridContainer from './GridContainer'
