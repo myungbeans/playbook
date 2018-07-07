@@ -50,6 +50,14 @@ class GridContainer extends Component {
             return <PathLine key={UUID()} dimension={this.props.settings.interval} x1={move.startX} x2={move.endX} y1={move.startY} y2={move.endY}/>
         })
     }
+
+    drawAllPoints = () => {
+        return [...this.drawPlayers(), ...this.drawEndPoints()]
+    }
+
+    drawAllLines = () => {
+        return [...this.drawVertical(), ...this.drawHorizontal(), ...this.drawPathLines()]
+    }
     
 
     newEndPoint = (e) => {
@@ -71,13 +79,15 @@ class GridContainer extends Component {
     render() {
         return (
             <div onContextMenu={this.newEndPoint} id="Grid-Container" data-reactid=".0.0.0">
-                {this.drawPlayers()}
-                {this.drawEndPoints()}
+                {/*this.drawPlayers()*/}
+                {/*this.drawEndPoints()*/}
+                {this.drawAllPoints()}
                 <svg className="ad-SVG" width="100vh" height="70vh" data-reactid=".0.0.0.0">
                     <g className="ad-Grid" data-reactid=".0.0.0.0.0">
-                        {this.drawVertical()}
-                        {this.drawHorizontal()}
-                        {this.drawPathLines()}
+                        {/*this.drawVertical()*/}
+                        {/*this.drawHorizontal()*/}
+                        {/*this.drawPathLines()*/}
+                        {this.drawAllLines()}
                     </g>
                 </svg>
             </div>

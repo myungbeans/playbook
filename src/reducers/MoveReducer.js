@@ -4,9 +4,9 @@ import { defaultState } from '../index'
 export default function moveReducer(state={...defaultState}, { type, payload }) {    
     switch(type){
         case UPDATE_ENDPOINT:
-            return {...state, roster: {...state.roster, [payload.player_id]: {...state.roster[payload.player_id], moves: [...payload.moves]}}}
+            return {...state, moves: {...state.moves, endPoints: [...payload.moves]}}
         case UPDATE_STARTPOINT:
-            return {...state, roster: {...state.roster, [payload.player_id]: {...state.roster[payload.player_id], moves: [...payload.moves]}}}
+            return {...state, moves: {...state.moves, endPoints: [...payload.moves]}}
         case SET_CURRENT_MOVE:
             return {...state, moveIndex: payload}
         case STORE_ENDPOINTS:
