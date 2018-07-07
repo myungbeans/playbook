@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { selectPlayer, updatePlayer, updateStartPoint } from '../actions/playbook-actions'
 import Draggable from 'react-draggable'
 
+//Actions
+import { selectPlayer, updatePlayer } from '../actions/playbook-actions'
+import { updateStartPoint } from '../actions/move-actions'
+//Assets
 import emptyCircle from '../assets/PlayerTokens/emptyCircle.png'
 import selectedCircle from '../assets/PlayerTokens/selectedCircle.png'
 

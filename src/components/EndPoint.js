@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { selectPlayer, updateEndPoint } from '../actions/playbook-actions'
+import { selectPlayer } from '../actions/playbook-actions'
+import { updateEndPoint } from '../actions/move-actions'
 import Draggable from 'react-draggable'
 
 import dashCircle2 from '../assets/PlayerTokens/dashCircle2.png'
@@ -52,14 +53,15 @@ class EndPoint extends Component {
     }
 
     persistEndCoords = ({x, y}) => {
-        fetch(`http://localhost:3000/api/v1/moves/${this.props.move_id}`, {
+        let player = this.props.players.roster[this.props.moveSettings.player_id]
+        fetch(`http://localhost:3000/api/v1/moves/${this.props.moveSettings.move_id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type" : "application/json"
             },
-            body: JSON.stringify({ startX: this.props.players.roster[this.props.player_id].x, startY: this.props.players.roster[this.props.player_id].y ,endX:x, endY:y })
+            body: JSON.stringify({ startX: player.x, startY: player.y ,endX:x, endY:y })
         })
-        .then(() => this.props.updateEndPoint({moveIndex: this.props.players.moveIndex, player_id: this.props.player_id, oldMoves: [...this.props.players.roster[this.props.player_id].moves], x, y}))
+        .then(() => this.props.updateEndPoint({moveIndex: this.props.moves.moveIndex, player_id: player.id, oldMoves: [...player.moves], x, y}))
     }
 
     render(){

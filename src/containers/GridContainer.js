@@ -8,7 +8,6 @@ import { updateGridDimensions } from '../actions/settings-actions'
 import { GridLine, PathLine } from '../components/Line'
 import StartPoint from '../components/StartPoint'
 import EndPoint from '../components/EndPoint'
-import Snap, { Paper } from 'snapsvg-cjs'
 
 class GridContainer extends Component {
     componentDidMount() {
@@ -18,7 +17,7 @@ class GridContainer extends Component {
         this.props.updateGridDimensions( { height, width} )
     }
 
-    setVertical = () => {
+    drawVertical = () => {
         const verticalLines = []
         for (let i = 0; i < this.props.settings.width; i = i+this.props.settings.interval){
             verticalLines.push(<GridLine key={UUID()} x1={i} x2={i} y1={0} y2={this.props.settings.height}/>)
@@ -26,7 +25,7 @@ class GridContainer extends Component {
         return verticalLines
     }
 
-    setHorizontal = () => {
+    drawHorizontal = () => {
         const horizontalLines = []
         for (let i = 0; i < this.props.settings.height; i = i+this.props.settings.interval){
             horizontalLines.push(<GridLine key={UUID()} x1={0} x2={this.props.settings.width} y1={i} y2={i}/>)
@@ -34,46 +33,24 @@ class GridContainer extends Component {
         return horizontalLines
     }
 
-    setPlayers = () => {
+    drawPlayers = () => {
         return Object.values(this.props.players.roster).map(player => {
             return <StartPoint key={UUID()} player_id={player.id} name={player.name} draggable={"true"} dimension={this.props.settings.interval} x={player.x} y={player.y}/>
         })
     }
 
-    setEndPoints = () => {
-        //TODO: Rendering only LAST move of each player upon load.
-        let moves = {
-            endPoints: [],
-            pathLines: []
-        }
-        Object.values(this.props.players.roster).forEach(player => { 
-            if (player.moves && player.moves.length - 1 === this.props.players.moveIndex) {
-                let move = player.moves[this.props.players.moveIndex]
-                moves.endPoints.push(
-                    <div key={UUID()}>
-                        <EndPoint key={UUID()} player_id={player.id} move_id={move.id} draggable={"true"} dimension={this.props.settings.interval} moveSettings={move} />
-                    </div>
-                )
-                this.updateCoordsIfNeeded(player, move, this.props)
-                moves.pathLines.push(
-                    <PathLine key={UUID()} dimension={this.props.settings.interval} x1={move.startX} x2={move.endX} y1={move.startY} y2={move.endY}/>
-                )
-            }
+    drawEndPoints = () => {
+        return this.props.moves.endPoints.map(endPoint => { 
+            return <EndPoint key={UUID()} draggable={"true"} dimension={this.props.settings.interval} moveSettings={endPoint} />
         })
-        return moves
     }
 
-    updateCoordsIfNeeded = (player, move, props) => {
-        if (player.x !== move.startX || player.y !== move.startY) {
-            fetch(`http://localhost:3000/api/v1/moves/${move.id}`, {
-                method: "PATCH",
-                headers: {
-                    "Content-Type" : "application/json"
-                },
-                body: JSON.stringify({ startX: props.players.roster[player.id].x, startY: props.players.roster[player.id].y ,endX:move.endX, endY:move.endY })
-            })
-        }
+    drawPathLines = () => {
+        return this.props.moves.endPoints.map(move => {
+            return <PathLine key={UUID()} dimension={this.props.settings.interval} x1={move.startX} x2={move.endX} y1={move.startY} y2={move.endY}/>
+        })
     }
+    
 
     newEndPoint = (e) => {
         e.preventDefault()
@@ -92,16 +69,15 @@ class GridContainer extends Component {
     }
 
     render() {
-        let moves = this.setEndPoints()
         return (
             <div onContextMenu={this.newEndPoint} id="Grid-Container" data-reactid=".0.0.0">
-                {this.setPlayers()}
-                {moves.endPoints}
+                {this.drawPlayers()}
+                {this.drawEndPoints()}
                 <svg className="ad-SVG" width="100vh" height="70vh" data-reactid=".0.0.0.0">
                     <g className="ad-Grid" data-reactid=".0.0.0.0.0">
-                        {this.setVertical()}
-                        {this.setHorizontal()}
-                        {moves.pathLines}
+                        {this.drawVertical()}
+                        {this.drawHorizontal()}
+                        {this.drawPathLines()}
                     </g>
                 </svg>
             </div>
