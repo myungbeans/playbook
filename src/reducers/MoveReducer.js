@@ -4,10 +4,8 @@ import { defaultState } from '../index'
 export default function moveReducer(state={...defaultState}, { type, payload }) {    
     switch(type){
         case UPDATE_POINT:
-            let prevPoints = [...state.points] || []
-            return {...state, points: prevPoints.concat(payload.moves)}
+            return {...state, points: payload}
         case UPDATE_STARTPOINT:
-            
             return {...state, moves: {...state.moves, points: [...payload.moves]}}
         case SET_CURRENT_MOVE:
             return {...state, moveIndex: payload}

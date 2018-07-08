@@ -29,13 +29,13 @@
 //     })
 // }
 
-export const persistStartCoords = ({x, y}, id, callback) => {
-    fetch(`http://localhost:3000/api/v1/players/${id}`, {
+export const persistStartCoords = (payload, callback) => {
+    fetch(`http://localhost:3000/api/v1/players/${payload.player.id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type" : "application/json"
             },
-            body: JSON.stringify({ x, y })
+            body: JSON.stringify(payload)
     })
     .then(callback)
 }

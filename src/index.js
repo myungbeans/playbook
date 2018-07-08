@@ -28,6 +28,7 @@ export const defaultState = {
         interval: 30,
         height: 417,
         width: 1326,
+        loading: false,
     },
     homepage: {
         myPlays:[],
@@ -38,7 +39,7 @@ export const defaultState = {
         selectedPlayer: "",
     },
     moves: {
-        points: [],
+        points: {},
         moveIndex: "",
     }
 }

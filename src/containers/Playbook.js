@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux'
 
 //Actions
 import { setPlayers } from '../actions/playbook-actions'
+import { toggleLoading } from '../actions/settings-actions'
 import { setCurrentMove, storePoints } from '../actions/move-actions'
 //Containers
 import PlaybookMenu from '../components/PlaybookMenu'
@@ -17,6 +18,7 @@ import CustomMenuContainer from './CustomMenuContainer';
 
 class Playbook extends Component {
     componentDidMount(){
+        this.props.toggleLoading(this.props.settings.loading, true)
         this.setUp()
     }
     
@@ -31,19 +33,20 @@ class Playbook extends Component {
         .then(data => {
             let roster = {}
             data.forEach(player => roster[player.id] = player)
+            this.props.setCurrentMove({...roster})
             this.props.setPlayers(roster)
+            this.setPoints(this.props.players.roster, this.props.moves.moveIndex)
         })
-        .then(()=> this.props.setCurrentMove({...this.props.players.roster}))
-        .then(()=> this.setPoints(this.props.players.roster, this.props.moves.moveIndex))
+        // .then(()=> this.setPoints(this.props.players.roster, this.props.moves.moveIndex))
+        .then(()=> this.props.toggleLoading(this.props.settings.loading, false))
     }
 
     setPoints = (players, moveIndex) => {
-        let points = []
+        let points = {}
         Object.values(players).forEach(player => {
             if (player.moves[0] && player.moves.length - 1 === moveIndex) {
                 let move = player.moves[moveIndex]
-                points.push(move)
-                // persistEndCoords(player, move, this.props)
+                points[move.id] = move
             }
         })
         this.props.storePoints(points)
@@ -64,7 +67,7 @@ class Playbook extends Component {
     render() {
         return (
             <div id="playbook-page-container">
-                <GridContainer/>
+                {this.props.settings.loading ? null : <GridContainer/>}
                 <PlaybookMenu/>
                 <CustomMenuContainer/>
             </div>
@@ -78,7 +81,7 @@ const mapStateToProps = state => {
 
 const mapActionsToProps = (dispatch) => {
     return bindActionCreators({
-        setPlayers, setCurrentMove, storePoints
+        setPlayers, setCurrentMove, storePoints, toggleLoading
     }, dispatch)
 }
   

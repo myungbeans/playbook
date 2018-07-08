@@ -1,6 +1,7 @@
 export const UPDATE_GRID_DIMENSIONS = 'settings: updateGridDimensions'
 export const INCREASE_GRID_INCREMENT = 'settings: increaseGridIncrement'
 export const DECREASE_GRID_INCREMENT = 'settings: decreaseGridIncrement'
+export const TOGGLE_LOADING = 'settings: loading'
 
 export function updateGridDimensions(dimensions) {
     return {
@@ -23,5 +24,13 @@ export function decreaseGridIncrement(increment) {
     return {
         type: DECREASE_GRID_INCREMENT,
         payload: increment
+    }
+}
+
+export function toggleLoading(prevState, explicitToggle) {
+    let status = explicitToggle || !prevState
+    return {
+        type: TOGGLE_LOADING,
+        payload: status
     }
 }

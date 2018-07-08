@@ -36,21 +36,33 @@ class GridContainer extends Component {
     }
 
     drawPlayers = () => {
-        return Object.values(this.props.players.roster).map(player => {
-            return <StartPoint key={UUID()} draggable={"true"} dimension={this.props.settings.interval} ownProps={player}/>
-        })
+        if (!this.props.settings.loading){
+            return Object.values(this.props.moves.points).map(move => {
+                return <StartPoint key={UUID()} draggable={"true"} dimension={this.props.settings.interval} ownProps={move}/>
+            })
+        } else {
+            return []
+        }
     }
 
     drawEndPoints = () => {
-        return this.props.moves.points.map(point => { 
-            return <EndPoint key={UUID()} draggable={"true"} dimension={this.props.settings.interval} ownProps={point} />
-        })
+        if (!this.props.settings.loading){
+            return Object.values(this.props.moves.points).map(move => {
+                return <EndPoint key={UUID()} draggable={"true"} dimension={this.props.settings.interval} ownProps={move}/>
+            })
+        } else {
+            return []
+        }
     }
 
     drawPathLines = () => {
-        return this.props.moves.points.map(move => {
-            return <PathLine key={UUID()} dimension={this.props.settings.interval} x1={move.startX} x2={move.endX} y1={move.startY} y2={move.endY}/>
-        })
+        if (!this.props.settings.loading){
+            return Object.values(this.props.moves.points).map(move => {
+                return <PathLine key={UUID()} dimension={this.props.settings.interval} x1={move.startX} x2={move.endX} y1={move.startY} y2={move.endY}/>
+            })
+        } else {
+            return []
+        }
     }
 
     drawAllPoints = () => {
@@ -60,7 +72,6 @@ class GridContainer extends Component {
     drawAllLines = () => {
         return [...this.drawVertical(), ...this.drawHorizontal(), ...this.drawPathLines()]
     }
-    
 
     newEndPoint = (e) => {
         e.preventDefault()
@@ -73,6 +84,7 @@ class GridContainer extends Component {
     }
 
     render() {
+        
         return (
             <div onContextMenu={this.newEndPoint} id="Grid-Container" data-reactid=".0.0.0">
                 {this.drawAllPoints()}

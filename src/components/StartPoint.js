@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 import Draggable from 'react-draggable'
 
 //Actions
-import { selectPlayer, updatePlayer } from '../actions/playbook-actions'
-import { updateStartPoint } from '../actions/move-actions'
+import { selectPlayer } from '../actions/playbook-actions'
+import { updatePoint } from '../actions/move-actions'
 //Assets
 import emptyCircle from '../assets/PlayerTokens/emptyCircle.png'
 import selectedCircle from '../assets/PlayerTokens/selectedCircle.png'
@@ -13,19 +13,19 @@ import selectedCircle from '../assets/PlayerTokens/selectedCircle.png'
 import { persistStartCoords, persistEndCoords } from '../APICalls'
 
 class StartPoint extends Component {
-    constructor(props) {
+    constructor(props){
         super(props)
 
         this.state = {
             disabled: true,
             activeDrags: 0,
             controlledPosition: {
-                x: this.props.ownProps.x, y: this.props.ownProps.y
+                x: this.props.ownProps.startX, y: this.props.ownProps.startY
             },
         }
     }
-    
-    style ={
+
+    style = {
         backgroundColor: "transparent",
         height: this.props.dimension,
         width: this.props.dimension,
@@ -33,7 +33,7 @@ class StartPoint extends Component {
     }
 
     verifySelectedPlayer = () => {
-        return this.props.players.selectedPlayer === this.props.ownProps.id
+        return this.props.players.selectedPlayer === this.props.ownProps.player_id
     }
 
     imgSrc = () => {
@@ -43,7 +43,7 @@ class StartPoint extends Component {
     hoveredPlayer = (e) => {
         e.preventDefault()
         e.stopPropagation()
-        return this.verifySelectedPlayer() ? null : this.props.selectPlayer(this.props.ownProps.id)
+        return this.verifySelectedPlayer() ? null : this.props.selectPlayer(this.props.ownProps.player_id)
     }
 
     onStart = (e) => {
@@ -62,14 +62,32 @@ class StartPoint extends Component {
 
     controlledStop = (e, position) => {
         const {x, y} = position;
-        let player = this.props.ownProps
+        let move = this.props.ownProps
+        move.startX = x
+        move.startY = y
         this.setState({controlledPosition: {x, y}})
         this.onStop()
-        persistStartCoords({x, y}, player.id, ()=>this.props.updatePlayer({id: player.id,x,y}))
+
+        let playerInfo = this.findPlayer()
+        persistStartCoords({
+            player: {
+                id: playerInfo.player_id,
+                name: playerInfo.player.name,
+                moves_attributes: 
+                    [{...move, startX: x, startY: y, order: this.props.moves.moveIndex}]
+            }
+        }, () => this.props.updatePoint( this.props.moves.points, {...move}))
 
 
         // this.props.updateStartPoint({x, y, moveIndex: this.props.moves.moveIndex, moves: [...player.moves]})
         // this.updateEndPointIfExists({x, y, player})
+    }
+
+    findPlayer = () => {
+        return {
+            player_id: this.props.ownProps.player_id,
+            player: this.props.players.roster[this.props.ownProps.player_id]
+        }
     }
 
     updateEndPointIfExists = ({x, y, player}) => {
@@ -95,7 +113,7 @@ const mapStateToProps = state => {
 
 const mapActionsToProps = (dispatch) => {
     return bindActionCreators({
-        selectPlayer, updatePlayer, updateStartPoint
+        selectPlayer, updatePoint
     }, dispatch)
 }
 

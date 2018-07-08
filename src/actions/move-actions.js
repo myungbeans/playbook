@@ -3,14 +3,12 @@ export const UPDATE_STARTPOINT = "startPoint: updateStartPoint"
 export const SET_CURRENT_MOVE = "moves: currentMove"
 export const STORE_POINTS = "moves: storePoints"
 
-export function updatePoint({moveIndex, moves, x, y}){
-    if (moves[moveIndex]){
-        moves[moveIndex].endX = x
-        moves[moveIndex].endY = y
-    }
+export function updatePoint(prevPoints, move){
+    let newMoves = prevPoints
+    newMoves[move.id] = move
     return {
         type: UPDATE_POINT,
-        payload: {moves}
+        payload: {...newMoves}
     }
 }
 
@@ -27,7 +25,7 @@ export function updateStartPoint({moveIndex, moves, x, y}){
 
 export function setCurrentMove(roster){
     let moveIndex
-    if(roster[1]){
+    if(roster[0]){
         moveIndex = roster[1].moves.length - 1
     } else {
         moveIndex = 0
@@ -41,6 +39,6 @@ export function setCurrentMove(roster){
 export function storePoints(data){
     return {
         type: STORE_POINTS,
-        payload: data || []
+        payload: {...data} || {}
     }
 }

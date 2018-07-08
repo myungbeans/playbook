@@ -10,7 +10,7 @@ export default function playbookReducer(state={...defaultState}, { type, payload
         case SELECT_PLAYER:
             return {...state, selectedPlayer: payload}
         case UPDATE_PLAYER:
-            return {...state, roster: {...state.roster, [payload.id]: {...state.roster[payload.id], x: payload.x, y:payload.y}}}
+            return {...state, moves: {...state.moves, points: {...state.roster[payload.id], x: payload.x, y:payload.y}}}
         default:
             return state
     }
