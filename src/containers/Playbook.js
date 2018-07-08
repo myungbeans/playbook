@@ -5,13 +5,15 @@ import { bindActionCreators } from 'redux'
 
 //Actions
 import { setPlayers } from '../actions/playbook-actions'
-import { setCurrentMove, storeEndPoints } from '../actions/move-actions'
+import { setCurrentMove, storePoints } from '../actions/move-actions'
 //Containers
 import PlaybookMenu from '../components/PlaybookMenu'
 import GridContainer from './GridContainer'
 import CustomMenuContainer from './CustomMenuContainer';
 //Components
 
+//Fetch Calls
+// import { persistEndCoords } from '../APICalls'
 
 class Playbook extends Component {
     componentDidMount(){
@@ -31,33 +33,33 @@ class Playbook extends Component {
             data.forEach(player => roster[player.id] = player)
             this.props.setPlayers(roster)
         })
-        .then(()=> this.props.setCurrentMove(this.props.players.roster))
-        .then(()=> this.setEndPoints(this.props.players.roster, this.props.moves.moveIndex))
+        .then(()=> this.props.setCurrentMove({...this.props.players.roster}))
+        .then(()=> this.setPoints(this.props.players.roster, this.props.moves.moveIndex))
     }
 
-    setEndPoints = (players, moveIndex) => {
-        let endPoints = []
+    setPoints = (players, moveIndex) => {
+        let points = []
         Object.values(players).forEach(player => {
             if (player.moves[0] && player.moves.length - 1 === moveIndex) {
                 let move = player.moves[moveIndex]
-                endPoints.push(move)
-                this.updateCoordsIfNeeded(player, move, this.props)
+                points.push(move)
+                // persistEndCoords(player, move, this.props)
             }
         })
-        this.props.storeEndPoints(endPoints)
+        this.props.storePoints(points)
     }
 
-    updateCoordsIfNeeded = (player, move, props) => {
-        if (player.x !== move.startX || player.y !== move.startY) {
-            fetch(`http://localhost:3000/api/v1/moves/${move.id}`, {
-                method: "PATCH",
-                headers: {
-                    "Content-Type" : "application/json"
-                },
-                body: JSON.stringify({ startX: props.players.roster[player.id].x, startY: props.players.roster[player.id].y ,endX:move.endX, endY:move.endY })
-            })
-        }
-    }
+    // updateCoordsIfNeeded = (player, move, props) => {
+    //     if (player.x !== move.startX || player.y !== move.startY) {
+    //         fetch(`http://localhost:3000/api/v1/moves/${move.id}`, {
+    //             method: "PATCH",
+    //             headers: {
+    //                 "Content-Type" : "application/json"
+    //             },
+    //             body: JSON.stringify({ startX: props.players.roster[player.id].x, startY: props.players.roster[player.id].y ,endX:move.endX, endY:move.endY })
+    //         })
+    //     }
+    // }
 
     render() {
         return (
@@ -76,7 +78,7 @@ const mapStateToProps = state => {
 
 const mapActionsToProps = (dispatch) => {
     return bindActionCreators({
-        setPlayers, setCurrentMove, storeEndPoints
+        setPlayers, setCurrentMove, storePoints
     }, dispatch)
 }
   

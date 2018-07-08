@@ -1,55 +1,46 @@
-export const UPDATE_ENDPOINT = "endPoint: updateEndPoint"
+export const UPDATE_POINT = "point: updatePoint"
 export const UPDATE_STARTPOINT = "startPoint: updateStartPoint"
 export const SET_CURRENT_MOVE = "moves: currentMove"
-export const STORE_ENDPOINTS = "moves: storeEndPoints"
+export const STORE_POINTS = "moves: storePoints"
 
-export function updateEndPoint(data){
-    if (data.oldMoves[data.moveIndex]){
-        data.oldMoves[data.moveIndex].endX = data.x
-        data.oldMoves[data.moveIndex].endY = data.y
-        return {
-            type: UPDATE_ENDPOINT,
-            payload: {...data, moves: [...data.oldMoves]}
-        }
+export function updatePoint({moveIndex, moves, x, y}){
+    if (moves[moveIndex]){
+        moves[moveIndex].endX = x
+        moves[moveIndex].endY = y
     }
     return {
-        type: UPDATE_ENDPOINT,
-        payload: {...data, moves: [...data.oldMoves]}
+        type: UPDATE_POINT,
+        payload: {moves}
     }
 }
 
-export function updateStartPoint(data){
-    if (data.oldMoves[data.moveIndex]){
-        data.oldMoves[data.moveIndex].startX = data.x
-        data.oldMoves[data.moveIndex].startY = data.y
-        return {
-            type: UPDATE_ENDPOINT,
-            payload: {...data, moves: [...data.oldMoves]}
-        }
+export function updateStartPoint({moveIndex, moves, x, y}){
+    if (moves[moveIndex]){
+        moves[moveIndex].startX = x
+        moves[moveIndex].startY = y
     }
     return {
-        type: UPDATE_ENDPOINT,
-        payload: {...data, moves: [...data.oldMoves]}
+        type: UPDATE_POINT,
+        payload: {moves}
     }
 }
 
-export function setCurrentMove(data){
-    if (data[Object.keys(data)[0]] && data[Object.keys(data)[0]].moves){
-        return {
-            type: SET_CURRENT_MOVE,
-            payload: (data[Object.keys(data)[0]].moves.length - 1)
-        }
+export function setCurrentMove(roster){
+    let moveIndex
+    if(roster[1]){
+        moveIndex = roster[1].moves.length - 1
     } else {
-        return {
+        moveIndex = 0
+    }
+    return {
             type: SET_CURRENT_MOVE,
-            payload: 0
-        }
+            payload: moveIndex
     }
 }
 
-export function storeEndPoints(data){
+export function storePoints(data){
     return {
-        type: STORE_ENDPOINTS,
+        type: STORE_POINTS,
         payload: data || []
     }
 }

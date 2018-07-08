@@ -9,6 +9,8 @@ import { updateStartPoint } from '../actions/move-actions'
 //Assets
 import emptyCircle from '../assets/PlayerTokens/emptyCircle.png'
 import selectedCircle from '../assets/PlayerTokens/selectedCircle.png'
+//Fetch Calls
+import { persistStartCoords, persistEndCoords } from '../APICalls'
 
 class StartPoint extends Component {
     constructor(props) {
@@ -18,7 +20,7 @@ class StartPoint extends Component {
             disabled: true,
             activeDrags: 0,
             controlledPosition: {
-                x: this.props.x, y: this.props.y
+                x: this.props.ownProps.x, y: this.props.ownProps.y
             },
         }
     }
@@ -31,11 +33,17 @@ class StartPoint extends Component {
     }
 
     verifySelectedPlayer = () => {
-        return this.props.players.selectedPlayer === this.props.player_id
+        return this.props.players.selectedPlayer === this.props.ownProps.id
     }
 
     imgSrc = () => {
         return this.verifySelectedPlayer() ? selectedCircle : emptyCircle
+    }
+
+    hoveredPlayer = (e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        return this.verifySelectedPlayer() ? null : this.props.selectPlayer(this.props.ownProps.id)
     }
 
     onStart = (e) => {
@@ -54,40 +62,27 @@ class StartPoint extends Component {
 
     controlledStop = (e, position) => {
         const {x, y} = position;
+        let player = this.props.ownProps
         this.setState({controlledPosition: {x, y}})
-        //TODO: consider making coords based on % of screen so as to maintain ratio when zooming
         this.onStop()
-        this.persistCoords({x, y})
+        persistStartCoords({x, y}, player.id, ()=>this.props.updatePlayer({id: player.id,x,y}))
+
+
+        // this.props.updateStartPoint({x, y, moveIndex: this.props.moves.moveIndex, moves: [...player.moves]})
+        // this.updateEndPointIfExists({x, y, player})
     }
 
-    selectPlayer = (e) => {
-        e.preventDefault()
-        e.stopPropagation()
-        return this.verifySelectedPlayer() ? null : this.props.selectPlayer(this.props.player_id)
-    }
-
-    persistCoords = ({x, y}) => {
-        fetch(`http://localhost:3000/api/v1/players/${this.props.player_id}`, {
-            method: "PATCH",
-            headers: {
-                "Content-Type" : "application/json"
-            },
-            body: JSON.stringify({ x:x, y:y })
-        })
-        .then(() => this.props.updatePlayer({id: this.props.player_id,x,y}))
-        .then(() => {
-            let moves = this.props.players.roster[this.props.player_id].moves || []
-            this.props.updateStartPoint({moveIndex: this.props.players.moveIndex, player_id: this.props.player_id, oldMoves: moves, x, y})
-        })
+    updateEndPointIfExists = ({x, y, player}) => {
+        let move = player.moves[this.props.moves.moveIndex]
+        if (!!move) {persistEndCoords({x, y}, move)}
     }
 
     render(){
         const {controlledPosition} = this.state;
 
-        //TODO: bounds need to account for window resizing after the initial grid has been renderd. Might be fixed once the grid size becomes responsive to window size
         return (
             <Draggable onStart={this.onStart} onStop={this.controlledStop} position={controlledPosition} bounds={{left: 0, top: 0, right:this.props.width, bottom: this.props.height - 17}} >
-                <img onMouseEnter={this.selectPlayer} src={this.imgSrc()} style={this.style} alt="Player Token"/>
+                <img onMouseEnter={this.hoveredPlayer} src={this.imgSrc()} style={this.style} alt="Player Token"/>
             </Draggable>
         )
     }

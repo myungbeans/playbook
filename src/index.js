@@ -35,12 +35,11 @@ export const defaultState = {
     },
     players: {
         roster: {},
-        moveIndex: "",
-        selectedPlayer: ""
+        selectedPlayer: "",
     },
     moves: {
+        points: [],
         moveIndex: "",
-        endPoints: [],
     }
 }
 

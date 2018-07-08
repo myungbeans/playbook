@@ -3,11 +3,13 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import UUID from "uuid"
 
+//Actions
 import { updateGridDimensions } from '../actions/settings-actions'
-
+//Components
 import { GridLine, PathLine } from '../components/Line'
 import StartPoint from '../components/StartPoint'
 import EndPoint from '../components/EndPoint'
+import { createNewMove } from '../APICalls'
 
 class GridContainer extends Component {
     componentDidMount() {
@@ -35,18 +37,18 @@ class GridContainer extends Component {
 
     drawPlayers = () => {
         return Object.values(this.props.players.roster).map(player => {
-            return <StartPoint key={UUID()} player_id={player.id} name={player.name} draggable={"true"} dimension={this.props.settings.interval} x={player.x} y={player.y}/>
+            return <StartPoint key={UUID()} draggable={"true"} dimension={this.props.settings.interval} ownProps={player}/>
         })
     }
 
     drawEndPoints = () => {
-        return this.props.moves.endPoints.map(endPoint => { 
-            return <EndPoint key={UUID()} draggable={"true"} dimension={this.props.settings.interval} moveSettings={endPoint} />
+        return this.props.moves.points.map(point => { 
+            return <EndPoint key={UUID()} draggable={"true"} dimension={this.props.settings.interval} ownProps={point} />
         })
     }
 
     drawPathLines = () => {
-        return this.props.moves.endPoints.map(move => {
+        return this.props.moves.points.map(move => {
             return <PathLine key={UUID()} dimension={this.props.settings.interval} x1={move.startX} x2={move.endX} y1={move.startY} y2={move.endY}/>
         })
     }
@@ -63,30 +65,19 @@ class GridContainer extends Component {
     newEndPoint = (e) => {
         e.preventDefault()
         let player = this.props.players.roster[this.props.players.selectedPlayer]
-        if (!player || player.moves[this.props.players.moveIndex]){
+        if (!player || (player.moves && player.moves[this.props.moves.moveIndex])){
             console.log("Already have a move or player not found")
-        } else { 
-            fetch(`http://localhost:3000/api/v1/players/${player.id}/moves/`, {
-                method: "POST",
-                headers: {
-                "Content-Type" : "application/json"
-                },
-                body: JSON.stringify({ player_id: player.id, startX: player.x, startY:player.y, endX: player.x, endY: player.y - 40, duration: 5})
-            })    
+        } else {
+            createNewMove(player)
         }
     }
 
     render() {
         return (
             <div onContextMenu={this.newEndPoint} id="Grid-Container" data-reactid=".0.0.0">
-                {/*this.drawPlayers()*/}
-                {/*this.drawEndPoints()*/}
                 {this.drawAllPoints()}
                 <svg className="ad-SVG" width="100vh" height="70vh" data-reactid=".0.0.0.0">
                     <g className="ad-Grid" data-reactid=".0.0.0.0.0">
-                        {/*this.drawVertical()*/}
-                        {/*this.drawHorizontal()*/}
-                        {/*this.drawPathLines()*/}
                         {this.drawAllLines()}
                     </g>
                 </svg>
@@ -95,7 +86,7 @@ class GridContainer extends Component {
     }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
     return state
 }
 
