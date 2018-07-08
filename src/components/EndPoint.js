@@ -9,7 +9,7 @@ import { updatePoint } from '../actions/move-actions'
 //Assets
 import dashCircle2 from '../assets/PlayerTokens/dashCircle2.png'
 //Fetch Calls
-import { persistEndCoords } from '../APICalls'
+import { persistCoords } from '../APICalls'
 
 class EndPoint extends Component {
     constructor(props) {
@@ -52,8 +52,26 @@ class EndPoint extends Component {
         const {x, y} = position;
         this.setState({controlledPosition: {x, y}})
         this.onStop()
-        let player = this.props.players.roster[this.props.ownProps.player_id]
-        persistEndCoords({x: player.x, y: player.y}, this.props.ownProps, ()=>this.props.updatePoint({moveIndex: this.props.moves.moveIndex, moves: [...player.moves], x, y}))
+
+        let playerInfo = this.findPlayer()
+        let move = this.props.ownProps
+        move.endX = x
+        move.endY = y
+        persistCoords({
+            player: {
+                id: playerInfo.player_id,
+                name: playerInfo.player.name,
+                moves_attributes: 
+                    [{...move, endX: x, endY: y, order: this.props.moves.moveIndex}]
+            }
+        }, () => this.props.updatePoint( this.props.moves.points, {...move}))
+    }
+
+    findPlayer = () => {
+        return {
+            player_id: this.props.ownProps.player_id,
+            player: this.props.players.roster[this.props.ownProps.player_id]
+        }
     }
 
     render(){

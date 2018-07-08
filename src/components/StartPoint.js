@@ -10,7 +10,7 @@ import { updatePoint } from '../actions/move-actions'
 import emptyCircle from '../assets/PlayerTokens/emptyCircle.png'
 import selectedCircle from '../assets/PlayerTokens/selectedCircle.png'
 //Fetch Calls
-import { persistStartCoords, persistEndCoords } from '../APICalls'
+import { persistCoords } from '../APICalls'
 
 class StartPoint extends Component {
     constructor(props){
@@ -40,7 +40,7 @@ class StartPoint extends Component {
         return this.verifySelectedPlayer() ? selectedCircle : emptyCircle
     }
 
-    hoveredPlayer = (e) => {
+    updateSelectedPlayer = (e) => {
         e.preventDefault()
         e.stopPropagation()
         return this.verifySelectedPlayer() ? null : this.props.selectPlayer(this.props.ownProps.player_id)
@@ -62,14 +62,14 @@ class StartPoint extends Component {
 
     controlledStop = (e, position) => {
         const {x, y} = position;
-        let move = this.props.ownProps
-        move.startX = x
-        move.startY = y
         this.setState({controlledPosition: {x, y}})
         this.onStop()
 
         let playerInfo = this.findPlayer()
-        persistStartCoords({
+        let move = this.props.ownProps
+        move.startX = x
+        move.startY = y
+        persistCoords({
             player: {
                 id: playerInfo.player_id,
                 name: playerInfo.player.name,
@@ -77,10 +77,6 @@ class StartPoint extends Component {
                     [{...move, startX: x, startY: y, order: this.props.moves.moveIndex}]
             }
         }, () => this.props.updatePoint( this.props.moves.points, {...move}))
-
-
-        // this.props.updateStartPoint({x, y, moveIndex: this.props.moves.moveIndex, moves: [...player.moves]})
-        // this.updateEndPointIfExists({x, y, player})
     }
 
     findPlayer = () => {
@@ -90,17 +86,12 @@ class StartPoint extends Component {
         }
     }
 
-    updateEndPointIfExists = ({x, y, player}) => {
-        let move = player.moves[this.props.moves.moveIndex]
-        if (!!move) {persistEndCoords({x, y}, move)}
-    }
-
     render(){
         const {controlledPosition} = this.state;
 
         return (
             <Draggable onStart={this.onStart} onStop={this.controlledStop} position={controlledPosition} bounds={{left: 0, top: 0, right:this.props.width, bottom: this.props.height - 17}} >
-                <img onMouseEnter={this.hoveredPlayer} src={this.imgSrc()} style={this.style} alt="Player Token"/>
+                <img onMouseEnter={this.updateSelectedPlayer} src={this.imgSrc()} style={this.style} alt="Player Token"/>
             </Draggable>
         )
     }

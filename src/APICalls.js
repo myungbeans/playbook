@@ -10,43 +10,14 @@
 //     }
 // }
 
-// export const persistPlayerAndEndCoords = ({startX, startY, endX, endY}, player_id, move) => {
-//     fetch(`http://localhost:3000/api/v1/players/${player_id}`, {
-//             method: "PATCH",
-//             headers: {
-//                 "Content-Type" : "application/json"
-//             },
-//             body: JSON.stringify({ x:x, y:y })
-//     })
-//     .then(()=> {
-//         fetch(`http://localhost:3000/api/v1/moves/${move.id}`, {
-//         method: "PATCH",
-//         headers: {
-//             "Content-Type" : "application/json"
-//         },
-//         body: JSON.stringify({ startX: x, startY: y ,endX:move.endX, endY:move.endY })
-//         })
-//     })
-// }
 
-export const persistStartCoords = (payload, callback) => {
+export const persistCoords = (payload, callback) => {
     fetch(`http://localhost:3000/api/v1/players/${payload.player.id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type" : "application/json"
             },
             body: JSON.stringify(payload)
-    })
-    .then(callback)
-}
-
-export const persistEndCoords = ({x, y}, move, callback) => {
-    fetch(`http://localhost:3000/api/v1/moves/${move.id}`, {
-        method: "PATCH",
-        headers: {
-            "Content-Type" : "application/json"
-        },
-        body: JSON.stringify({ startX: x, startY: y ,endX:move.endX, endY:move.endY })
     })
     .then(callback)
 }

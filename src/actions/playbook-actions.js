@@ -1,7 +1,6 @@
 export const ADD_PLAYER = 'playbookMenu: addPlayer'
 export const SET_PLAYERS = "playbookMenu: setPlayers"
 export const SELECT_PLAYER = 'players: selectPlayer'
-export const UPDATE_PLAYER = "players: updatePlayer"
 
 export function addPlayer(data){
     return {
@@ -20,13 +19,6 @@ export function setPlayers(data){
 export function selectPlayer(data){
     return {
         type: SELECT_PLAYER,
-        payload: data
-    }
-}
-
-export function updatePlayer(data){
-    return {
-        type: UPDATE_PLAYER,
         payload: data
     }
 }

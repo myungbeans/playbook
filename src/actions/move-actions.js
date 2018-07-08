@@ -1,5 +1,4 @@
 export const UPDATE_POINT = "point: updatePoint"
-export const UPDATE_STARTPOINT = "startPoint: updateStartPoint"
 export const SET_CURRENT_MOVE = "moves: currentMove"
 export const STORE_POINTS = "moves: storePoints"
 
@@ -9,17 +8,6 @@ export function updatePoint(prevPoints, move){
     return {
         type: UPDATE_POINT,
         payload: {...newMoves}
-    }
-}
-
-export function updateStartPoint({moveIndex, moves, x, y}){
-    if (moves[moveIndex]){
-        moves[moveIndex].startX = x
-        moves[moveIndex].startY = y
-    }
-    return {
-        type: UPDATE_POINT,
-        payload: {moves}
     }
 }
 
