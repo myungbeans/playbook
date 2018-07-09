@@ -12,15 +12,32 @@ import StartPoint from '../components/StartPoint'
 import EndPoint from '../components/EndPoint'
 
 class GridContainer extends Component {
+    constructor(props){
+        super(props)
+
+        this.setPathLines()
+        this.state = {
+            pathLines: this.setPathLines(),
+        }
+    }
+
     componentDidMount() {
         const height = document.getElementById("Grid-Container").clientHeight
         const width = document.getElementById("Grid-Container").clientWidth
 
         this.props.updateGridDimensions( { height, width} )
     }
-
-    state = {
-        pathLines: {},
+    
+    setPathLines = () => {
+        let pathLines = {}
+        this.mapMoves(move => {
+            if(move.startX !== move.endX && move.startY !== move.endY){
+                this.props.revealPoint(this.props.moves.activeEndPoints, move)
+                let newPath = <PathLine key={UUID()} moveID={move.id} />
+                pathLines[move.id] = newPath
+            }
+        })
+        return pathLines
     }
 
     drawVertical = () => {
