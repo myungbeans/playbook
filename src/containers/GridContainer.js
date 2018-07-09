@@ -5,11 +5,11 @@ import UUID from "uuid"
 
 //Actions
 import { updateGridDimensions } from '../actions/settings-actions'
+import { revealPoint } from '../actions/move-actions'
 //Components
 import { GridLine, PathLine } from '../components/Line'
 import StartPoint from '../components/StartPoint'
 import EndPoint from '../components/EndPoint'
-import { createNewMove } from '../APICalls'
 
 class GridContainer extends Component {
     componentDidMount() {
@@ -35,9 +35,13 @@ class GridContainer extends Component {
         return horizontalLines
     }
 
+    mapMoves = (callback) => {
+        return Object.values(this.props.moves.points).map(callback)
+    }
+
     drawPlayers = () => {
         if (!this.props.settings.loading){
-            return Object.values(this.props.moves.points).map(move => {
+            return this.mapMoves(move => {
                 return <StartPoint key={UUID()} draggable={"true"} dimension={this.props.settings.interval} ownProps={move}/>
             })
         } else {
@@ -47,7 +51,7 @@ class GridContainer extends Component {
 
     drawEndPoints = () => {
         if (!this.props.settings.loading){
-            return Object.values(this.props.moves.points).map(move => {
+            return this.mapMoves(move => {
                 return <EndPoint key={UUID()} draggable={"true"} dimension={this.props.settings.interval} ownProps={move}/>
             })
         } else {
@@ -57,7 +61,7 @@ class GridContainer extends Component {
 
     drawPathLines = () => {
         if (!this.props.settings.loading){
-            return Object.values(this.props.moves.points).map(move => {
+            return this.mapMoves(move => {
                 return <PathLine key={UUID()} dimension={this.props.settings.interval} x1={move.startX} x2={move.endX} y1={move.startY} y2={move.endY}/>
             })
         } else {
@@ -73,20 +77,20 @@ class GridContainer extends Component {
         return [...this.drawVertical(), ...this.drawHorizontal(), ...this.drawPathLines()]
     }
 
-    newEndPoint = (e) => {
+    findMoveOfCurrentPlayer(){
+        return Object.values(this.props.moves.points).find(move => move.player_id === this.props.players.selectedPlayer)
+    }
+
+    revealEndPoint = (e) => {
         e.preventDefault()
-        let player = this.props.players.roster[this.props.players.selectedPlayer]
-        if (!player || (player.moves && player.moves[this.props.moves.moveIndex])){
-            console.log("Already have a move or player not found")
-        } else {
-            createNewMove(player)
-        }
+
+        let move = this.findMoveOfCurrentPlayer()
+        this.props.revealPoint(this.props.moves.activeEndPoints, move)
     }
 
     render() {
-        
         return (
-            <div onContextMenu={this.newEndPoint} id="Grid-Container" data-reactid=".0.0.0">
+            <div onContextMenu={this.revealEndPoint} id="Grid-Container" data-reactid=".0.0.0">
                 {this.drawAllPoints()}
                 <svg className="ad-SVG" width="100vh" height="70vh" data-reactid=".0.0.0.0">
                     <g className="ad-Grid" data-reactid=".0.0.0.0.0">
@@ -104,7 +108,7 @@ const mapStateToProps = (state) => {
 
 const mapActionsToProps = (dispatch) => {
     return bindActionCreators({
-        updateGridDimensions
+        updateGridDimensions, revealPoint
     }, dispatch)
 }
 

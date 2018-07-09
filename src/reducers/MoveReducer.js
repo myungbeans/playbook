@@ -1,4 +1,4 @@
-import { UPDATE_POINT, SET_CURRENT_MOVE, STORE_POINTS } from '../actions/move-actions'
+import { UPDATE_POINT, SET_CURRENT_MOVE, STORE_POINTS, REVEAL_POINT } from '../actions/move-actions'
 import { defaultState } from '../index'
 
 export default function moveReducer(state={...defaultState}, { type, payload }) {    
@@ -9,6 +9,8 @@ export default function moveReducer(state={...defaultState}, { type, payload }) 
             return {...state, moveIndex: payload}
         case STORE_POINTS:
             return {...state, points: payload}
+        case REVEAL_POINT:
+            return {...state, activeEndPoints: payload}
         default:
             return state
     }

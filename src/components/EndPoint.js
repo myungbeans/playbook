@@ -20,6 +20,7 @@ class EndPoint extends Component {
             controlledPosition: {
                 x: this.props.ownProps.endX, y: this.props.ownProps.endY
             },
+            hidden: true,
         }
     }
     
@@ -74,12 +75,18 @@ class EndPoint extends Component {
         }
     }
 
+    isHidden = () => {
+        return !Object.keys(this.props.moves.activeEndPoints).includes(`${this.props.ownProps.id}`)
+    }
+
     render(){
         const {controlledPosition} = this.state;
         return (
-            <Draggable onStart={this.onStart} onStop={this.controlledStop} position={controlledPosition} bounds={{left: 0, top: 0, right:this.props.width, bottom: this.props.height - 17}} >
+            <div>
+            {this.isHidden() || <Draggable onStart={this.onStart} onStop={this.controlledStop} position={controlledPosition} bounds={{left: 0, top: 0, right:this.props.width, bottom: this.props.height - 17}} >
                 <img src={dashCircle2} style={this.style} alt="EndPoint Token"/>
-            </Draggable>
+            </Draggable>}
+            </div>
         )
     }
 }

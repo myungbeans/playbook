@@ -41,6 +41,7 @@ export const defaultState = {
     moves: {
         points: {},
         moveIndex: "",
+        activeEndPoints: {},
     }
 }
 
