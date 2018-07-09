@@ -12,6 +12,7 @@
 
 
 export const persistCoords = (payload, callback) => {
+    callback = callback || console.log("Coordinates Persisted")
     fetch(`http://localhost:3000/api/v1/players/${payload.player.id}`, {
             method: "PATCH",
             headers: {

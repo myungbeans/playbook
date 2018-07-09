@@ -8,10 +8,6 @@ export const GridLine = (props) => {
 }
 
 class PathLine extends Component {
-    // state = {
-    //     move : {}
-    // }
-    
     style = {
         stroke: "#000",
     }

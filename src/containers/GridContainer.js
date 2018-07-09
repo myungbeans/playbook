@@ -10,6 +10,8 @@ import { revealPoint } from '../actions/move-actions'
 import PathLine, { GridLine } from '../components/Line'
 import StartPoint from '../components/StartPoint'
 import EndPoint from '../components/EndPoint'
+//Fetch Calls
+import { persistCoords } from '../APICalls'
 
 class GridContainer extends Component {
     constructor(props){
@@ -94,11 +96,24 @@ class GridContainer extends Component {
 
     showEndPoint = (e) => {
         e.preventDefault()
+        console.log(e.clientX, e.clientY)
+        let x = e.clientX - (this.props.settings.interval/2)
+        let y = (e.clientY - 65 - (this.props.settings.interval/2))
 
         if(this.props.players.selectedPlayer){
             let move = this.findMoveOfCurrentPlayer()
+            move.endX = x
+            move.endY = y
             this.props.revealPoint(this.props.moves.activeEndPoints, move)
             this.revealPathLine()
+            persistCoords({
+                player: {
+                id: move.player_id,
+                name: this.props.players.roster[move.player_id].name,
+                moves_attributes: 
+                    [{...move}]
+                }
+            })
         } else {
             console.log("ERROR: user not selected")
         }
@@ -119,7 +134,6 @@ class GridContainer extends Component {
     }
 
     render() {
-        console.log("pathlines", this.state.pathLines)
         return (
             <div onContextMenu={this.showEndPoint} id="Grid-Container" data-reactid=".0.0.0">
                 {this.drawAllPoints()}
