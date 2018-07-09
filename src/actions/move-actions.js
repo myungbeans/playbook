@@ -33,10 +33,11 @@ export function storePoints(data){
 }
 
 export function revealPoint(prevPoints, point){
-    let newPoints = prevPoints || {}
-    newPoints[point.id] = point
+    let newPoints = prevPoints || []
+    newPoints.push(point.id)
+    let setPoints = new Set(newPoints)
     return {
         type: REVEAL_POINT,
-        payload: {...newPoints}
+        payload: [...setPoints]
     }
 }

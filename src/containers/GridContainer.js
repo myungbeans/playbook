@@ -7,7 +7,7 @@ import UUID from "uuid"
 import { updateGridDimensions } from '../actions/settings-actions'
 import { revealPoint } from '../actions/move-actions'
 //Components
-import { GridLine, PathLine } from '../components/Line'
+import PathLine, { GridLine } from '../components/Line'
 import StartPoint from '../components/StartPoint'
 import EndPoint from '../components/EndPoint'
 
@@ -17,6 +17,10 @@ class GridContainer extends Component {
         const width = document.getElementById("Grid-Container").clientWidth
 
         this.props.updateGridDimensions( { height, width} )
+    }
+
+    state = {
+        pathLines: {},
     }
 
     drawVertical = () => {
@@ -59,42 +63,53 @@ class GridContainer extends Component {
         }
     }
 
-    drawPathLines = () => {
-        if (!this.props.settings.loading){
-            return this.mapMoves(move => {
-                return <PathLine key={UUID()} dimension={this.props.settings.interval} x1={move.startX} x2={move.endX} y1={move.startY} y2={move.endY}/>
-            })
-        } else {
-            return []
-        }
-    }
-
     drawAllPoints = () => {
         return [...this.drawPlayers(), ...this.drawEndPoints()]
     }
 
-    drawAllLines = () => {
-        return [...this.drawVertical(), ...this.drawHorizontal(), ...this.drawPathLines()]
+    drawGridLines = () => {
+        return [...this.drawVertical(), ...this.drawHorizontal()]
     }
 
     findMoveOfCurrentPlayer(){
         return Object.values(this.props.moves.points).find(move => move.player_id === this.props.players.selectedPlayer)
     }
 
-    revealEndPoint = (e) => {
+    showEndPoint = (e) => {
         e.preventDefault()
 
+        if(this.props.players.selectedPlayer){
+            let move = this.findMoveOfCurrentPlayer()
+            this.props.revealPoint(this.props.moves.activeEndPoints, move)
+            this.revealPathLine()
+        } else {
+            console.log("ERROR: user not selected")
+        }
+    }
+
+    revealPathLine = () => {
         let move = this.findMoveOfCurrentPlayer()
-        this.props.revealPoint(this.props.moves.activeEndPoints, move)
+        let pathLines = this.state.pathLines
+        this.setStatePathLines(move, pathLines)
+    }
+
+    setStatePathLines = (move, pathLines) => {
+        if (this.props.moves.activeEndPoints.includes(move.id)){
+            let newPath = <PathLine key={UUID()} moveID={move.id} />
+            pathLines[move.id] = newPath
+            this.setState({ pathLines: {...pathLines}})
+        }
     }
 
     render() {
+        console.log("pathlines", this.state.pathLines)
         return (
-            <div onContextMenu={this.revealEndPoint} id="Grid-Container" data-reactid=".0.0.0">
+            <div onContextMenu={this.showEndPoint} id="Grid-Container" data-reactid=".0.0.0">
                 {this.drawAllPoints()}
                 <svg className="ad-SVG" width="100vh" height="70vh" data-reactid=".0.0.0.0">
                     <g className="ad-Grid" data-reactid=".0.0.0.0.0">
-                        {this.drawAllLines()}
+                        {this.drawGridLines()}
+                        {Object.values(this.state.pathLines)}
                     </g>
                 </svg>
             </div>

@@ -76,16 +76,18 @@ class EndPoint extends Component {
     }
 
     isHidden = () => {
-        return !Object.keys(this.props.moves.activeEndPoints).includes(`${this.props.ownProps.id}`)
+        return !this.props.moves.activeEndPoints.includes(this.props.ownProps.id)
     }
 
     render(){
         const {controlledPosition} = this.state;
+    
         return (
             <div>
-            {this.isHidden() || <Draggable onStart={this.onStart} onStop={this.controlledStop} position={controlledPosition} bounds={{left: 0, top: 0, right:this.props.width, bottom: this.props.height - 17}} >
-                <img src={dashCircle2} style={this.style} alt="EndPoint Token"/>
-            </Draggable>}
+            {this.isHidden() ||
+                <Draggable onStart={this.onStart} onStop={this.controlledStop} position={controlledPosition} bounds={{left: 0, top: 0, right:this.props.width, bottom: this.props.height - 17}} >
+                    <img src={dashCircle2} style={this.style} alt="EndPoint Token"/>
+                </Draggable>}
             </div>
         )
     }
