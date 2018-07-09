@@ -2,18 +2,17 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux' 
 import { connect } from 'react-redux'
-import { routeActions } from 'react-router-redux'
 import { withRouter } from 'react-router-dom'
+//Actions
+import { routeActions } from 'react-router-redux'
 import { addPlayer, selectPlayer } from '../actions/playbook-actions'
-
+import { updatePoint } from '../actions/move-actions'
 //SpeedDial Dependencies
 import { SpeedDial, SpeedDialAction, SpeedDialIcon} from '@material-ui/lab'
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-
 //Custom Icons
 import { StraightRouteIcon, SharpRouteIcon, SquiggleRoute, GroupIcon } from '../assets/menuIcons/Icons'
-
 //Default Icons
 import ContentCopyIcon from '@material-ui/icons/ContentCopy';
 import SaveIcon from '@material-ui/icons/Save';
@@ -47,23 +46,40 @@ class PlaybookMenu extends Component {
   };
 
   defaultNamer = () => {
-    return Object.keys(this.props.players.roster) ? Object.keys(this.props.players.roster).last + 1 : 1
+    let players = Object.keys(this.props.players.roster)
+    return players ? players.last : 1
   }
 
   postToPlayers = () => {
+    let x = Math.round(this.props.settings.width/2)
+    let y = Math.round(this.props.settings.height/2)
     fetch("http://localhost:3000/api/v1/players/", {
       method: "POST",
       headers: {
         "Content-Type" : "application/json"
       },
-      body: JSON.stringify({ play_id: localStorage.getItem("selectedPlay"), name: `P${this.defaultNamer()}`, x:625, y:370 })
+      body: JSON.stringify({ play_id: localStorage.getItem("selectedPlay"), name: `P${this.defaultNamer()}`,
+        moves_attributes: [{
+          startX: x,
+          startY: y,
+          endX: x,
+          endY: y,
+          startDelay: 0,
+          endDelay: 0, 
+          duration: 3,
+          order: this.props.moves.moveIndex,
+        }]
+      })
     })
     .then(res => res.json())
-    .then(json => {
+    .then(playerData => {
       let newPlayer = {}
-      newPlayer[json.id] = json
+      newPlayer[playerData.id] = playerData
       this.props.addPlayer(newPlayer)
-      this.props.selectPlayer(json.id)
+      this.props.selectPlayer(playerData.id)
+
+      let move = playerData.moves[this.props.moves.moveIndex]
+      this.props.updatePoint(this.props.moves.points, {...move})
     })
   }
 
@@ -137,7 +153,7 @@ const mapStateToProps = state => {
 
 const mapActionsToProps = (dispatch) => {
   return bindActionCreators({
-      ...routeActions, addPlayer, selectPlayer
+      ...routeActions, addPlayer, selectPlayer, updatePoint,
   }, dispatch)
 }
 

@@ -37,7 +37,6 @@ class Playbook extends Component {
             this.props.setPlayers(roster)
             this.setPoints(this.props.players.roster, this.props.moves.moveIndex)
         })
-        // .then(()=> this.setPoints(this.props.players.roster, this.props.moves.moveIndex))
         .then(()=> this.props.toggleLoading(this.props.settings.loading, false))
     }
 
@@ -51,18 +50,6 @@ class Playbook extends Component {
         })
         this.props.storePoints(points)
     }
-
-    // updateCoordsIfNeeded = (player, move, props) => {
-    //     if (player.x !== move.startX || player.y !== move.startY) {
-    //         fetch(`http://localhost:3000/api/v1/moves/${move.id}`, {
-    //             method: "PATCH",
-    //             headers: {
-    //                 "Content-Type" : "application/json"
-    //             },
-    //             body: JSON.stringify({ startX: props.players.roster[player.id].x, startY: props.players.roster[player.id].y ,endX:move.endX, endY:move.endY })
-    //         })
-    //     }
-    // }
 
     render() {
         return (
