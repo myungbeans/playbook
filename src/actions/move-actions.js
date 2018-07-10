@@ -45,10 +45,12 @@ export function revealPoint(prevPoints, point){
 
 export function hidePoint(prevPoints, point){
     let newPoints = [...prevPoints]
-    console.log(newPoints)
     let index = newPoints.indexOf(point.id)
-    newPoints.splice(index, 1)
-    console.log("post splice", newPoints)
+    if (index > 0){
+        newPoints.splice(index, 1)
+    } else if (index = 0) {
+        newPoints = []
+    }
     return {
         type: HIDE_POINT,
         payload: [...newPoints]

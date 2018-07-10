@@ -31,6 +31,7 @@ class GridContainer extends Component {
         this.props.updateGridDimensions( { height, width} )
     }
     
+    //Fired upon Creation
     setPathLines = () => {
         let pathLines = {}
         this.mapMoves(move => {
@@ -41,6 +42,20 @@ class GridContainer extends Component {
             }
         })
         return pathLines
+    }
+
+    revealPathLine = () => {
+        let move = this.findMoveOfCurrentPlayer()
+        let pathLines = this.state.pathLines
+        this.setStatePathLines(move, pathLines)
+    }
+
+    setStatePathLines = (move, pathLines) => {
+        if (this.props.moves.activeEndPoints.includes(move.id)){
+            let newPath = <PathLine key={UUID()} moveID={move.id} />
+            pathLines[move.id] = newPath
+            this.setState({ pathLines: {...pathLines}})
+        }
     }
 
     drawVertical = () => {
@@ -118,20 +133,6 @@ class GridContainer extends Component {
             })
         } else {
             console.log("ERROR: user not selected")
-        }
-    }
-
-    revealPathLine = () => {
-        let move = this.findMoveOfCurrentPlayer()
-        let pathLines = this.state.pathLines
-        this.setStatePathLines(move, pathLines)
-    }
-
-    setStatePathLines = (move, pathLines) => {
-        if (this.props.moves.activeEndPoints.includes(move.id)){
-            let newPath = <PathLine key={UUID()} moveID={move.id} />
-            pathLines[move.id] = newPath
-            this.setState({ pathLines: {...pathLines}})
         }
     }
 
