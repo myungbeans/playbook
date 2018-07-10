@@ -10,7 +10,19 @@
 //     }
 // }
 
+export const hideMove = (payload, callback) => {
+    persistCoords(payload, callback)
+}
 
+export const destroyPlayer = (player_id) => {
+    fetch(`http://localhost:3000/api/v1/players/${player_id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type" : "application/json",
+                "Authorization": localStorage.getItem("token")
+            },
+    })
+}
 
 export const postNewPlay = (payload,callback) => {
     fetch(`http://localhost:3000/api/v1/plays/`, {

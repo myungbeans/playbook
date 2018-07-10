@@ -13,7 +13,7 @@ export function PlusIcon() {
 
 export function StraightRouteIcon() {
     return (
-        <svg viewBox="0 13 90 78" width="3.5em" height="3.5em">
+        <svg id="straight-route-icon" viewBox="0 13 90 78" width="3.5em" height="3.5em">
             <path
             d="M45 15.1c-16.5 0-29.9 13.4-29.9 29.9S28.5 74.9 45 74.9 74.9 61.5 74.9 45 61.5 15.1 45 15.1zm0 57.8c-15.4 0-27.9-12.5-27.9-27.9S29.6 17.1 45 17.1 72.9 29.6 72.9 45 60.4 72.9 45 72.9z"
             fill="none"
@@ -25,7 +25,7 @@ export function StraightRouteIcon() {
 
 export function SharpRouteIcon() {
     return (
-        <svg viewBox="0 13 90 78" width="3.5em" height="3.5em">
+        <svg id="sharp-route-icon" viewBox="0 13 90 78" width="3.5em" height="3.5em">
             <path
             d="M45 15.1c-16.5 0-29.9 13.4-29.9 29.9S28.5 74.9 45 74.9 74.9 61.5 74.9 45 61.5 15.1 45 15.1zm0 57.8c-15.4 0-27.9-12.5-27.9-27.9S29.6 17.1 45 17.1 72.9 29.6 72.9 45 60.4 72.9 45 72.9z"
             fill="none"
@@ -37,7 +37,7 @@ export function SharpRouteIcon() {
 
 export function SquiggleRoute() {
     return ( 
-        <svg viewBox="0 13 90 78" width="3.5em" height="3.5em">
+        <svg id="squiggle-route-icon" viewBox="0 13 90 78" width="3.5em" height="3.5em">
             <path
             d="M45 15.1c-16.5 0-29.9 13.4-29.9 29.9S28.5 74.9 45 74.9 74.9 61.5 74.9 45 61.5 15.1 45 15.1zm0 57.8c-15.4 0-27.9-12.5-27.9-27.9S29.6 17.1 45 17.1 72.9 29.6 72.9 45 60.4 72.9 45 72.9z"
             fill="none"
@@ -49,7 +49,7 @@ export function SquiggleRoute() {
 
 export function GroupIcon() {
     return (
-        <svg
+        <svg id="group-icon"
             data-name="Layer 1"
             viewBox="-2.5 2.5 64.11 67.33"
             width="2em"
@@ -61,3 +61,31 @@ export function GroupIcon() {
     )
 }
 
+export function TrashIcon() {
+    return (
+        <svg id="trash-icon" viewBox='-15 -13 130 130' width="2.6em" height="2.6em">
+            <path d='M64.1,18.8V7.5H36.8v11.3H12.4v4.1h7.2l5.2,67.7h51.4l5.2-67.7h8.3v-4.1H64.1z M60.1,11.5v7.2H40.9v-7.2H60.1z M77.3,22.7 l-4.9,63.6H28.5l-4.8-63.6H77.3z'
+            />
+            <rect x='48.4' y='33.6' width='4.1' height='42.3' />
+            <rect x='60.8' y='33.5' transform='matrix(.9985 .0541 -.0541 .9985 3.053 -3.32)'
+            width='4.1' height='42.4' />
+            <rect x='16.8' y='52.7' transform='scale(.99996) rotate(86.9 38.019 54.737)'
+            width='42.4' height='4.1' />
+        </svg>
+    )
+}
+
+export function EraseRouteIcon() {
+    return ( 
+        <svg id="erase-route-icon" viewBox='-8 -8 40 40' height="2.6em" width="2.6em">
+            <path d='M11.671,20.497H9.329c-0.668,0-1.296-0.26-1.768-0.732l-3-3c-0.472-0.472-0.732-1.1-0.732-1.768s0.26-1.295,0.732-1.768 L16.146,1.644c0.188-0.188,0.52-0.188,0.707,0l7,7c0.195,0.195,0.195,0.512,0,0.707L13.439,19.765 C12.967,20.237,12.339,20.497,11.671,20.497z M16.5,2.704L5.268,13.937c-0.283,0.283-0.439,0.66-0.439,1.061 s0.156,0.777,0.439,1.061l3,3c0.284,0.283,0.66,0.439,1.061,0.439h2.343c0.401,0,0.777-0.156,1.061-0.439L22.793,8.997L16.5,2.704z'
+            />
+            <path d='M15.5,17.497c-0.128,0-0.256-0.049-0.354-0.146l-7-7c-0.195-0.195-0.195-0.512,0-0.707s0.512-0.195,0.707,0l7,7 c0.195,0.195,0.195,0.512,0,0.707C15.756,17.448,15.628,17.497,15.5,17.497z'
+            />
+            <path d='M5.5,20.497h-5c-0.276,0-0.5-0.224-0.5-0.5s0.224-0.5,0.5-0.5h5c0.276,0,0.5,0.224,0.5,0.5S5.776,20.497,5.5,20.497z'
+            />
+            <path d='M14.5,22.497h-9c-0.276,0-0.5-0.224-0.5-0.5s0.224-0.5,0.5-0.5h9c0.276,0,0.5,0.224,0.5,0.5S14.776,22.497,14.5,22.497z'
+            />
+        </svg>
+    )
+}

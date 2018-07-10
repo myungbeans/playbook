@@ -2,6 +2,7 @@ export const UPDATE_POINT = "point: updatePoint"
 export const SET_CURRENT_MOVE = "moves: currentMove"
 export const STORE_POINTS = "moves: storePoints"
 export const REVEAL_POINT = "point: reveal"
+export const HIDE_POINT = "point: hide"
 
 export function updatePoint(prevPoints, move){
     let newMoves = prevPoints
@@ -39,5 +40,17 @@ export function revealPoint(prevPoints, point){
     return {
         type: REVEAL_POINT,
         payload: [...setPoints]
+    }
+}
+
+export function hidePoint(prevPoints, point){
+    let newPoints = [...prevPoints]
+    console.log(newPoints)
+    let index = newPoints.indexOf(point.id)
+    newPoints.splice(index, 1)
+    console.log("post splice", newPoints)
+    return {
+        type: HIDE_POINT,
+        payload: [...newPoints]
     }
 }

@@ -6,17 +6,15 @@ import { withRouter } from 'react-router-dom'
 //Actions
 import { routeActions } from 'react-router-redux'
 import { addPlayer, selectPlayer } from '../actions/playbook-actions'
-import { updatePoint } from '../actions/move-actions'
-//SpeedDial Dependencies
+import { updatePoint, hidePoint } from '../actions/move-actions'
+//Custom Icons
+import { StraightRouteIcon, SharpRouteIcon, SquiggleRoute, GroupIcon, TrashIcon, EraseRouteIcon } from '../assets/menuIcons/Icons'
+//Fetch
+import { destroyPlayer, hideMove } from '../APICalls'
+//SpeedDial
 import { SpeedDial, SpeedDialAction, SpeedDialIcon} from '@material-ui/lab'
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-//Custom Icons
-import { StraightRouteIcon, SharpRouteIcon, SquiggleRoute, GroupIcon } from '../assets/menuIcons/Icons'
-//Default Icons
-import ContentCopyIcon from '@material-ui/icons/ContentCopy';
-import SaveIcon from '@material-ui/icons/Save';
-import DeleteIcon from '@material-ui/icons/Delete';
 
 const styles = theme => ({
   root: {
@@ -24,7 +22,7 @@ const styles = theme => ({
   },
   speedDial: {
     position: 'absolute',
-    bottom: theme.spacing.unit * 2,
+    bottom: theme.spacing.unit * 30,
     right: theme.spacing.unit * 3,
   },
 });
@@ -34,9 +32,8 @@ const actions = [
   { icon: <SharpRouteIcon/>, name: 'Sharp Route' },
   { icon: <SquiggleRoute/>, name: 'Round Route' },
   { icon: <GroupIcon />, name: 'Group' },
-  { icon: <ContentCopyIcon />, name: 'Copy' },
-  { icon: <SaveIcon />, name: 'Save' },
-  { icon: <DeleteIcon />, name: 'Delete' },
+  { icon: <EraseRouteIcon />, name: 'Erase Route' },
+  { icon: <TrashIcon />, name: 'Delete' },
 ];
 
 class PlaybookMenu extends Component {
@@ -111,13 +108,55 @@ class PlaybookMenu extends Component {
     });
   };
 
+  menuActions = (e) => {
+    e.preventDefault()
+    switch(e.target.id){
+      case 'trash-icon':
+        return this.trash()
+      case 'erase-route-icon':
+        return this.erase()
+      default:
+        return null
+    }
+  }
+
+  isPlayerSelected = () => {
+    if(this.props.players.selectedPlayer){
+      return true
+    } else {
+      console.log("Error: You must select a player first")
+      return false
+    }
+  }
+
+  trash = () => {
+    return this.isPlayerSelected() ? destroyPlayer(this.props.players.selectedPlayer) : null
+  }
+
+  erase = () => {
+    if(this.isPlayerSelected()){
+      let player = this.props.players.roster[this.props.players.selectedPlayer]
+      let move = player.moves[this.props.moves.moveIndex]
+      move.endX = move.startX
+      move.endY = move.startY
+      return hideMove({
+        player: {
+            id: player.id,
+            name: player.name,
+            moves_attributes: 
+            [{...move}]
+        }
+      }, () => this.props.hidePoint(this.props.moves.activeEndPoints, {...move}))
+    }
+  }
+
   render() {
     const { classes } = this.props;
     const { hidden, open } = this.state;
     return (
       <div className={classes.root}>
         <SpeedDial
-          ariaLabel="SpeedDial openIcon example"
+          ariaLabel="SpeedDial openIcon"
           className={classes.speedDial}
           hidden={hidden}
           icon={<SpeedDialIcon/>}
@@ -133,8 +172,8 @@ class PlaybookMenu extends Component {
             <SpeedDialAction
               key={action.name}
               icon={action.icon}
-              tooltipTitle={action.name}
-              onClick={this.handleClick}
+              onClick={this.menuActions}
+              title={action.name}
             />
           ))}
         </SpeedDial>
@@ -153,7 +192,7 @@ const mapStateToProps = state => {
 
 const mapActionsToProps = (dispatch) => {
   return bindActionCreators({
-      ...routeActions, addPlayer, selectPlayer, updatePoint,
+      ...routeActions, addPlayer, selectPlayer, updatePoint, hidePoint
   }, dispatch)
 }
 
