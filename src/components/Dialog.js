@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom'
 
 //Actions
 import { routeActions } from 'react-router-redux'
-import { addPlay, deletePlay } from '../actions/homepage-actions'
+import { addPlay } from '../actions/homepage-actions'
 //Components
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core'
 import { errorOnClass, shrinkOnID } from './anime'
@@ -55,9 +55,6 @@ class DialogBox extends Component {
         this.props.close()
         destroyPlay(this.props.play_id)
         shrinkOnID(this.props.card_id)
-        setTimeout(()=>{
-        this.props.deletePlay(this.props.myPlays, this.props.play_id)
-        }, 2000)
     }
 
     edit = () => {
@@ -107,7 +104,7 @@ const mapStateToProps = state => {
 
 const mapActionsToProps = (dispatch) => {
     return bindActionCreators({
-        ...routeActions, addPlay, deletePlay
+        ...routeActions, addPlay
     }, dispatch)
 }
 

@@ -1,53 +1,30 @@
 import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-// import Slider from '@material-ui/lab/Slider'
-import anime from 'animejs'
+import { createAnimationTimeline } from './anime'
+
+//Actions
+import { selectPlayer } from '../actions/playbook-actions'
 
 class AnimeControls extends Component {
     state = {
         progress: 0,
     }
 
-    doSmth = () => {
-        this.loop()
-    }
-
-    updateProgress = (e, value) => {
-        e.preventDefault()
-        e.stopPropagation()
-        this.setState({progress: value})
-    }
-
     mapMoves = (callback) => {
         return Object.values(this.props.moves.points).map(callback)
     }
 
-    loop = () => {
-        this.mapMoves(move => {
-            this.playTimeLine.add({
-                targets: `#startPoint-${move.id}`,
-                translateX: move.endX - move.startX,
-                translateY: move.endY - move.startY,
-                duration: move.duration,
-                offset: move.startDelay,
-            })
-        })
-    }
-
-    createAnimation = () => {
-        return anime.timeline({
-            easing: 'linear',
-            direction: 'linear',
-        });
+    matchIDtoMove = (id) => {
+        return this.props.moves.points[id]
     }
 
     onPlay = () => {
         let points = [...document.querySelectorAll('.start-point')]
-        let anime = this.createAnimation()
+        let anime = createAnimationTimeline()
 
         points.forEach(point => {
             let move = this.matchIDtoMove(point.id)
-            console.log(move)
             anime.add({
                 targets: point,
                 translateX: [ move.startX, move.endX],
@@ -57,19 +34,18 @@ class AnimeControls extends Component {
             })
         })
 
-        anime.play
+        return anime.play
     }
 
-    matchIDtoMove = (id) => {
-        return this.props.moves.points[id]
+    onReset = () => {
+        this.props.players.roster.selectedPlayer === "" ? this.props.selectPlayer(0) : this.props.selectPlayer("")
     }
-
-
 
     render(){
         return (
             <div className="line player align-items">
                 <button onClick={this.onPlay} className="play">Play</button>
+                <button onClick={this.onReset} className="reset">Reset</button>
             </div>
         )
     }
@@ -79,4 +55,10 @@ const mapStateToProps = state => {
     return state
 }
 
-export default connect(mapStateToProps, null)(AnimeControls);
+const mapActionsToProps = (dispatch) => {
+    return bindActionCreators({
+        selectPlayer,
+    }, dispatch)
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(AnimeControls);

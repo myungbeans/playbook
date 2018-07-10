@@ -67,8 +67,15 @@ class StartPoint extends Component {
 
         let playerInfo = this.findPlayer()
         let move = this.props.ownProps
-        move.startX = x
-        move.startY = y
+        if (move.startX === move.endX && move.startY === move.endY){
+            move.startX = x
+            move.startY = y
+            move.endX = x
+            move.endY = y
+        } else {
+            move.startX = x
+            move.startY = y
+        }
         persistCoords({
             player: {
                 id: playerInfo.player_id,

@@ -20,3 +20,10 @@ export const shrinkOnID = (targetID) => {
         easing: 'easeOutCirc'
     })
 }
+
+export const createAnimationTimeline = () => {
+    return anime.timeline({
+        easing: 'linear',
+        direction: 'linear',
+    });
+}
