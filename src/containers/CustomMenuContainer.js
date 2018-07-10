@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+//Assets
 import IconButton from '@material-ui/core/IconButton';
 import ExpandLess from '@material-ui/icons/ExpandLess'
 import ExpandMore from '@material-ui/icons/ExpandMore'
-
-import { connect } from 'react-redux'
+//Actions
 import { updateGridDimensions } from '../actions/settings-actions'
 import { increaseGridIncrement } from '../actions/settings-actions'
 import { decreaseGridIncrement } from '../actions/settings-actions'
-import { bindActionCreators } from 'redux'
+//Components
+import AnimeControls from '../components/AnimeControls'
 
 class CustomMenuContainer extends Component {
     increaseGridIncrement = () => {
@@ -27,6 +30,8 @@ class CustomMenuContainer extends Component {
                 <br/>
                 <br/>
                 <p>Player: {this.props.players.selectedPlayer}</p>
+                <br/>
+                <AnimeControls/>
             </div>
         )
     }

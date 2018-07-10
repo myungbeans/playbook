@@ -14,6 +14,8 @@
     "animejs": "^2.2.0",
     "history": "^4.7.2",
     "react": "^16.4.1",
+    "react-anime": "^2.1.0",
+    "react-css-transition": "^0.7.4",
     "react-dnd": "^5.0.0",
     "react-dnd-html5-backend": "^5.0.1",
     "react-dom": "^16.4.1",

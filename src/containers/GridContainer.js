@@ -3,6 +3,10 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import UUID from "uuid"
 
+//TODO: do something with this
+// import anime from 'animejs'
+import Anime from 'react-anime'
+
 //Actions
 import { updateGridDimensions } from '../actions/settings-actions'
 import { revealPoint } from '../actions/move-actions'
@@ -12,6 +16,7 @@ import StartPoint from '../components/StartPoint'
 import EndPoint from '../components/EndPoint'
 //Fetch Calls
 import { persistCoords } from '../APICalls'
+
 
 class GridContainer extends Component {
     constructor(props){
@@ -96,9 +101,8 @@ class GridContainer extends Component {
 
     showEndPoint = (e) => {
         e.preventDefault()
-        console.log(e.clientX, e.clientY)
         let x = e.clientX - (this.props.settings.interval/2)
-        let y = (e.clientY - 65 - (this.props.settings.interval/2))
+        let y = (e.clientY - 65) - (this.props.settings.interval/2)
 
         if(this.props.players.selectedPlayer){
             let move = this.findMoveOfCurrentPlayer()
@@ -135,15 +139,16 @@ class GridContainer extends Component {
 
     render() {
         return (
-            <div onContextMenu={this.showEndPoint} id="Grid-Container" data-reactid=".0.0.0">
-                {this.drawAllPoints()}
-                <svg className="ad-SVG" width="100vh" height="70vh" data-reactid=".0.0.0.0">
-                    <g className="ad-Grid" data-reactid=".0.0.0.0.0">
-                        {this.drawGridLines()}
-                        {Object.values(this.state.pathLines)}
-                    </g>
-                </svg>
-            </div>
+                <div onContextMenu={this.showEndPoint} id="Grid-Container" data-reactid=".0.0.0">
+                    {this.drawAllPoints()}
+                    <svg className="ad-SVG" width="100vh" height="70vh" data-reactid=".0.0.0.0">
+                        <g className="ad-Grid" data-reactid=".0.0.0.0.0">
+                            {this.drawGridLines()}
+                            {Object.values(this.state.pathLines)}
+                        </g>
+                    </svg>
+                    <button onClick={this.selector}>CLICK TO MOVE</button>
+                </div>
         )
     }
 }
