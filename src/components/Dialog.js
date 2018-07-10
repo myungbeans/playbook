@@ -5,13 +5,13 @@ import { withRouter } from 'react-router-dom'
 
 //Actions
 import { routeActions } from 'react-router-redux'
-import { addPlay } from '../actions/homepage-actions'
+import { addPlay, deletePlay } from '../actions/homepage-actions'
 //Components
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core'
 import { errorOnClass } from './anime'
 //Fetch
 import { postNewPlay } from '../APICalls'
-import { deletePlay } from '../APICalls'
+import { destroyPlay } from '../APICalls'
 
 
 class DialogBox extends Component {
@@ -53,8 +53,9 @@ class DialogBox extends Component {
     }
 
     delete = () => {
-        deletePlay(this.props.play_id)
-        //action to remove the play from the selectedplays array in store
+        destroyPlay(this.props.play_id)
+        this.props.deletePlay(this.props.play_id)
+        this.props.close()
     }
 
     edit = () => {
@@ -104,7 +105,7 @@ const mapStateToProps = state => {
 
 const mapActionsToProps = (dispatch) => {
     return bindActionCreators({
-        ...routeActions, addPlay
+        ...routeActions, addPlay, deletePlay
     }, dispatch)
 }
 

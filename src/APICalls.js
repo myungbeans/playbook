@@ -23,7 +23,7 @@ export const postNewPlay = (payload) => {
     })
 }
 
-export const deletePlay = (play_id, callback) => {
+export const destroyPlay = (play_id) => {
     fetch(`http://localhost:3000/api/v1/plays/${play_id}`, {
             method: "DELETE",
             headers: {
@@ -31,7 +31,6 @@ export const deletePlay = (play_id, callback) => {
                 "Authorization": localStorage.getItem("token")
             },
     })
-    .then(()=>callback)
 }
 
 export const persistCoords = (payload, callback) => {

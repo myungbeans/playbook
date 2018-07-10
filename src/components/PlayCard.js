@@ -58,7 +58,7 @@ class PlayCard extends Component {
                     </Grid>
                 </Zoom>
 
-                <DialogBox open={this.state.open} close={this.handleClose} player_id={this.props.player_id} type={this.state.type}/>
+                <DialogBox open={this.state.open} close={this.handleClose} play_id={this.props.play_id} type={this.state.type}/>
             </div>
         )
     }
