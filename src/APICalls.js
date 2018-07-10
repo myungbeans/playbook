@@ -23,6 +23,16 @@ export const postNewPlay = (payload) => {
     })
 }
 
+export const deletePlay = (play_id, callback) => {
+    fetch(`http://localhost:3000/api/v1/plays/${play_id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type" : "application/json",
+                "Authorization": localStorage.getItem("token")
+            },
+    })
+    .then(()=>callback)
+}
 
 export const persistCoords = (payload, callback) => {
     callback = callback || console.log("Coordinates Persisted")

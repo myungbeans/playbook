@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import Slider from '@material-ui/lab/Slider'
+// import Slider from '@material-ui/lab/Slider'
 import anime from 'animejs'
 
 class AnimeControls extends Component {

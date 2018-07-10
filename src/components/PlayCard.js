@@ -1,18 +1,35 @@
 import React, { Component } from 'react'
-import {Card, CardActions, CardContent, CardMedia, Typography, Button, Zoom, Grid} from '@material-ui/core/';
-//Paper, TextField
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux' 
+import { withRouter } from 'react-router-dom'
+//Actions
+import { routeActions } from 'react-router-redux'
+import { selectPlay } from '../actions/homepage-actions'
+//Components
+import { Button, Card, CardActions, CardContent, CardMedia, Typography, Zoom, Grid } from '@material-ui/core/';
+import DialogBox from './Dialog'
+//Fetch
+// import { deletePlay } from '../APICalls'
+//Stylesheets
 import '../stylesheets/index.css';
 import '../stylesheets/Playcard.css'
 
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux' 
-import { routeActions } from 'react-router-redux'
-import { withRouter } from 'react-router-dom'
-import { selectPlay } from '../actions/homepage-actions'
-
 class PlayCard extends Component {
-    handleClick = () => {
-        this.props.selectPlay(this.props.play_id) //TODO: REFACTOR --> play_id stored in localstorage. Maybe implement a check system to check localStorage vs storre
+    state = {
+        open: false,
+        type: ""
+    };
+
+    handleClickOpen = () => {
+        this.setState({ type: "delete", open: true})
+    };
+
+    handleClose = () => {
+        this.setState({ open: false });
+    };
+
+    handleSelectPlay = () => {
+        this.props.selectPlay(this.props.play_id)
         localStorage.setItem("selectedPlay", this.props.play_id)
         this.props.history.push('/playbook')
     }
@@ -30,16 +47,18 @@ class PlayCard extends Component {
                                 </Typography>
                             </CardContent>
                             <CardActions>
-                                <Button size="small" color="primary" onClick={this.handleClick}>
+                                <Button size="small" color="primary" onClick={this.handleSelectPlay}>
                                     Play
                                 </Button>
-                                <Button size="small" color="primary">
+                                <Button size="small" color="primary" onClick={this.handleClickOpen}>
                                     Delete
                                 </Button>
                             </CardActions>
                         </Card>
                     </Grid>
                 </Zoom>
+
+                <DialogBox open={this.state.open} close={this.handleClose} player_id={this.props.player_id} type={this.state.type}/>
             </div>
         )
     }
