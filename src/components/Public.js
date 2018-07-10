@@ -6,10 +6,12 @@ import { withRouter } from 'react-router-dom'
 
 import React, { Component } from 'react'
 
+import { Title } from '../assets/publicSplash'
+
 class Public extends Component {
     render() {
         return (
-            <h1> PUBLIC </h1>
+            <Title/>
         )
     }
 }
