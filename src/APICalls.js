@@ -12,7 +12,7 @@
 
 
 
-export const postNewPlay = (payload) => {
+export const postNewPlay = (payload,callback) => {
     fetch(`http://localhost:3000/api/v1/plays/`, {
             method: "POST",
             headers: {
@@ -21,6 +21,8 @@ export const postNewPlay = (payload) => {
             },
             body: JSON.stringify(payload)
     })
+    .then(res=>res.json())
+    .then(data => callback(data))
 }
 
 export const destroyPlay = (play_id) => {

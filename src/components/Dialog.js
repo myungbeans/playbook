@@ -8,7 +8,7 @@ import { routeActions } from 'react-router-redux'
 import { addPlay, deletePlay } from '../actions/homepage-actions'
 //Components
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core'
-import { errorOnClass } from './anime'
+import { errorOnClass, shrinkOnID } from './anime'
 //Fetch
 import { postNewPlay } from '../APICalls'
 import { destroyPlay } from '../APICalls'
@@ -43,8 +43,7 @@ class DialogBox extends Component {
     new = () => {
         let play = {title: this.state.title, user_id: localStorage.getItem("id")}
         if (this.state.title && !this.mapMyPlaysTitles().includes(this.state.title)){
-            postNewPlay(play)
-            this.props.addPlay(this.props.myPlays, play)
+            postNewPlay(play, (play)=>this.props.addPlay(this.props.myPlays, play))
             this.props.close()
         } else {
             errorOnClass("dialog-box")
@@ -53,9 +52,12 @@ class DialogBox extends Component {
     }
 
     delete = () => {
-        destroyPlay(this.props.play_id)
-        this.props.deletePlay(this.props.play_id)
         this.props.close()
+        destroyPlay(this.props.play_id)
+        shrinkOnID(this.props.card_id)
+        setTimeout(()=>{
+        this.props.deletePlay(this.props.myPlays, this.props.play_id)
+        }, 2000)
     }
 
     edit = () => {
@@ -65,13 +67,13 @@ class DialogBox extends Component {
     type = () => {
         switch(this.props.type){
             case("new"):
-                return {id: "new-play-form", text: "Please enter a title:", action: "Create"}
+                return {title: "New Play", text: "Please enter a title:", action: "Create"}
             case("delete"):
-                return {id: "delete-play-form", text: "Are you sure you want to Delete this?", action: "Delete"}
+                return {title: `Delete ${this.props.title}`, text: "Are you sure you want to Delete this?", action: "Delete"}
             case("edit"):
-                return {id: "edit-play-form", text: "Please enter a title:", action: "Update"}
+                return {title: `Edit ${this.props.title}`, text: "Please enter a title:", action: "Update"}
             default:
-                return {id: "play-form"}
+                return {title: "play-form"}
         }
     }
 
@@ -79,7 +81,7 @@ class DialogBox extends Component {
         let settings = this.type()
         return (
             <Dialog className={"dialog-box"} open={this.props.open} onClose={this.props.close} aria-labelledby="form-dialog-title" maxWidth={'md'} onBackdropClick={this.props.close}>
-                <DialogTitle id="form-dialog-title">New Play</DialogTitle>
+                <DialogTitle id="form-dialog-title">{settings.title}</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
                         {settings.text}

@@ -39,7 +39,7 @@ class PlayCard extends Component {
             <div>
                 <Zoom in style={{transitionDelay: this.props.delay}}>
                     <Grid sm item>
-                        <Card className="card">
+                        <Card className="card" id={`play-card-${this.props.play_id}`}>
                             <CardMedia className="media" image="/static/images/cards/contemplative-reptile.jpg" title="Contemplative Reptile" />
                             <CardContent>
                                 <Typography gutterBottom variant="headline" component="h2">
@@ -58,7 +58,7 @@ class PlayCard extends Component {
                     </Grid>
                 </Zoom>
 
-                <DialogBox open={this.state.open} close={this.handleClose} play_id={this.props.play_id} type={this.state.type}/>
+                <DialogBox open={this.state.open} card_id={`play-card-${this.props.play_id}`} title={this.props.title} close={this.handleClose} play_id={this.props.play_id} type={this.state.type}/>
             </div>
         )
     }

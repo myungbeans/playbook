@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom'
 
 //Actions
 import { routeActions } from 'react-router-redux'
-import { addPlay } from '../actions/homepage-actions'
+// import { addPlay } from '../actions/homepage-actions'
 //Components
 import { Button, Card, CardActions, CardContent, CardMedia, Typography, Zoom, Grid } from '@material-ui/core/';
 import DialogBox from './Dialog'
@@ -62,7 +62,7 @@ const mapStateToProps = state => {
 
 const mapActionsToProps = (dispatch) => {
     return bindActionCreators({
-        ...routeActions, addPlay
+        ...routeActions
     }, dispatch)
 }
 
