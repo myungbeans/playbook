@@ -3,10 +3,6 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import UUID from "uuid"
 
-//TODO: do something with this
-// import anime from 'animejs'
-import Anime from 'react-anime'
-
 //Actions
 import { updateGridDimensions } from '../actions/settings-actions'
 import { revealPoint } from '../actions/move-actions'
@@ -70,7 +66,9 @@ class GridContainer extends Component {
     drawPlayers = () => {
         if (!this.props.settings.loading){
             return this.mapMoves(move => {
-                return <StartPoint key={UUID()} draggable={"true"} dimension={this.props.settings.interval} ownProps={move}/>
+                return (
+                    <StartPoint key={UUID()} draggable={"true"} dimension={this.props.settings.interval} ownProps={move}/>
+                )
             })
         } else {
             return []
@@ -147,7 +145,6 @@ class GridContainer extends Component {
                             {Object.values(this.state.pathLines)}
                         </g>
                     </svg>
-                    <button onClick={this.selector}>CLICK TO MOVE</button>
                 </div>
         )
     }

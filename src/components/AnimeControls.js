@@ -1,19 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Slider from '@material-ui/lab/Slider'
-// import anime from 'animejs'
+import anime from 'animejs'
 
 class AnimeControls extends Component {
     state = {
         progress: 0,
-        // playTimeLine: anime.timeline({
-        //     direction: 'alternate',
-        //     loop: false,
-        //     easing: 'linear',
-        //     update: function(anim) {
-        //         slider.value = anim.progress
-        //     }
-        // })
     }
 
     doSmth = () => {
@@ -42,14 +34,42 @@ class AnimeControls extends Component {
         })
     }
 
+    createAnimation = () => {
+        return anime.timeline({
+            easing: 'linear',
+            direction: 'linear',
+        });
+    }
+
+    onPlay = () => {
+        let points = [...document.querySelectorAll('.start-point')]
+        let anime = this.createAnimation()
+
+        points.forEach(point => {
+            let move = this.matchIDtoMove(point.id)
+            console.log(move)
+            anime.add({
+                targets: point,
+                translateX: [ move.startX, move.endX],
+                translateY: [ move.startY, move.endY],
+                duration: (move.duration * 300),
+                offset: 0
+            })
+        })
+
+        anime.play
+    }
+
+    matchIDtoMove = (id) => {
+        return this.props.moves.points[id]
+    }
+
+
+
     render(){
-        // {this.loop()}
         return (
             <div className="line player align-items">
-                <button onClick={this.doSmth.play} className="play">Play</button>
-                <button onClick={this.doSmth.pause} className="pause">Pause</button>
-                <button onClick={this.doSmth.restart} className="restart">Restart</button>
-                <Slider className="progress" onChange={(e,value)=>this.updateProgress(e,value)} step={1} type="range" value={this.state.progress}/>
+                <button onClick={this.onPlay} className="play">Play</button>
             </div>
         )
     }
