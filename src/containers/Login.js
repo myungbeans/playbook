@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux'
 import { routeActions } from 'react-router-redux'
 import { withRouter } from 'react-router-dom'
 
-// import { errorOnID } from '../components/anime'
+import { toggleError, errorMsg } from '../actions/settings-actions'
 
 class Login extends Component {
     state = {
@@ -33,8 +33,8 @@ class Login extends Component {
                 localStorage.setItem('id', json.id);
                 setTimeout(()=> this.props.history.push('/home'), 1000)
             } else {
-                // errorOnID("login-form")
-
+                this.props.errorMsg(`${json.errors}`)
+                this.props.toggleError(true)
             }
         })
     }
@@ -69,7 +69,7 @@ const mapStateToProps = state => {
 
 const mapActionsToProps = (dispatch) => {
     return bindActionCreators({
-        ...routeActions
+        ...routeActions, toggleError, errorMsg
     }, dispatch)
 }
   
