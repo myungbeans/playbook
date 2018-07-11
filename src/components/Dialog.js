@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom'
 //Actions
 import { routeActions } from 'react-router-redux'
 import { addPlay } from '../actions/homepage-actions'
+import { handleError } from '../actions/settings-actions'
 //Components
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core'
 import { errorOnClass, shrinkOnID } from './anime'
@@ -32,22 +33,32 @@ class DialogBox extends Component {
             case("edit"):
                 return this.edit()
             default:
-                return console.log("Submitted blank")
+                return this.props.handleError({errors: ["Submitted a blank Title"]})
         }
     }
 
     mapMyPlaysTitles = () => {
-        return Object.values(this.props.myPlays).map(play => play.title)
+        return Object.values(this.props.myPlays).map(play => play.title.toLowerCase())
+    }
+
+    verifyTitle = (title) => {
+        if (this.state.title && !this.mapMyPlaysTitles().includes(this.state.title.toLowerCase()) && !!this.state.title.replace(/\s/g,'')){
+            return true
+        }
+        return false
     }
 
     new = () => {
         let play = {title: this.state.title, user_id: localStorage.getItem("id")}
-        if (this.state.title && !this.mapMyPlaysTitles().includes(this.state.title)){
+        if (this.verifyTitle()){
             postNewPlay(play, (play)=>this.props.addPlay(this.props.myPlays, play))
+            this.setState({title: ""})
             this.props.close()
         } else {
             errorOnClass("dialog-box")
-            console.log("Error: title must be present and unique")
+            let errorMsg = {errors: []}
+            !this.state.title ? errorMsg.errors.push("Please enter a title.") : errorMsg.errors.push("Titles must be unique.")
+            this.props.handleError(errorMsg)
         }
     }
 
@@ -104,7 +115,7 @@ const mapStateToProps = state => {
 
 const mapActionsToProps = (dispatch) => {
     return bindActionCreators({
-        ...routeActions, addPlay
+        ...routeActions, addPlay, handleError
     }, dispatch)
 }
 

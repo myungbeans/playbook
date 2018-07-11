@@ -6,9 +6,8 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { routeActions } from 'react-router-redux'
 import { withRouter } from 'react-router-dom'
-
-import { toggleError, errorMsg } from '../actions/settings-actions'
-
+//Actions
+import { handleError } from '../actions/settings-actions'
 class NewUser extends Component {
     state = {
         toggle: true,
@@ -27,13 +26,7 @@ class NewUser extends Component {
         })
         .then(res => res.json())
         .then(data => {
-            if (data.errors){
-                console.log(data)
-                this.props.errorMsg(`${data.errors[0]}`)
-                this.props.toggleError(true)
-                return null
-            }
-            this.redirectToLogin()
+            data.errors ? this.props.handleError(data) : this.redirectToLogin()
         })
     }
 
@@ -68,7 +61,7 @@ const mapStateToProps = state => {
 
 const mapActionsToProps = (dispatch) => {
     return bindActionCreators({
-        ...routeActions, toggleError, errorMsg
+        ...routeActions, handleError
     }, dispatch)
 }
   

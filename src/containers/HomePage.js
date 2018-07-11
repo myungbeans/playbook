@@ -4,10 +4,12 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux' 
 import { routeActions } from 'react-router-redux'
 import { withRouter } from 'react-router-dom'
+
+//Actions
 import { getPlays } from '../actions/homepage-actions'
-
+import { handleError } from '../actions/settings-actions'
+//Components
 import {Grid} from '@material-ui/core/';
-
 import PlayCard from '../components/PlayCard'
 import AddCard from '../components/AddCard'
 
@@ -22,7 +24,7 @@ class HomePage extends Component {
         })
         .then(res => res.json())
         .then(data => {
-            this.props.getPlays(data)
+            data.errors ? this.props.handleError(data) : this.props.getPlays(data)
         })
     }
 
@@ -56,7 +58,7 @@ const mapStateToProps = state => {
 
 const mapActionsToProps = (dispatch) => {
     return bindActionCreators({
-        ...routeActions, getPlays,
+        ...routeActions, getPlays, handleError
     }, dispatch)
 }
 

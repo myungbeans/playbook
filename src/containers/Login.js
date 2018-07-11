@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux'
 import { routeActions } from 'react-router-redux'
 import { withRouter } from 'react-router-dom'
 
-import { toggleError, errorMsg } from '../actions/settings-actions'
+import { handleError } from '../actions/settings-actions'
 
 class Login extends Component {
     state = {
@@ -26,15 +26,14 @@ class Login extends Component {
             body: JSON.stringify({ username: event.target.username.value, password: event.target.password.value})
         })
         .then(res => res.json())
-        .then(json => {
-            if(json.token && json.id){
+        .then(data => {
+            if(data.errors){
+                this.props.handleError(data)
+            } else { 
                 this.setState({...this.state, toggle: false})
-                localStorage.setItem('token', json.token);
-                localStorage.setItem('id', json.id);
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('id', data.id);
                 setTimeout(()=> this.props.history.push('/home'), 1000)
-            } else {
-                this.props.errorMsg(`${json.errors}`)
-                this.props.toggleError(true)
             }
         })
     }
@@ -69,7 +68,7 @@ const mapStateToProps = state => {
 
 const mapActionsToProps = (dispatch) => {
     return bindActionCreators({
-        ...routeActions, toggleError, errorMsg
+        ...routeActions, handleError
     }, dispatch)
 }
   

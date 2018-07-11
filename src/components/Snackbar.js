@@ -15,7 +15,7 @@ import WarningIcon from '@material-ui/icons/Warning';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux' 
-import { toggleError } from '../actions/settings-actions'
+import { toggleError, errorMsg } from '../actions/settings-actions'
 
 const variantIcon = {
   success: CheckCircleIcon,
@@ -151,7 +151,7 @@ const mapStateToProps = state => {
 
 const mapActionsToProps = (dispatch) => {
     return bindActionCreators({
-        toggleError
+        toggleError, errorMsg
     }, dispatch)
 }
 
