@@ -8,36 +8,36 @@ return (
     id='New_Pattern_Swatch_2' viewBox='0 -104.333 108 104.333' overflow='visible'>
         <g fill='none'>
             <polygon points='108,0 0,0 0,-104.333 108,-104.333' />
-            <g stroke='#000' strokeWidth='1.589' strokeMiterlimit='10'>
-                <line y1='-104.333' x2='108' y2='-104.333' />
-                <line y1='-99.758' x2='108' y2='-99.758' />
-                <line y1='-95.182' x2='108' y2='-95.182' />
-                <line y1='-90.606' x2='108' y2='-90.606' />
-                <line y1='-86.03' x2='108' y2='-86.03' />
-                <line y1='-81.455' x2='108' y2='-81.455' />
-                <line y1='-76.879' x2='108' y2='-76.879' />
-                <line y1='-72.303' x2='108' y2='-72.303' />
-                <line y1='-67.728' x2='108' y2='-67.728' />
-                <line y1='-63.152' x2='108' y2='-63.152' />
-                <line y1='-58.576' x2='108' y2='-58.576' />
-                <line y1='-54' x2='108' y2='-54' />
-                <line y1='-49.424' x2='108' y2='-49.424' />
-                <line y1='-44.849' x2='108' y2='-44.849' />
-                <line y1='-40.273' x2='108' y2='-40.273' />
-                <line y1='-35.697' x2='108' y2='-35.697' />
-                <line y1='-31.122' x2='108' y2='-31.122' />
-                <line y1='-26.546' x2='108' y2='-26.546' />
-                <line y1='-21.97' x2='108' y2='-21.97' />
-                <line y1='-17.394' x2='108' y2='-17.394' />
-                <line y1='-12.818' x2='108.002' y2='-12.818' />
-                <line y1='-8.243' x2='108.002' y2='-8.243' />
-                <line y1='-3.667' x2='108.002' y2='-3.667' />
+            <g className="all-logo-shadow-fill" stroke='#000' strokeWidth='1.589' strokeMiterlimit='10'>
+                <line className="logo-shadow-fill" y1='-104.333' x2='108' y2='-104.333' />
+                <line className="logo-shadow-fill" y1='-99.758' x2='108' y2='-99.758' />
+                <line className="logo-shadow-fill" y1='-95.182' x2='108' y2='-95.182' />
+                <line className="logo-shadow-fill" y1='-90.606' x2='108' y2='-90.606' />
+                <line className="logo-shadow-fill" y1='-86.03' x2='108' y2='-86.03' />
+                <line className="logo-shadow-fill" y1='-81.455' x2='108' y2='-81.455' />
+                <line className="logo-shadow-fill" y1='-76.879' x2='108' y2='-76.879' />
+                <line className="logo-shadow-fill" y1='-72.303' x2='108' y2='-72.303' />
+                <line className="logo-shadow-fill" y1='-67.728' x2='108' y2='-67.728' />
+                <line className="logo-shadow-fill" y1='-63.152' x2='108' y2='-63.152' />
+                <line className="logo-shadow-fill" y1='-58.576' x2='108' y2='-58.576' />
+                <line className="logo-shadow-fill" y1='-54' x2='108' y2='-54' />
+                <line className="logo-shadow-fill" y1='-49.424' x2='108' y2='-49.424' />
+                <line className="logo-shadow-fill" y1='-44.849' x2='108' y2='-44.849' />
+                <line className="logo-shadow-fill" y1='-40.273' x2='108' y2='-40.273' />
+                <line className="logo-shadow-fill" y1='-35.697' x2='108' y2='-35.697' />
+                <line className="logo-shadow-fill" y1='-31.122' x2='108' y2='-31.122' />
+                <line className="logo-shadow-fill" y1='-26.546' x2='108' y2='-26.546' />
+                <line className="logo-shadow-fill" y1='-21.97' x2='108' y2='-21.97' />
+                <line className="logo-shadow-fill" y1='-17.394' x2='108' y2='-17.394' />
+                <line className="logo-shadow-fill" y1='-12.818' x2='108.002' y2='-12.818' />
+                <line className="logo-shadow-fill" y1='-8.243' x2='108.002' y2='-8.243' />
+                <line className="logo-shadow-fill" y1='-3.667' x2='108.002' y2='-3.667' />
             </g>
         </g>
     </pattern>
     <rect x='-267.349' y='-186.727' fill='none' width='108' height='104.333'
     />
-    <polygon fill='#FFF' stroke='#000' strokeLinejoin='round' strokeMiterlimit='10'
+    <polygon className="l outline" fill='#FFF' stroke='#000' strokeLinejoin='round' strokeMiterlimit='10'
     points='99.852,44.134 107.184,51.475 107.184,68.528 72.185,68.528 63.685,59.309 63.685,2.973 80.852,2.973 89.018,10.975 89.018,44.134'
     />
     <pattern id='SVGID_1_' xlinkHref='#New_Pattern_Swatch_2' patternTransform='scale(.5607) rotate(45 -3351.991 -17728.92)'
@@ -101,7 +101,7 @@ return (
         d='M261.144,47.06 c0,0,5.447,0.35,5.447-4.33l-5.447,0V47.06z' />
     </g>
     <g>
-        <path fill='#FFF' stroke='#000' strokeLinejoin='round' strokeMiterlimit='10'
+        <path className="p outline" fill='#FFF' stroke='#000' strokeLinejoin='round' strokeMiterlimit='10'
         d='M47.023,9.833 c11.149,8.584,11.359,14.649,11.149,20.72C57.667,45.167,44.09,49.484,28.923,49.484v19.044h-18l-8-9.884V2.973h27.749 c0,0,10.452-0.337,16.356,6.858'
         />
         <path fill='none' stroke='#000' strokeLinejoin='round' strokeMiterlimit='10'

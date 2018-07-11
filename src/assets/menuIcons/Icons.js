@@ -89,3 +89,41 @@ export function EraseRouteIcon() {
         </svg>
     )
 }
+
+export function HomePageIcon() {
+    return (
+        <svg id='Layer_1' xmlns='http://www.w3.org/2000/svg' width='416' height='554' viewBox='0 0 416 554'>
+        <path fill='#FFF' stroke='#000' strokeWidth='12.782' strokeLinecap='round'
+        strokeLinejoin='round' strokeMiterlimit='10' d='M400.443,526.724c0,7.869-13.536,14.247-30.231,14.247H47.788c-16.695,0-30.231-6.378-30.231-14.247V58.93 c0-7.869,13.536-14.248,30.231-14.248h322.424c16.695,0,30.231,6.379,30.231,14.248V526.724z'/>
+        <rect x='133.94' y='13.029' fill='#FFF' stroke='#000' strokeWidth='7.519'
+        strokeLinecap='round' strokeLinejoin='round' strokeMiterlimit='10' width='150.119'
+        height='63.307' />
+        <polyline fill='none' stroke='#000' strokeWidth='12.255' strokeLinecap='round'
+        strokeLinejoin='round' strokeMiterlimit='10' points='175.384,147.242 142.704,110.987 110.023,147.242'
+        />
+        <path fill='none' stroke='#000' strokeWidth='12.255' strokeLinecap='round'
+        strokeLinejoin='round' strokeMiterlimit='10' strokeDasharray='10.2128,20.4254'
+        d='M142.704,123.978c0,65.872,0,57.702,0,81.702c0,12.255-0.329,60.383,67.914,73.021c55.148,10.213,84.255,23.489,100.088,47.987 c15.75,24.371,10.209,61.799,10.209,61.799'
+        />
+        <line fill='none' stroke='#000' strokeWidth='12.255' strokeLinecap='round'
+        strokeLinejoin='round' strokeMiterlimit='10' x1='257.994' y1='187.296'
+        x2='311.101' y2='240.402' />
+        <line fill='none' stroke='#000' strokeWidth='12.255' strokeLinecap='round'
+        strokeLinejoin='round' strokeMiterlimit='10' x1='311.101' y1='187.296'
+        x2='257.994' y2='240.402' />
+        <circle fill='none' stroke='#000' strokeWidth='11.07' strokeLinecap='round'
+        strokeLinejoin='round' strokeMiterlimit='10' cx='320.422' cy='440.533'
+        r='32.519' />
+        <g fill='none' stroke='#000' strokeWidth='12.255' strokeLinecap='round'
+        strokeLinejoin='round' strokeMiterlimit='10'>
+            <line x1='172.208' y1='375.468' x2='225.314' y2='428.574' />
+            <line x1='225.314' y1='375.468' x2='172.208' y2='428.574' />
+        </g>
+        <g fill='none' stroke='#000' strokeWidth='12.255' strokeLinecap='round'
+        strokeLinejoin='round' strokeMiterlimit='10'>
+            <line x1='72.124' y1='276.344' x2='125.229' y2='329.45' />
+            <line x1='125.229' y1='276.344' x2='72.124' y2='329.45' />
+        </g>
+    </svg>
+    )
+}

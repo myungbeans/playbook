@@ -7,8 +7,19 @@ import { withRouter } from 'react-router-dom'
 import React, { Component } from 'react'
 
 import { Title } from '../assets/publicSplash'
+import { createAnimationTimeline } from '../components/anime'
 
 class Public extends Component {
+    componentDidMount(){
+        let anime = createAnimationTimeline()
+        anime.add({
+            targets: '.logo-shadow-fill',
+            translateX: [-250, 0],
+            easing: 'linear'
+        })
+
+    }
+
     render() {
         return (
             <Title/>
