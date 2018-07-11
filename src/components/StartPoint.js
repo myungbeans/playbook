@@ -96,11 +96,9 @@ class StartPoint extends Component {
     render(){
         const {controlledPosition} = this.state;
         return (
-            // <Anime easing="linear" duration={2000} translateX={this.props.ownProps.endX - this.props.ownProps.startX} translateY={this.props.ownProps.endY - this.props.ownProps.startY} >
-                <Draggable id={this.props.ownProps.id} onStart={this.onStart} onStop={this.controlledStop} position={controlledPosition} bounds={{left: 0, top: 0, right:this.props.width, bottom: this.props.height - 17}} >
-                    <img className={"start-point"} id={`${this.props.ownProps.id}`} onMouseEnter={this.updateSelectedPlayer} src={this.imgSrc()} style={this.style} alt="Player Token"/>
-                </Draggable>
-            // </Anime>
+            <Draggable id={this.props.ownProps.id} onStart={this.onStart} onStop={this.controlledStop} position={controlledPosition} bounds={"#Grid-Container"} >
+                <img className={"start-point"} id={`${this.props.ownProps.id}`} onMouseEnter={this.updateSelectedPlayer} src={this.imgSrc()} style={this.style} alt="Player Token"/>
+            </Draggable>
         )
     }
 }
