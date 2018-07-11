@@ -85,7 +85,7 @@ class EndPoint extends Component {
         return (
             <div>
             {this.isHidden() ||
-                <Draggable onStart={this.onStart} onStop={this.controlledStop} position={controlledPosition} bounds={{left: 0, top: 0, right:this.props.width, bottom: this.props.height - 17}} >
+                <Draggable onStart={this.onStart} onStop={this.controlledStop} position={controlledPosition} bounds={"#Grid-Container"} >
                     <img src={dashCircle2} style={this.style} alt="EndPoint Token"/>
                 </Draggable>}
             </div>
