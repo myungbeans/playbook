@@ -28,6 +28,7 @@ class Login extends Component {
         .then(res => res.json())
         .then(data => {
             if(data.errors){
+                console.log(data.errors)
                 this.props.handleError(data)
             } else { 
                 this.setState({...this.state, toggle: false})
