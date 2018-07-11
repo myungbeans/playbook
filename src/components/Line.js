@@ -23,7 +23,7 @@ class PathLine extends Component {
     //TODO: dynamically change color based on selected player
     render() {
         return (
-            <line stroke={this.style.stroke} x1={this.adjustDimension(this.matchIDtoMove().startX, 'x')} y1={this.adjustDimension(this.matchIDtoMove().startY)} x2={this.adjustDimension(this.matchIDtoMove().endX,'x')} y2={this.adjustDimension(this.matchIDtoMove().endY)} id={"pathLine"} strokeDasharray="6" ></line>
+            <line stroke={this.style.stroke} strokeWidth={`${this.props.settings.interval * (1/12)}px`} x1={this.adjustDimension(this.matchIDtoMove().startX, 'x')} y1={this.adjustDimension(this.matchIDtoMove().startY)} x2={this.adjustDimension(this.matchIDtoMove().endX,'x')} y2={this.adjustDimension(this.matchIDtoMove().endY)} id={"pathLine"} strokeDasharray="6" ></line>
         )
     }
 }

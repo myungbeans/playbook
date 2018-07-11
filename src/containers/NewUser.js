@@ -8,6 +8,7 @@ import { routeActions } from 'react-router-redux'
 import { withRouter } from 'react-router-dom'
 //Actions
 import { handleError } from '../actions/settings-actions'
+
 class NewUser extends Component {
     state = {
         toggle: true,

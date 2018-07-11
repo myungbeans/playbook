@@ -6,6 +6,7 @@ import UUID from "uuid"
 //Actions
 import { updateGridDimensions } from '../actions/settings-actions'
 import { revealPoint } from '../actions/move-actions'
+import { handleError } from '../actions/settings-actions'
 //Components
 import PathLine, { GridLine } from '../components/Line'
 import StartPoint from '../components/StartPoint'
@@ -118,7 +119,7 @@ class GridContainer extends Component {
                 }
             })
         } else {
-            console.log("ERROR: user not selected")
+            this.props.handleError({errors: ["User not selected"]})
         }
     }
 
@@ -143,7 +144,7 @@ const mapStateToProps = (state) => {
 
 const mapActionsToProps = (dispatch) => {
     return bindActionCreators({
-        updateGridDimensions, revealPoint
+        updateGridDimensions, revealPoint, handleError
     }, dispatch)
 }
 

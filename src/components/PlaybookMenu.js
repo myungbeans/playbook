@@ -7,6 +7,7 @@ import { withRouter } from 'react-router-dom'
 import { routeActions } from 'react-router-redux'
 import { addPlayer, selectPlayer } from '../actions/playbook-actions'
 import { updatePoint, hidePoint, removeMove } from '../actions/move-actions'
+import { handleError } from '../actions/settings-actions'
 //Custom Icons
 import { StraightRouteIcon, SharpRouteIcon, SquiggleRoute, GroupIcon, TrashIcon, EraseRouteIcon } from '../assets/menuIcons/Icons'
 //Fetch
@@ -121,12 +122,7 @@ class PlaybookMenu extends Component {
   }
 
   isPlayerSelected = () => {
-    if(this.props.players.selectedPlayer){
-      return true
-    } else {
-      console.log("Error: You must select a player first")
-      return false
-    }
+    return this.props.players.selectedPlayer ? true : false
   }
 
   trash = () => {
@@ -134,16 +130,19 @@ class PlaybookMenu extends Component {
       let {move} = this.findMoveAndPlayer()
       this.props.removeMove(this.props.moves.points, move.id)
       destroyPlayer(this.props.players.selectedPlayer)
+      this.props.selectPlayer("")
+    } else {
+      this.props.handleError({errors: ["Please select a Player."]})
     }
   }
 
   findMoveAndPlayer = () => {
-    if(this.props.players.selectedPlayer){
-    let player = this.props.players.roster[this.props.players.selectedPlayer]
-    let move = Object.values(this.props.moves.points).find(move => move.player_id === player.id)
-    return {player, move}
+    if(!this.props.players.selectedPlayer){
+      this.props.handleError({errors: ["Please select a Player."]})
     } else {
-      console.log("error: select a player first")
+      let player = this.props.players.roster[this.props.players.selectedPlayer]
+      let move = Object.values(this.props.moves.points).find(move => move.player_id === player.id)
+      return {player, move}
     }
   }
 
@@ -152,7 +151,7 @@ class PlaybookMenu extends Component {
       let {player, move} = this.findMoveAndPlayer()
       let prevPoints = this.props.moves.activeEndPoints
       if(move.startX === move.endX && move.startY === move.endY){
-        return console.log("Move already hidden")
+        return this.props.handleError({errors: ["Move already hidden."] })
       }
       move.endX = move.startX
       move.endY = move.startY
@@ -160,6 +159,8 @@ class PlaybookMenu extends Component {
         () => { this.props.hidePoint(prevPoints, {...move})
       })
       return console.log("Hidden successfully")
+    } else {
+      this.props.handleError({errors: ["Please select a Player."]})
     }
   }
 
@@ -205,7 +206,7 @@ const mapStateToProps = state => {
 
 const mapActionsToProps = (dispatch) => {
   return bindActionCreators({
-      ...routeActions, addPlayer, selectPlayer, updatePoint, hidePoint, removeMove
+      ...routeActions, addPlayer, selectPlayer, updatePoint, hidePoint, removeMove, handleError
   }, dispatch)
 }
 

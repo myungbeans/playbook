@@ -9,7 +9,7 @@ import { toggleError, errorMsg } from '../actions/settings-actions'
 //Components
 import AppBar from '../components/AppBar'
 import Login from '../containers/Login'
-import HomePage from './Homepage'
+import HomePage from '../containers/HomePage'
 import NewUser from './NewUser'
 import Public from '../components/Public'
 import Playbook from './Playbook'

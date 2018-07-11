@@ -14,7 +14,6 @@ import PlayCard from '../components/PlayCard'
 import AddCard from '../components/AddCard'
 
 class HomePage extends Component {
-
     fetchPlay = () => {
         fetch(`http://localhost:3000/api/v1/users/${localStorage.getItem("id")}/plays/`, {
             headers: {
