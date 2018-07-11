@@ -28,9 +28,9 @@ export const createAnimationTimeline = () => {
     });
 }
 
-// export const homepageAnimationTimeline = () => {
-//     return anime.timeline({
-//         easing: 'linear',
-//         direction: 'linear',
-//     })
-// }
+export const homepageAnimationTimeline = () => {
+    return anime.timeline({
+        easing: 'linear',
+        direction: 'linear',
+    })
+}

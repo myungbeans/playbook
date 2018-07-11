@@ -54,7 +54,7 @@ return (
     />
     <pattern id='SVGID_3_' xlinkHref='#New_Pattern_Swatch_2' patternTransform='scale(.5607) rotate(45 -3414.857 -17539.862)'
     />
-    <polygon fill='url(#SVGID_3_)' stroke='#000' strokeLinejoin='round' strokeMiterlimit='10'
+    <polygon className="early-fill" fill='url(#SVGID_3_)' stroke='#000' strokeLinejoin='round' strokeMiterlimit='10'
     points='140.045,38.225 144.909,38.225 139.534,19.6 134.159,38.225 139.022,38.225'
     />
     <pattern id='SVGID_4_' xlinkHref='#New_Pattern_Swatch_2' patternTransform='scale(.5607) rotate(45 -3374.196 -17441.696)'
@@ -109,7 +109,7 @@ return (
         />
         <pattern id='SVGID_10_' xlinkHref='#New_Pattern_Swatch_2' patternTransform='scale(.5607) rotate(45 -3570.058 -17827.983)'
         />
-        <path fill='url(#SVGID_10_)' stroke='#000' strokeLinejoin='round' strokeMiterlimit='10'
+        <path className="early-fill " fill='url(#SVGID_10_)' stroke='#000' strokeLinejoin='round' strokeMiterlimit='10'
         d='M34.484,21.851 c0,0.59-0.04,1.13-0.12,1.63c-1.48-0.01-5.44,0-5.44,0v5.44c-0.76,0.13-1.42,0.14-1.83,0.14h-0.3c-0.84,0.01-5.87,0-5.87,0v-14.41 c0,0,5.03-0.01,5.87,0C27.843,14.661,34.484,14.301,34.484,21.851z'
         />
         <pattern id='SVGID_11_' xlinkHref='#New_Pattern_Swatch_2' patternTransform='scale(.5607) rotate(45 -3494.18 -17836.59)'

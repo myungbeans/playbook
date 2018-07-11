@@ -7,17 +7,36 @@ import { withRouter } from 'react-router-dom'
 import React, { Component } from 'react'
 
 import { Title } from '../assets/publicSplash'
-import { createAnimationTimeline } from '../components/anime'
+import { homepageAnimationTimeline } from '../components/anime'
 
 class Public extends Component {
     componentDidMount(){
-        let anime = createAnimationTimeline()
-        anime.add({
+        // let anime = homepageAnimationTimeline()
+        // anime
+        // .add({
+        //     targets: '.logo-shadow-fill',
+        //     translateX: [-250, 0],
+        //     easing: 'linear',
+        //     opacity: 1,
+        // })
+        this.mountAnimation()
+    }
+
+    componentDidUpdate(){
+        console.log("Update")
+        this.mountAnimation()
+    }
+
+    mountAnimation = () => {
+        let anime = homepageAnimationTimeline()
+        anime
+        .add({
             targets: '.logo-shadow-fill',
             translateX: [-250, 0],
-            easing: 'linear'
+            easing: 'linear',
+            opacity: 1,
+            delay: 1000
         })
-
     }
 
     render() {
