@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom'
 //Actions
 import { routeActions } from 'react-router-redux'
 import { addPlayer, selectPlayer } from '../actions/playbook-actions'
-import { updatePoint, hidePoint } from '../actions/move-actions'
+import { updatePoint, hidePoint, removeMove } from '../actions/move-actions'
 //Custom Icons
 import { StraightRouteIcon, SharpRouteIcon, SquiggleRoute, GroupIcon, TrashIcon, EraseRouteIcon } from '../assets/menuIcons/Icons'
 //Fetch
@@ -131,19 +131,25 @@ class PlaybookMenu extends Component {
 
   trash = () => {
     if(this.isPlayerSelected()){
-      
+      let {move} = this.findMoveAndPlayer()
+      this.props.removeMove(this.props.moves.points, move.id)
       destroyPlayer(this.props.players.selectedPlayer)
     }
   }
 
-  findMoveFromPlayerId = (playerId) => {
-    return Object.values(this.props.moves.points).find(move => move.player_id === playerId)
+  findMoveAndPlayer = () => {
+    if(this.props.players.selectedPlayer){
+    let player = this.props.players.roster[this.props.players.selectedPlayer]
+    let move = Object.values(this.props.moves.points).find(move => move.player_id === player.id)
+    return {player, move}
+    } else {
+      console.log("error: select a player first")
+    }
   }
 
   erase = () => {
     if(this.isPlayerSelected()){
-      let player = this.props.players.roster[this.props.players.selectedPlayer]
-      let move = this.findMoveFromPlayerId(player.id)
+      let {player, move} = this.findMoveAndPlayer()
       let prevPoints = this.props.moves.activeEndPoints
       if(move.startX === move.endX && move.startY === move.endY){
         return console.log("Move already hidden")
@@ -199,7 +205,7 @@ const mapStateToProps = state => {
 
 const mapActionsToProps = (dispatch) => {
   return bindActionCreators({
-      ...routeActions, addPlayer, selectPlayer, updatePoint, hidePoint
+      ...routeActions, addPlayer, selectPlayer, updatePoint, hidePoint, removeMove
   }, dispatch)
 }
 

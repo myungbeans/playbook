@@ -1,10 +1,9 @@
-export const UPDATE_POINT = "point: updatePoint"
 export const SET_CURRENT_MOVE = "moves: currentMove"
 export const REMOVE_MOVE = "moves: removeMove"
 export const STORE_MOVES = "moves: storeMoves"
+export const UPDATE_POINT = "point: updatePoint"
 export const REVEAL_POINT = "point: reveal"
 export const HIDE_POINT = "point: hide"
-
 
 export function updatePoint(prevPoints, move){
     let newMoves = prevPoints
@@ -56,5 +55,16 @@ export function hidePoint(prevPoints, point){
     return {
         type: HIDE_POINT,
         payload: [...newPoints]
+    }
+}
+
+export function removeMove(prevMoves, moveId) {
+    let newMoves = prevMoves || {}
+    if (newMoves[moveId]){
+        delete newMoves[moveId]
+    }
+    return {
+        type: REMOVE_MOVE,
+        payload: newMoves
     }
 }
