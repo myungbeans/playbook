@@ -25,8 +25,8 @@ export const shrinkOnID = (targetID) => {
     return anime({
         targets: `#${targetID}`,
         scale: 0,
-        duration: 700,
-        easing: 'easeOutCirc'
+        duration: 500,
+        easing: 'easeOutQuint'
     })
 }
 

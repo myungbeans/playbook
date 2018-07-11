@@ -5,14 +5,13 @@ import { withRouter } from 'react-router-dom'
 
 //Actions
 import { routeActions } from 'react-router-redux'
-import { addPlay, deletePlay } from '../actions/homepage-actions'
+import { addPlay, getPlays } from '../actions/homepage-actions'
 import { handleError } from '../actions/settings-actions'
 //Components
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core'
 import { errorOnClass, shrinkOnID } from './anime'
 //Fetch
 import { postNewPlay } from '../APICalls'
-import { destroyPlay } from '../APICalls'
 
 
 class DialogBox extends Component {
@@ -65,7 +64,23 @@ class DialogBox extends Component {
     delete = () => {
         this.props.close()
         shrinkOnID(this.props.card_id)
-        destroyPlay(this.props.play_id, () =>  this.props.deletePlay(this.props.myPlays, this.props.play_id))
+        fetch(`http://localhost:3000/api/v1/plays/${this.props.play_id}`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type" : "application/json",
+            "Authorization": localStorage.getItem("token")
+        },
+        })
+        .then(()=> {
+            let newPlays = this.props.myPlays
+            let play = newPlays.find(play => play.id === this.props.play_id)
+            if (newPlays.length === 1){
+                newPlays = []
+            } else if (play){
+                newPlays.splice(newPlays.indexOf(play), 1);
+            }
+            return this.props.getPlays(newPlays)
+        })
     }
 
     edit = () => {
@@ -115,7 +130,7 @@ const mapStateToProps = state => {
 
 const mapActionsToProps = (dispatch) => {
     return bindActionCreators({
-        ...routeActions, addPlay, handleError, deletePlay
+        ...routeActions, addPlay, handleError, getPlays
     }, dispatch)
 }
 
