@@ -6,7 +6,8 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { routeActions } from 'react-router-redux'
 import { withRouter } from 'react-router-dom'
-
+//Actions
+import { handleError } from '../actions/settings-actions'
 class NewUser extends Component {
     state = {
         toggle: true,
@@ -25,11 +26,7 @@ class NewUser extends Component {
         })
         .then(res => res.json())
         .then(data => {
-            //TODO: Check for error messages on the response
-            //TODO: fadeout effect
-            // localStorage.setItem('token', data.token)
-            // localStorage.setItem('id', data.id)
-            this.props.history.push('/login')
+            data.errors ? this.props.handleError(data) : this.redirectToLogin()
         })
     }
 
@@ -38,7 +35,6 @@ class NewUser extends Component {
     }
 
     render() {
-        console.log(this.props)
         return (
             <div className='outer-div-create-user'>
                 <Fade in={this.state.toggle} timeout={this.state.inOut} >
@@ -65,7 +61,7 @@ const mapStateToProps = state => {
 
 const mapActionsToProps = (dispatch) => {
     return bindActionCreators({
-        ...routeActions
+        ...routeActions, handleError
     }, dispatch)
 }
   

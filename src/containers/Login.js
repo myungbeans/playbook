@@ -7,6 +7,8 @@ import { bindActionCreators } from 'redux'
 import { routeActions } from 'react-router-redux'
 import { withRouter } from 'react-router-dom'
 
+import { handleError } from '../actions/settings-actions'
+
 class Login extends Component {
     state = {
         toggle: true,
@@ -16,7 +18,6 @@ class Login extends Component {
     onSubmit = (event) => {
         event.preventDefault()
         event.persist()
-        this.setState({...this.state, toggle: false})
         fetch("http://localhost:3000/api/v1/sessions/", {
             method: "POST",
             headers: {
@@ -25,10 +26,15 @@ class Login extends Component {
             body: JSON.stringify({ username: event.target.username.value, password: event.target.password.value})
         })
         .then(res => res.json())
-        .then(json => {
-            localStorage.setItem('token', json.token);
-            localStorage.setItem('id', json.id);
-            setTimeout(()=> this.props.history.push('/home'), 1000)
+        .then(data => {
+            if(data.errors){
+                this.props.handleError(data)
+            } else { 
+                this.setState({...this.state, toggle: false})
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('id', data.id);
+                setTimeout(()=> this.props.history.push('/home'), 1000)
+            }
         })
     }
 
@@ -38,7 +44,7 @@ class Login extends Component {
 
     render() {
         return (
-            <div className='outer-div'>
+            <div id="login-form" className='outer-div'>
                 <Fade in={this.state.toggle} timeout={this.state.inOut} >
                 <Paper className='Input-Paper'elevation={1}>
                     <form onSubmit={this.onSubmit}>
@@ -62,7 +68,7 @@ const mapStateToProps = state => {
 
 const mapActionsToProps = (dispatch) => {
     return bindActionCreators({
-        ...routeActions
+        ...routeActions, handleError
     }, dispatch)
 }
   

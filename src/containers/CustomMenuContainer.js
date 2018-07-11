@@ -9,16 +9,17 @@ import ExpandMore from '@material-ui/icons/ExpandMore'
 import { updateGridDimensions } from '../actions/settings-actions'
 import { increaseGridIncrement } from '../actions/settings-actions'
 import { decreaseGridIncrement } from '../actions/settings-actions'
+import { handleError } from '../actions/settings-actions'
 //Components
 import AnimeControls from '../components/AnimeControls'
 
 class CustomMenuContainer extends Component {
     increaseGridIncrement = () => {
-        this.props.increaseGridIncrement(this.props.settings.interval + 5)
+        this.props.settings.interval >= 100 ? this.props.handleError({errors: ["Grid size cannot be any bigger"]}) : this.props.increaseGridIncrement(this.props.settings.interval + 5)
     }
 
     decreaseGridIncrement = () => {
-        this.props.settings.interval <= 0 || this.props.decreaseGridIncrement(this.props.settings.interval - 5 )
+        this.props.settings.interval <= 5 ? this.props.handleError({errors: ["Grid size cannot be any smaller"]}) : this.props.decreaseGridIncrement(this.props.settings.interval - 5 )
     }
 
     render() {
@@ -42,7 +43,7 @@ const mapStateToProps = state => {
 
 const mapActionsToProps = (dispatch) => {
     return bindActionCreators({
-        updateGridDimensions, increaseGridIncrement, decreaseGridIncrement
+        updateGridDimensions, increaseGridIncrement, decreaseGridIncrement, handleError
     }, dispatch)
 }
   

@@ -15,7 +15,9 @@ export function addPlay(prevState, play){
 export function deletePlay(prevState, playID){
     let newPlays = prevState
     for(let i=0; i < newPlays.length; i++){
-        if(newPlays[i].id === playID){
+        if(newPlays.length === 1) {
+            if (newPlays[i].id === playID){return []}
+        } else if (newPlays[i].id === playID){
             newPlays.splice(i,1)
             break;
         }else{

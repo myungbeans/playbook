@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux' //needed to set up connection between store and this file
+import { bindActionCreators } from 'redux' 
 import { Route, Switch, withRouter } from 'react-router-dom'
-
 import '../stylesheets/Grid.css';
 
+//Actions
+import { toggleError, errorMsg } from '../actions/settings-actions'
+//Components
 import AppBar from '../components/AppBar'
 import Login from '../containers/Login'
 import HomePage from './Homepage'
 import NewUser from './NewUser'
 import Public from '../components/Public'
 import Playbook from './Playbook'
+import CustomizedSnackbars from '../components/Snackbar'
+import { Snackbar } from '../../node_modules/@material-ui/core';
 
 class App extends Component {
   render() {
@@ -18,23 +23,28 @@ class App extends Component {
     <Route key={"home"} exact path="/home" render={ () => <HomePage/>}/>
     ]
     const login = [<Route key={"login"} path="/login" exact render={ () => <Login/>}/>,<Route key={"signup"} path="/new_account" exact render={ () => <NewUser/>}/>]
-    
     return (
       <div className="App">
         <AppBar props={this.props} />
         <Switch history={this.props.history}>
-          { localStorage.getItem("token") ? routes : login }
+          { localStorage.getItem("token") === "undefined" || !localStorage.getItem("token") ? login : routes }
           <Route key={"default"} path="/" render={() => <Public/>}/>
         </Switch>
+        <Snackbar/>
+        <CustomizedSnackbars/>
       </div>
     );
   }
 }
 
-
-//Redux functions
 const mapStateToProps = state => {
   return state 
 }
 
-export default withRouter(connect(mapStateToProps)(App));
+const mapActionsToProps = (dispatch) => {
+  return bindActionCreators({
+      toggleError, errorMsg
+  }, dispatch)
+}
+
+export default withRouter(connect(mapStateToProps, mapActionsToProps)(App));
