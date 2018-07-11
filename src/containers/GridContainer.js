@@ -15,48 +15,31 @@ import { persistCoords } from '../APICalls'
 
 
 class GridContainer extends Component {
-    constructor(props){
-        super(props)
-
-        this.setPathLines()
-        this.state = {
-            pathLines: this.setPathLines(),
-        }
-    }
-
     componentDidMount() {
         const height = document.getElementById("Grid-Container").clientHeight
         const width = document.getElementById("Grid-Container").clientWidth
 
         this.props.updateGridDimensions( { height, width} )
+        this.setupInitialEndPoints()
     }
-    
-    setPathLines = () => {
-        let pathLines = {}
+
+    setupInitialEndPoints = () => {
         this.mapMoves(move => {
             if(move.startX !== move.endX && move.startY !== move.endY){
                 this.props.revealPoint(this.props.moves.activeEndPoints, move)
-                let newPath = <PathLine key={UUID()} moveID={move.id} />
-                pathLines[move.id] = newPath
             }
         })
-        return pathLines
     }
 
-    revealPathLine = () => {
-        let move = this.findMoveOfCurrentPlayer()
-        let pathLines = this.state.pathLines
-        this.setStatePathLines(move, pathLines)
+    //HELPER METHODS
+    mapMoves = (callback) => {
+        return Object.values(this.props.moves.points).map(callback)
+    }
+    findMoveOfCurrentPlayer(){
+        return Object.values(this.props.moves.points).find(move => move.player_id === this.props.players.selectedPlayer)
     }
 
-    setStatePathLines = (move, pathLines) => {
-        if (this.props.moves.activeEndPoints.includes(move.id)){
-            let newPath = <PathLine key={UUID()} moveID={move.id} />
-            pathLines[move.id] = newPath
-            this.setState({ pathLines: {...pathLines}})
-        }
-    }
-
+    //DRAWING GRID
     drawVertical = () => {
         const verticalLines = []
         for (let i = 0; i < this.props.settings.width; i = i+this.props.settings.interval){
@@ -64,7 +47,6 @@ class GridContainer extends Component {
         }
         return verticalLines
     }
-
     drawHorizontal = () => {
         const horizontalLines = []
         for (let i = 0; i < this.props.settings.height; i = i+this.props.settings.interval){
@@ -73,10 +55,11 @@ class GridContainer extends Component {
         return horizontalLines
     }
 
-    mapMoves = (callback) => {
-        return Object.values(this.props.moves.points).map(callback)
+    drawGridLines = () => {
+        return [...this.drawVertical(), ...this.drawHorizontal()]
     }
-
+    
+    //DRAWING POINTS
     drawPlayers = () => {
         if (!this.props.settings.loading){
             return this.mapMoves(move => {
@@ -103,14 +86,19 @@ class GridContainer extends Component {
         return [...this.drawPlayers(), ...this.drawEndPoints()]
     }
 
-    drawGridLines = () => {
-        return [...this.drawVertical(), ...this.drawHorizontal()]
+    //DRAWING PATHLINES
+    setPathLines = () => {
+        let pathLines = []
+        this.mapMoves(move => {
+            if(move.startX !== move.endX && move.startY !== move.endY){
+                let newPath = <PathLine key={UUID()} moveID={move.id} />
+                pathLines.push(newPath)
+            }
+        })
+        return pathLines
     }
 
-    findMoveOfCurrentPlayer(){
-        return Object.values(this.props.moves.points).find(move => move.player_id === this.props.players.selectedPlayer)
-    }
-
+    //RIGHT CLICK ACTION
     showEndPoint = (e) => {
         e.preventDefault()
         let x = e.clientX - (this.props.settings.interval/2)
@@ -121,7 +109,6 @@ class GridContainer extends Component {
             move.endX = x
             move.endY = y
             this.props.revealPoint(this.props.moves.activeEndPoints, move)
-            this.revealPathLine()
             persistCoords({
                 player: {
                 id: move.player_id,
@@ -137,15 +124,15 @@ class GridContainer extends Component {
 
     render() {
         return (
-                <div onContextMenu={this.showEndPoint} id="Grid-Container" data-reactid=".0.0.0">
-                    {this.drawAllPoints()}
-                    <svg className="ad-SVG" width="100vh" height="70vh" data-reactid=".0.0.0.0">
-                        <g className="ad-Grid" data-reactid=".0.0.0.0.0">
-                            {this.drawGridLines()}
-                            {Object.values(this.state.pathLines)}
-                        </g>
-                    </svg>
-                </div>
+            <div onContextMenu={this.showEndPoint} id="Grid-Container" data-reactid=".0.0.0">
+                {this.drawAllPoints()}
+                <svg className="ad-SVG" width="100vh" height="70vh" data-reactid=".0.0.0.0">
+                    <g className="ad-Grid" data-reactid=".0.0.0.0.0">
+                        {this.drawGridLines()}
+                        {this.setPathLines()}
+                    </g>
+                </svg>
+            </div>
         )
     }
 }
