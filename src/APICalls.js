@@ -26,25 +26,26 @@ export const destroyPlayer = (player_id) => {
 
 export const postNewPlay = (payload,callback) => {
     fetch(`http://localhost:3000/api/v1/plays/`, {
-            method: "POST",
-            headers: {
-                "Content-Type" : "application/json",
-                "Authorization": localStorage.getItem("token")
-            },
-            body: JSON.stringify(payload)
+        method: "POST",
+        headers: {
+            "Content-Type" : "application/json",
+            "Authorization": localStorage.getItem("token")
+        },
+        body: JSON.stringify(payload)
     })
     .then(res=>res.json())
     .then(data => callback(data))
 }
 
-export const destroyPlay = (play_id) => {
+export const destroyPlay = (play_id, callback) => {
     fetch(`http://localhost:3000/api/v1/plays/${play_id}`, {
-            method: "DELETE",
-            headers: {
-                "Content-Type" : "application/json",
-                "Authorization": localStorage.getItem("token")
-            },
+        method: "DELETE",
+        headers: {
+            "Content-Type" : "application/json",
+            "Authorization": localStorage.getItem("token")
+        },
     })
+    .then(callback)
 }
 
 export const persistCoords = (payload, callback) => {
