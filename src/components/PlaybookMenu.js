@@ -130,23 +130,30 @@ class PlaybookMenu extends Component {
   }
 
   trash = () => {
-    return this.isPlayerSelected() ? destroyPlayer(this.props.players.selectedPlayer) : null
+    if(this.isPlayerSelected()){
+      
+      destroyPlayer(this.props.players.selectedPlayer)
+    }
+  }
+
+  findMoveFromPlayerId = (playerId) => {
+    return Object.values(this.props.moves.points).find(move => move.player_id === playerId)
   }
 
   erase = () => {
     if(this.isPlayerSelected()){
       let player = this.props.players.roster[this.props.players.selectedPlayer]
-      let move = player.moves[this.props.moves.moveIndex]
+      let move = this.findMoveFromPlayerId(player.id)
+      let prevPoints = this.props.moves.activeEndPoints
+      if(move.startX === move.endX && move.startY === move.endY){
+        return console.log("Move already hidden")
+      }
       move.endX = move.startX
       move.endY = move.startY
-      return hideMove({
-        player: {
-            id: player.id,
-            name: player.name,
-            moves_attributes: 
-            [{...move}]
-        }
-      }, () => this.props.hidePoint(this.props.moves.activeEndPoints, {...move}))
+      hideMove({ player: { id: player.id, name: player.name, moves_attributes: [{...move}] }},
+        () => { this.props.hidePoint(prevPoints, {...move})
+      })
+      return console.log("Hidden successfully")
     }
   }
 

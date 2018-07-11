@@ -31,7 +31,6 @@ class GridContainer extends Component {
         this.props.updateGridDimensions( { height, width} )
     }
     
-    //Fired upon Creation
     setPathLines = () => {
         let pathLines = {}
         this.mapMoves(move => {
