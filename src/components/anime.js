@@ -11,6 +11,16 @@ export const errorOnClass = (targetClassName) => {
     })
 }
 
+export const errorOnID = (targetID) => {
+    return anime({
+        targets: `#${targetID}`,
+        translateX: [-20, +20, 0],
+        duration: 60,
+        direction: 'easeInOutBack',
+        loop: 5,
+    })
+}
+
 export const shrinkOnID = (targetID) => {
     return anime({
         targets: `#${targetID}`,

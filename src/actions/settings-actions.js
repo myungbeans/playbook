@@ -2,6 +2,22 @@ export const UPDATE_GRID_DIMENSIONS = 'settings: updateGridDimensions'
 export const INCREASE_GRID_INCREMENT = 'settings: increaseGridIncrement'
 export const DECREASE_GRID_INCREMENT = 'settings: decreaseGridIncrement'
 export const TOGGLE_LOADING = 'settings: loading'
+export const TOGGLE_ERROR = 'settings: displayErrorMsg'
+export const ERROR_MSG = 'settings: editErrorMsg'
+
+export function toggleError(bool){
+    return {
+        type: TOGGLE_ERROR,
+        payload: bool
+    }
+}
+
+export function errorMsg(msg){
+    return {
+        type: ERROR_MSG,
+        payload: msg
+    }
+}
 
 export function updateGridDimensions(dimensions) {
     return {

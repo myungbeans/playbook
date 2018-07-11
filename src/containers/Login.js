@@ -7,6 +7,8 @@ import { bindActionCreators } from 'redux'
 import { routeActions } from 'react-router-redux'
 import { withRouter } from 'react-router-dom'
 
+// import { errorOnID } from '../components/anime'
+
 class Login extends Component {
     state = {
         toggle: true,
@@ -16,7 +18,6 @@ class Login extends Component {
     onSubmit = (event) => {
         event.preventDefault()
         event.persist()
-        this.setState({...this.state, toggle: false})
         fetch("http://localhost:3000/api/v1/sessions/", {
             method: "POST",
             headers: {
@@ -26,9 +27,15 @@ class Login extends Component {
         })
         .then(res => res.json())
         .then(json => {
-            localStorage.setItem('token', json.token);
-            localStorage.setItem('id', json.id);
-            setTimeout(()=> this.props.history.push('/home'), 1000)
+            if(json.token && json.id){
+                this.setState({...this.state, toggle: false})
+                localStorage.setItem('token', json.token);
+                localStorage.setItem('id', json.id);
+                setTimeout(()=> this.props.history.push('/home'), 1000)
+            } else {
+                // errorOnID("login-form")
+
+            }
         })
     }
 
@@ -38,7 +45,7 @@ class Login extends Component {
 
     render() {
         return (
-            <div className='outer-div'>
+            <div id="login-form" className='outer-div'>
                 <Fade in={this.state.toggle} timeout={this.state.inOut} >
                 <Paper className='Input-Paper'elevation={1}>
                     <form onSubmit={this.onSubmit}>

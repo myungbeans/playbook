@@ -29,6 +29,10 @@ export const defaultState = {
         height: 417,
         width: 1326,
         loading: false,
+        error: {
+            show: false,
+            message: "No Errors"
+        }
     },
     homepage: {
         myPlays:[],
