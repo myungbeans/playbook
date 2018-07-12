@@ -10,6 +10,7 @@ import { updateGridDimensions } from '../actions/settings-actions'
 import { increaseGridIncrement } from '../actions/settings-actions'
 import { decreaseGridIncrement } from '../actions/settings-actions'
 import { handleError } from '../actions/settings-actions'
+import { Typography } from '@material-ui/core/';
 //Components
 import AnimeControls from '../components/AnimeControls'
 
@@ -26,10 +27,10 @@ class CustomMenuContainer extends Component {
         return (
             <div id="Customization-Menu-Container">
                 <IconButton onClick={this.decreaseGridIncrement} color="default"><ExpandMore/></IconButton>
-                Grid Interval: {this.props.settings.interval}
+                    <Typography style={{display: "inline"}} variant="subheading">GRID INTERVAL:  {this.props.settings.interval}</Typography>
                 <IconButton onClick={this.increaseGridIncrement} color="default"><ExpandLess/></IconButton>
                 <br/>
-                <p>Player: {this.props.players.selectedPlayer}</p>
+                <Typography style={{display: "inline"}} variant="subheading">Player: {this.props.players.selectedPlayer}</Typography>
                 <br/>
                 <AnimeControls/>
             </div>

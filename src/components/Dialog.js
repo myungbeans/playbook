@@ -112,10 +112,10 @@ class DialogBox extends Component {
                     {this.props.type === 'new'? <TextField required onChange={this.handleChange} autoFocus margin="dense" id="name" label="" value={this.state.title} type="email" fullWidth /> : null}
                 </DialogContent>
                 <DialogActions>
-                <Button onClick={this.buttonSubmit} color="primary">
+                <Button onClick={this.buttonSubmit} color="secondary">
                     {settings.action}
                 </Button>
-                <Button onClick={this.props.close} color="primary">
+                <Button onClick={this.props.close} color="secondary">
                     Cancel
                 </Button>
                 </DialogActions>

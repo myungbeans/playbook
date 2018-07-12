@@ -39,11 +39,11 @@ class HomePage extends Component {
         })
         
         return (
-            <Grid container alignContent="center" id="PlayCards-Container">
+            <Grid style={{paddingTop:"50px"}} container alignContent="center" id="PlayCards-Container">
                 <Grid container justify="center" id="new-card-container">
                     <AddCard delay={100}/>
                 </Grid>   
-                <Grid container alignItems="center" justify="center" spacing={8} id="my-cards-container">
+                <Grid container style={{paddingTop:"50px"}} alignItems="center" justify="center" spacing={8} id="my-cards-container">
                     {myPlays}
                 </Grid>
             </Grid>

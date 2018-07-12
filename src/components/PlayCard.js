@@ -38,7 +38,7 @@ class PlayCard extends Component {
         return (
             <div>
                 <Zoom in style={{transitionDelay: this.props.delay}}>
-                    <Grid sm item>
+                    <Grid sm item style={{paddintLeft:"30px", paddingRight:"30px"}}>
                         <Card className="card" id={`play-card-${this.props.play_id}`}>
                             <CardMedia className="media" image="/static/images/cards/contemplative-reptile.jpg" title="Contemplative Reptile" />
                             <CardContent>
