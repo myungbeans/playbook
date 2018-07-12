@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { createAnimationTimeline } from './anime'
+import ButtonBase from '@material-ui/core/ButtonBase';
+import { Typography } from '@material-ui/core/';
+// import { PlayArrow } from '@material-ui/icons'
+// import { Replay } from '@material-ui/icons'
 
 //Actions
 import { selectPlayer } from '../actions/playbook-actions'
@@ -43,9 +47,15 @@ class AnimeControls extends Component {
 
     render(){
         return (
-            <div className="line player align-items">
-                <button onClick={this.onPlay} className="play">Play</button>
-                <button onClick={this.onReset} className="reset">Reset</button>
+            <div style={{display: 'inline', paddingLeft:"455px"}}className="line player align-items">
+                <ButtonBase onClick={this.onPlay} centerRipple focusRipple color="black" style={{height:"40px", width: "100px", paddingRight:"10px"}} className="play">
+                    {/* <PlayArrow style={{color: "#99D3Df", height:"20px"}}></PlayArrow> */}
+                    <Typography style={{color:"#black"}} variant="headline">PLAY</Typography>
+                </ButtonBase>
+                <ButtonBase onClick={this.onReset} centerRipple focusRipple color="black" style={{height:"40px", width: "100px", paddingLeft:"10px"}} className="reset">
+                    {/* <Replay></Replay> */}
+                    <Typography variant="headline">RESET</Typography>
+                </ButtonBase>
             </div>
         )
     }

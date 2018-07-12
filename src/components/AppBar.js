@@ -6,9 +6,10 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
-
+import ButtonBase from '@material-ui/core/ButtonBase';
+import { hoverTitle } from '../components/anime'
+import UUID from 'uuid'
 import { ChangeHistory } from '@material-ui/icons'
-// Home, 
 
 const styles = {
   root: {
@@ -32,9 +33,16 @@ function ButtonAppBar(props) {
     myHistory.push('/')
   }
 
-  let logOut = <Button color="inherit" onClick={logOutAction}>Logout</Button>
-  let logIn = <Button color="inherit" onClick={()=> props.props.history.push('/login')}>Login</Button>
-  
+  const hoverEffect = () => {
+    console.log("Mouse over title")
+    return hoverTitle()
+  }
+
+  let logOut = <Button style={{marginLeft: "800px"}} color="inherit" onClick={logOutAction}>Logout</Button>
+  let logIn = <Button style={{marginLeft: "800px"}} color="inherit" onClick={()=> props.props.history.push('/login')}>Login</Button>
+  let playbook = "PLAYBOOK".split("")
+  let title = playbook.map(letter => <Typography key={UUID()} id={`title-${letter}`} display="inline" variant="title" color="inherit" className={classes.flex}>{letter}</Typography>)
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -42,9 +50,9 @@ function ButtonAppBar(props) {
           <IconButton onClick={()=> props.props.history.push('/home') } className={classes.menuButton} color="inherit" aria-label="Menu">
             <ChangeHistory/>
           </IconButton>
-          <Typography variant="title" color="inherit" className={classes.flex}>
-            PLAYBOOK
-          </Typography>
+          <ButtonBase id="app-bar-home" onMouseEnter={hoverEffect} style={{marginLeft: "807px"}}>
+            {title}
+          </ButtonBase>
           {localStorage.token? logOut : logIn}
         </Toolbar>
       </AppBar>

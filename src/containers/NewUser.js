@@ -48,7 +48,7 @@ class NewUser extends Component {
                         <Button type="submit" variant='contained' color='secondary'> Create User </Button>
                     </form>
                     <br />
-                    <p onClick={this.redirectToLogin}><Typography variant="caption">Already have an Account? Click to Login</Typography></p>
+                    <p onClick={this.redirectToLogin}><Typography color='secondary' variant="caption">Already have an Account? Click to Login</Typography></p>
                 </Paper>
                 </Fade>
             </div>

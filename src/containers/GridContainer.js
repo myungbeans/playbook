@@ -127,7 +127,7 @@ class GridContainer extends Component {
         return (
             <div onContextMenu={this.showEndPoint} id="Grid-Container" data-reactid=".0.0.0">
                 {this.drawAllPoints()}
-                <svg className="ad-SVG" width="100vh" height="70vh" data-reactid=".0.0.0.0">
+                <svg className="ad-SVG" width="100vh" height="80vh" data-reactid=".0.0.0.0">
                     <g className="ad-Grid" data-reactid=".0.0.0.0.0">
                         {this.drawGridLines()}
                         {this.setPathLines()}

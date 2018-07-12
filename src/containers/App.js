@@ -28,7 +28,7 @@ class App extends Component {
         <AppBar props={this.props} />
         <Switch history={this.props.history}>
           { localStorage.getItem("token") === "undefined" || !localStorage.getItem("token") ? login : routes }
-          <Route key={"default"} path="/" render={() => <Public/>}/>
+          <Route key={"default"} path="/" props={this.props} render={() => <Public/>}/>
         </Switch>
         <Snackbar/>
         <CustomizedSnackbars/>

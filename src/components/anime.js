@@ -37,6 +37,14 @@ export const createAnimationTimeline = () => {
     });
 }
 
+export const hoverTitle = () => {
+    return anime.timeline({
+        targets: `#title-P`,
+        direction: 'alternate',
+        translanteX: [{value: 3.2, duration: 1000, easing: "easeInOutQuint"}],
+    })
+}
+
 // export const homepageAnimationTimeline = () => {
 //     return anime.timeline({
 //         easing: 'linear',

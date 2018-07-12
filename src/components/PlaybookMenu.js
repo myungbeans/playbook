@@ -23,7 +23,7 @@ const styles = theme => ({
   },
   speedDial: {
     position: 'absolute',
-    bottom: theme.spacing.unit * 30,
+    bottom: theme.spacing.unit * 19,
     right: theme.spacing.unit * 3,
   },
 });
@@ -116,9 +116,19 @@ class PlaybookMenu extends Component {
         return this.trash()
       case 'erase-route-icon':
         return this.erase()
+      case 'group-icon':
+        return this.developmentMessage()
+      case 'squiggle-route-icon':
+        return this.developmentMessage()
+      case 'sharp-route-icon':
+        return this.developmentMessage()
       default:
         return null
     }
+  }
+
+  developmentMessage = () => {
+    this.props.handleError({errors: ["This feature is currently under development."]})
   }
 
   isPlayerSelected = () => {

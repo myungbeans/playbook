@@ -4,7 +4,6 @@ import './stylesheets/index.css';
 import App from './containers/App';
 import registerServiceWorker from './registerServiceWorker';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
-import { blueGrey } from '@material-ui/core/colors/blueGrey';
 
 import { createStore, combineReducers } from 'redux'
 import { createBrowserHistory } from 'history'
@@ -66,20 +65,14 @@ const theme = createMuiTheme({
     palette: {
         primary: {
             light: '##FFFFFF',
-            main: '#f2f2f2',
-            dark: '##f2f2f2',
+            main: '#E9E9E9',
+            dark: '##CDCDCD',
         },
-        secondary: blueGrey
-        // secondary: {
-        //     light: '#E3E1F7',
-        //     main: '#CBC9DD',
-        //     dark: '#464954',
-        // }
-        // secondary: {
-        //     light: '#464954',
-        //     main: '#464954',
-        //     dark: '#464954',
-        // },
+        secondary: {
+            main: '#99D3Df',
+            dark: "#88BBD6",
+            contrastText: "#fff"
+        }
     },
     typography: {
         fontFamily: 'Archivo'

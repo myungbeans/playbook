@@ -55,7 +55,7 @@ class Login extends Component {
                         <Button type="submit" variant='contained' color='secondary'> Log in </Button>
                     </form>
                     <br />
-                    <p onClick={this.redirectToSignup}><Typography variant="caption">Don't Have an Account? Create one here</Typography></p>
+                    <p onClick={this.redirectToSignup}><Typography variant="caption" color="secondary">Don't Have an Account? Create one here</Typography></p>
                 </Paper>
                 </Fade>
             </div>
