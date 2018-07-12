@@ -45,7 +45,7 @@ class NewUser extends Component {
                         <TextField required error={false} id="email-input" label="email" name="email" margin="normal"/><br />
                         <TextField required error={false} id="password-input" label="password" name="password" margin="normal" type="password"/><br />
                         <br />
-                        <Button type="submit" variant='contained' color='primary'> Create User </Button>
+                        <Button type="submit" variant='contained' color='secondary'> Create User </Button>
                     </form>
                     <br />
                     <p onClick={this.redirectToLogin}><Typography variant="caption">Already have an Account? Click to Login</Typography></p>

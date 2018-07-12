@@ -47,10 +47,10 @@ class PlayCard extends Component {
                                 </Typography>
                             </CardContent>
                             <CardActions>
-                                <Button size="small" color="primary" onClick={this.handleSelectPlay}>
+                                <Button size="small" color="secondary" onClick={this.handleSelectPlay}>
                                     Play
                                 </Button>
-                                <Button size="small" color="primary" onClick={this.handleClickOpen}>
+                                <Button size="small" color="secondary" onClick={this.handleClickOpen}>
                                     Delete
                                 </Button>
                             </CardActions>

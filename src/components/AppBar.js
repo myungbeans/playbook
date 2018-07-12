@@ -7,6 +7,8 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 
+import { ChangeHistory } from '@material-ui/icons'
+// Home, 
 
 const styles = {
   root: {
@@ -37,11 +39,11 @@ function ButtonAppBar(props) {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          {/*TODO: fix props.props*/}
           <IconButton onClick={()=> props.props.history.push('/home') } className={classes.menuButton} color="inherit" aria-label="Menu">
+            <ChangeHistory/>
           </IconButton>
           <Typography variant="title" color="inherit" className={classes.flex}>
-            Playbook
+            PLAYBOOK
           </Typography>
           {localStorage.token? logOut : logIn}
         </Toolbar>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Paper, Typography, TextField, Button, Fade} from '@material-ui/core/';
+import {Paper, Typography, TextField, Button, Fade } from '@material-ui/core/';
 import '../stylesheets/index.css';
 
 import { connect } from 'react-redux'
@@ -52,7 +52,7 @@ class Login extends Component {
                         <TextField required error={false} id="username-input" label="username" name="username" margin="normal"/><br />
                         <TextField required error={false} id="password-input" label="password" name="password" margin="normal" type="password"/><br />
                         <br />
-                        <Button type="submit" variant='contained' color='primary'> Log in </Button>
+                        <Button type="submit" variant='contained' color='secondary'> Log in </Button>
                     </form>
                     <br />
                     <p onClick={this.redirectToSignup}><Typography variant="caption">Don't Have an Account? Create one here</Typography></p>

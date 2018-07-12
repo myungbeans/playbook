@@ -21,9 +21,13 @@ class Public extends Component {
             scale: {value: 0, duration: 0, easing: 'easeInOutExpo'},
             easing: 'easeInOutBack',
         }).add({
-            offset: 5000,
+            targets: '.ButtonAppBar-root-1',
+            transformY: -50,
+            duration: 1
+        }).add({
+            offset: 4800,
             targets: '#Playbook-Logo',
-            scale: {value: 1, duration: 2500, easing: 'easeInOutExpo'},
+            scale: {value: 1, duration: 3500, easing: 'easeInOutExpo'},
             easing: 'linear'
         }).add({
             targets: '#Playbook-Logo',
@@ -81,21 +85,23 @@ class Public extends Component {
             translateY: [{value: 0, duration: 800, easing: "easeInOutQuint"}, {value: -2.55, duration: 800, easing: "easeInOutQuint"}, {value: 0, duration: 800, easing: "easeInOutQuint"}, {value: -2.55, duration: 800, easing: "easeInOutQuint"}, {value: 0.8, duration: 800, easing: "easeInOutQuint"}],
             duration: 3000,
             offset: '-=4000'
-        }).add({
-
         })
+        // let options = createAnimationTimeline()
+        // options.add({
+
+        // })
     }
-    //translateX: [0, 700],
-    // translateY: [0, 100],
-    // easing: 'easeInOutQuint',
-    // duration: 1000,
-    // delay: 1000
 
     circleStyle = {
         backgroundColor: "transparent",
         height: "0.5px",
         width: "0.5px",
         position: "absolute"
+    }
+
+    stopAnimation = (e) => {
+        console.log("clicked")
+        this.forceUpdate()
     }
 
     render() {

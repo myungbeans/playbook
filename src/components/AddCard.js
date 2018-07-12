@@ -41,7 +41,7 @@ class AddCard extends Component {
                                 </Typography>
                             </CardContent>
                             <CardActions>
-                                <Button onClick={this.handleClickOpen} size="small" color="primary">
+                                <Button onClick={this.handleClickOpen} size="small" color="secondary">
                                     New Play
                                 </Button>
                             </CardActions>
