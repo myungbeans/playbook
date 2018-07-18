@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { createAnimationTimeline } from './anime'
-import ButtonBase from '@material-ui/core/ButtonBase';
-import { Typography } from '@material-ui/core/';
-// import { PlayArrow } from '@material-ui/icons'
-// import { Replay } from '@material-ui/icons'
 
 //Actions
 import { selectPlayer } from '../actions/playbook-actions'
+//Components
+import ButtonBase from '@material-ui/core/ButtonBase';
+import { Typography } from '@material-ui/core/';
+import { createAnimationTimeline } from './anime'
 
 class AnimeControls extends Component {
     state = {

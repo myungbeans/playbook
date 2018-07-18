@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
-import {Paper, Typography, TextField, Button, Fade} from '@material-ui/core/';
-import '../stylesheets/index.css';
-
 import { bindActionCreators } from 'redux' 
 import { connect } from 'react-redux'
 import { routeActions } from 'react-router-redux'
 import { withRouter } from 'react-router-dom'
+
 //Actions
 import { handleError } from '../actions/settings-actions'
+//Components
+import {Paper, Typography, TextField, Button, Fade} from '@material-ui/core/';
+//Stylesheets
+import '../stylesheets/index.css';
+
 
 class NewUser extends Component {
     state = {

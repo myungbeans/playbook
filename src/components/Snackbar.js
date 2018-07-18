@@ -1,4 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux' 
+
+//Actions
+import { toggleError, errorMsg } from '../actions/settings-actions'
+//Components
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
@@ -12,9 +18,6 @@ import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 import WarningIcon from '@material-ui/icons/Warning';
 import { withStyles } from '@material-ui/core/styles';
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux' 
-import { toggleError, errorMsg } from '../actions/settings-actions'
 
 const variantIcon = {
   success: CheckCircleIcon,

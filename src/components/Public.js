@@ -1,11 +1,10 @@
-// import Button from '@material-ui/core/Button'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux' 
 import { routeActions } from 'react-router-redux'
 import { withRouter } from 'react-router-dom'
 
-import React, { Component } from 'react'
-
+//Components
 import { Title } from '../assets/publicSplash'
 import Typography from '@material-ui/core/Typography';
 import { createAnimationTimeline } from '../components/anime'
