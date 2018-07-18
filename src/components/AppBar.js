@@ -50,7 +50,7 @@ function ButtonAppBar(props) {
           <IconButton onClick={()=> props.props.history.push('/home') } className={classes.menuButton} color="inherit" aria-label="Menu">
             <ChangeHistory/>
           </IconButton>
-          <ButtonBase id="app-bar-home" onMouseEnter={hoverEffect} style={{marginLeft: "807px"}}>
+          <ButtonBase onClick={()=> props.props.history.push('/')} id="app-bar-home" onMouseEnter={hoverEffect} style={{marginLeft: "807px"}}>
             {title}
           </ButtonBase>
           {localStorage.token? logOut : logIn}
