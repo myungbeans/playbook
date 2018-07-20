@@ -1,6 +1,6 @@
 # PLAYBOOK
 
-![Playbook Opening Sequnece]('./playbook_gif.gif')
+![Playbook Opening Sequnece](https://media.giphy.com/media/2gVZiyyHbTsy6XLSh6/giphy.gif)
 
 A virtual playbook for coaches, drill directors, and dancers to map and visualize synchronized movement in action. Users can log-in to create or view all of their saved plays, drag and drop to edit player's positions, set travel paths/routes for each player, and hit play to see all of the players move along their routes.
 
