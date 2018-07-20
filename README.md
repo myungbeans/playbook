@@ -8,7 +8,7 @@ Built on a React-Redux front end and Ruby on Rails back end. Playbook uses JSON 
 
 ## Getting Started
 
-Back end repository can be found [here](http://www.github.com).
+Back end repository can be found [here](https://github.com/myungbeans/backendPlaybook).
 
 To run on a local server:
 
