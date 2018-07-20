@@ -26,14 +26,14 @@ class CustomMenuContainer extends Component {
     render() {
         return (
             <div id="Customization-Menu-Container" style={{backgroundColor:"#CDCDCD", height:"150px"}}>
-                <div id="custom-menu-content" style={{paddingTop:"2.6%"}}>
-                    <div id="custom-menu-content-grid" style={{marginLeft:"90px", display:"inline"}}>
-                    <IconButton onClick={this.decreaseGridIncrement} color="black" ><ExpandMore/></IconButton>
-                        <Typography style={{display: "inline"}} color="black" variant="headline">GRID INTERVAL:  {this.props.settings.interval}</Typography>
-                    <IconButton onClick={this.increaseGridIncrement} color="black"><ExpandLess/></IconButton>
+                <div id="custom-menu-content" style={{paddingTop:"2.1%"}}>
+                    <div id="custom-menu-content-grid" style={{marginLeft:"30px", display:"inline"}}>
+                    <IconButton onClick={this.decreaseGridIncrement} color="default" style={{paddingBottom: '5px'}} ><ExpandMore/></IconButton>
+                        <Typography style={{display: "inline"}} color="default" variant="title">GRID INTERVAL:  {this.props.settings.interval}</Typography>
+                    <IconButton onClick={this.increaseGridIncrement} color="default" style={{paddingBottom: '5px'}}><ExpandLess/></IconButton>
                     </div>
                     <AnimeControls/>
-                    <Typography style={{display: "inline", marginLeft: '520px'}} color="black" variant="headline">PLAYER:</Typography><Typography style={{display: "inline", marginLeft: '30px'}} color="black" variant="headline">{this.props.players.selectedPlayer}</Typography>
+                    <Typography style={{display: "inline", marginLeft: '280px'}} color="default" variant="title">PLAYER:</Typography><Typography style={{display: "inline", marginLeft: '30px'}} color="default" variant="title">{this.props.players.selectedPlayer}</Typography>
                 </div>
             </div>
         )

@@ -9,18 +9,19 @@ body {
   text-align: center;
   margin: 0 auto;
   width: 400px;
+  height: 101%;
 }
 
 .outer-div {
   position: relative;
   top: 40%;
-  transform: perspective(1px) translateY(80%);
+  transform: perspective(1px) translateY(35%);
 }
 
 .outer-div-create-user {
   position: relative;
   top: 40%;
-  transform: perspective(1px) translateY(62%);
+  transform: perspective(1px) translateY(28%);
 }
 
 .Main-Paper {

@@ -46,7 +46,7 @@ class AnimeControls extends Component {
 
     render(){
         return (
-            <div style={{display: 'inline', paddingLeft:"455px"}}className="line player align-items">
+            <div style={{display: 'inline', paddingLeft:"230px"}}className="line player align-items">
                 <ButtonBase onClick={this.onPlay} centerRipple focusRipple color="black" style={{height:"40px", width: "100px", paddingRight:"10px"}} className="play">
                     {/* <PlayArrow style={{color: "#99D3Df", height:"20px"}}></PlayArrow> */}
                     <Typography style={{color:"#black"}} variant="headline">PLAY</Typography>
