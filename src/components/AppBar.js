@@ -39,8 +39,8 @@ function ButtonAppBar(props) {
     return hoverTitle()
   }
 
-  let logOut = <Button style={{marginLeft: "800px"}} color="inherit" onClick={logOutAction}>Logout</Button>
-  let logIn = <Button style={{marginLeft: "800px"}} color="inherit" onClick={()=> props.props.history.push('/login')}>Login</Button>
+  let logOut = <Button style={{position: "relative", left: "80%"}} color="inherit" onClick={logOutAction}>Logout</Button>
+  let logIn = <Button style={{position: "relative", left: "80%"}} color="inherit" onClick={()=> props.props.history.push('/login')}>Login</Button>
   let playbook = "PLAYBOOK".split("")
   let title = playbook.map(letter => <Typography key={UUID()} id={`title-${letter}`} display="inline" variant="title" color="inherit" className={classes.flex}>{letter}</Typography>)
 
@@ -48,10 +48,10 @@ function ButtonAppBar(props) {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton onClick={()=> props.props.history.push('/home') } className={classes.menuButton} color="inherit" aria-label="Menu">
+          <IconButton onClick={()=> props.props.history.push('/') } className={classes.menuButton} color="inherit" aria-label="Menu">
             <ChangeHistory/>
           </IconButton>
-          <ButtonBase onClick={()=> props.props.history.push('/')} id="app-bar-home" onMouseEnter={hoverEffect} style={{marginLeft: "807px"}}>
+          <ButtonBase onClick={()=> props.props.history.push('/home')} id="app-bar-home" onMouseEnter={hoverEffect} style={{position: "relative", left: "41%"}}>
             {title}
           </ButtonBase>
           {localStorage.token? logOut : logIn}

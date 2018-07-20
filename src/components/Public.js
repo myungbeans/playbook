@@ -31,11 +31,10 @@ class Public extends Component {
         }).add({
             offset: 4800,
             targets: '#Playbook-Logo',
-            scale: {value: 1, duration: 3500, easing: 'easeInOutExpo'},
-            easing: 'linear'
+            scale: {value: 0.8, duration: 3500, easing: 'easeInOutExpo'},
         }).add({
             targets: '#Playbook-Logo',
-            scale: {value: 1, duration: 30000, easing: 'easeInOutExpo'},
+            scale: {value: 0.8, duration: 30000, easing: 'easeInOutExpo'},
         }).add({
             offset: "-=31000",
             targets: '.logo-shadow-fill',
@@ -55,61 +54,63 @@ class Public extends Component {
         }).add({
             offset: 8000,
             targets: [`#nowhistle`, `#clipboard`],
-            scale: { value: 150, duration: 0},
+            scale: { value: 100, duration: 0},
             translateY: [{value: 1, duration: 1200, easing: "easeInOutQuint"}],
         })
 
         let textMsg = createAnimationTimeline()
         textMsg.add({
             targets: [`#login-text`, `#signup-text`],
-            translateY: [{value: 2000, duration: 0, easing: "easeInOutQuint"}]
+            scale: {value: 0, duraiton: 0},
+            translateY: [{value: 1000, duration: 0}]
         }).add({
             offset: 8000,
             targets: [`#login-text`, `#signup-text`],
-            translateY: [{value: [1000, 270], duration: 1200, easing: "easeInOutQuint"}]
+            scale:{ value: 1, duration: 0},
+            translateY: [{value: [1000, 0], duration: 1200, easing: "easeInOutQuint"}]
         })
 
         let circles = createAnimationTimeline()
         circles.add({
             delay: 1000,
             targets: '#intro-circle-1',
-            scale: {value: 150, duration: 1000, easing: 'easeInOutExpo'},
+            scale: {value: 100, duration: 1000, easing: 'easeInOutExpo'},
         }).add({
             targets: '#intro-circle-2',
-            scale: {value: 150, duration: 1000, easing: 'easeInOutExpo'},
+            scale: {value: 100, duration: 1000, easing: 'easeInOutExpo'},
             offset: '-= 800'
         }).add({
             targets: '#intro-circle-3',
-            scale: {value: 150, duration: 1000, easing: 'easeInOutExpo'},
+            scale: {value: 100, duration: 1000, easing: 'easeInOutExpo'},
             offset: '-= 800'
         }).add({
             targets: '#intro-circle-4',
-            scale: {value: 150, duration: 1000, easing: 'easeInOutExpo'},
+            scale: {value: 100, duration: 1000, easing: 'easeInOutExpo'},
             offset: '-= 800'
         })
         .add({
             targets: '#intro-circle-1',
-            scale: {value: 150},
+            scale: {value: 100},
             translateX: [{value: 3.2, duration: 800, easing: "easeInOutQuint"}, {value: 0, duration: 800, easing: "easeInOutQuint"}, {value: 0, duration: 800, easing: "easeInOutQuint"}, {value: 1.6, duration: 800, easing: "easeInOutQuint"}, {value: -6, duration: 800, easing: "easeInOutQuint"}],
             translateY: [{value: 2.55, duration: 800, easing: "easeInOutQuint"}, {value: 2.55, duration: 800, easing: "easeInOutQuint"}, {value: 0, duration: 800, easing: "easeInOutQuint"}, {value: 0, duration: 800, easing: "easeInOutQuint"}, {value: -0.8, duration: 800, easing: "easeInOutQuint"}],
             duration: 3000
         }).add({
             targets: '#intro-circle-2',
-            scale: {value: 150},
+            scale: {value: 100},
             translateX: [{value: -3.2, duration: 800, easing: "easeInOutQuint"}, {value: 0, duration: 800, easing: "easeInOutQuint"}, {value: -3.2, duration: 800, easing: "easeInOutQuint"}, {value: -1.6, duration: 800, easing: "easeInOutQuint"}, {value: 6, duration: 800, easing: "easeInOutQuint"}],
             translateY: [{value: 0, duration: 800, easing: "easeInOutQuint"}, {value: 2.55, duration: 800, easing: "easeInOutQuint"}, {value: 2.55, duration: 800, easing: "easeInOutQuint"}, {value: 0, duration: 800, easing: "easeInOutQuint"}, {value: -0.8, duration: 800, easing: "easeInOutQuint"}],
             duration: 3000,
             offset: '-=4000'
         }).add({
             targets: '#intro-circle-3',
-            scale: {value: 150},
+            scale: {value: 100},
             translateX: [{value: 3.2, duration: 800, easing: "easeInOutQuint"}, {value: 0, duration: 800, easing: "easeInOutQuint"}, {value: 3.2, duration: 800, easing: "easeInOutQuint"}, {value: 1.6, duration: 800, easing: "easeInOutQuint"}, {value: -6, duration: 800, easing: "easeInOutQuint"}],
             translateY: [{value: -2.55, duration: 800, easing: "easeInOutQuint"}, {value: -2.55, duration: 800, easing: "easeInOutQuint"}, {value: -2.55, duration: 800, easing: "easeInOutQuint"}, {value: -2.55, duration: 800, easing: "easeInOutQuint"}, {value: 0.8, duration: 800, easing: "easeInOutQuint"}],
             duration: 3000,
             offset: '-=4000'
         }).add({
             targets: '#intro-circle-4',
-            scale: {value: 150},
+            scale: {value: 100},
             translateX: [{value: -3.2, duration: 800, easing: "easeInOutQuint"}, {value: 0, duration: 800, easing: "easeInOutQuint"}, {value: 0, duration: 800, easing: "easeInOutQuint"}, {value: -1.6, duration: 800, easing: "easeInOutQuint"}, {value: 6, duration: 800, easing: "easeInOutQuint"}],
             translateY: [{value: 0, duration: 800, easing: "easeInOutQuint"}, {value: -2.55, duration: 800, easing: "easeInOutQuint"}, {value: 0, duration: 800, easing: "easeInOutQuint"}, {value: -2.55, duration: 800, easing: "easeInOutQuint"}, {value: 0.8, duration: 800, easing: "easeInOutQuint"}],
             duration: 3000,
@@ -135,39 +136,32 @@ class Public extends Component {
         this.forceUpdate()
     }
 
-    // state = {
-    //     hovered: false
-    // }
+    login = () => {
+        this.props.history.push('/login')
+    }
 
-    // handleHover = () => {
-    //     console.log("enter")
-    //     this.setState({hovered: true})
-    // }
-    // handleExit = () => {
-    //     console.log("leave")
-    //     this.setState({hovered: false})
-    // }
+    signup = () => {
+        this.props.history.push('/new_account')
+    }
 
     render() {
         console.log(this.props)
         return (
         <div>
             <Title/>
-            <img id="intro-circle-1" src={emptyCircle} style={{...this.circleStyle, left: "35%", top: "20%"}} alt="circle"/>
-            <img id="intro-circle-2" src={groupedCircle} style={{...this.circleStyle, left: "60%", top: "20%"}} alt="circle"/>
-            <img id="intro-circle-3" src={selectedCircle} style={{...this.circleStyle, left: "35%", top: "60%"}} alt="circle"/>
-            <img id="intro-circle-4" src={dashCircle} style={{...this.circleStyle, left: "60%", top: "60%"}} alt="circle"/>
+            <img id="intro-circle-1" src={emptyCircle} style={{...this.circleStyle, left: "35%", top: "30%"}} alt="circle"/>
+            <img id="intro-circle-2" src={groupedCircle} style={{...this.circleStyle, left: "60%", top: "30%"}} alt="circle"/>
+            <img id="intro-circle-3" src={selectedCircle} style={{...this.circleStyle, left: "35%", top: "70%"}} alt="circle"/>
+            <img id="intro-circle-4" src={dashCircle} style={{...this.circleStyle, left: "60%", top: "70%"}} alt="circle"/>
             
-            <ButtonBase onMouseEnter={this.handleHover} onMouseLeave={this.handleExit} style={{left: "-720px"}}>
-                <img id="clipboard" src={clipboard} onClick={()=> this.props.history.push('/new_account')} style={{...this.circleStyle, left: "60%", top: "80%"}} alt="circle"/>
-                
+            <ButtonBase style={{position: "absolute", left:"36%", top:"45%"}}>
+                <img id="nowhistle" src={whistle} onClick={this.login} style={{...this.whistleStyle, left: "35%"}} alt="circle"/>
             </ButtonBase>
-            <ButtonBase style={{left: "-1300px"}}>
-                <img id="nowhistle" src={whistle} onClick={()=> this.props.history.push('/login')} style={{...this.whistleStyle, left: "35%", top: "80%"}} alt="circle"/>
-                
+            <ButtonBase onMouseEnter={this.handleHover} onMouseLeave={this.handleExit} style={{position: "absolute", left: "60%", top: "45%"}}>
+                <img id="clipboard" src={clipboard} onClick={this.signup} style={{...this.circleStyle, left: "60%"}} alt="circle"/>
             </ButtonBase>
-            <Typography id={"login-text"} style={{position: "absolute", left: "620px", color:"#000"}} variant="title" > LOGIN </Typography>
-            <Typography id={"signup-text"} style={{position: "absolute", left: "1192px", color:"#000"}} variant="title"> SIGN-UP </Typography>
+            <Typography id={"login-text"} onClick={this.login} style={{position: "absolute", left: "35.5%", bottom: "21%", color:"#000"}} variant="title" > LOGIN </Typography>
+            <Typography id={"signup-text"} onClick={this.signup} style={{position: "absolute", left: "58.5%", bottom: "21%", color:"#000"}} variant="title"> SIGN-UP </Typography>
         </div>
         )
     }

@@ -2,7 +2,7 @@ import React from 'react'
 
 export function Title(){
 return (
-<svg id='Playbook-Logo' width='100%' height='170' viewBox='0 0 489.334 71.667' style={{paddingTop:"145"}}>
+<svg id='Playbook-Logo' width='100%' height='170' viewBox='0 0 489.334 71.667' style={{paddingTop:"100"}}>
     {/*489.334  71.667*/}
     <pattern x='-137.667' y='-196.333' width='108' height='104.333' patternUnits='userSpaceOnUse'
     id='New_Pattern_Swatch_2' viewBox='0 -104.333 108 104.333' overflow='visible'>
