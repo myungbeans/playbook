@@ -18,9 +18,9 @@ PORT=4000 yarn start
 
 ## Built With
 
-* [React-Redux](http://www.dropwizard.io/1.0.2/docs/) - Web framework used to centralize state management
-* [AnimeJS](https://maven.apache.org/) - Lightweight animation library implemented to enable animations in opening page and player movement
-* [Draggable](https://rometools.github.io/rome/) - Used to enable drag and drop functionality
+* [React-Redux](https://redux.js.org/) - Web framework used to centralize state management
+* [AnimeJS](http://animejs.com/) - Lightweight animation library implemented to enable animations in opening page and player movement
+* [Draggable](https://github.com/mzabriskie/react-draggable) - Used to enable drag and drop functionality
 
 ## Acknowledgments
 
